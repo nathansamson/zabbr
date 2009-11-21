@@ -5,6 +5,13 @@
 
 namespace Zabbr {
 
+	/**
+	 * Constructor.
+	 *
+	 * @param window The SDLWindow.
+	 * @param fileName The file name of the splash image.
+	 * @param controller The controller that should be activated after loading is done.
+	*/
 	SplashController::SplashController(
 	          SDLWindow* window, std::string fileName,
 	          VSDLController* controller)
@@ -14,19 +21,21 @@ namespace Zabbr {
 		i = 0;
 	}
 	
-	SplashController::SplashController(const SplashController& orig)
-	                 : VSDLController(orig.fWindow)  {
-	}
-	
+	/**
+	 * Desctructor.
+	*/
 	SplashController::~SplashController() {
 		ResourceManager::manager().free(fImage);
 	}
 	
+	/**
+	 * Draws the splash screen.
+	*/
 	void SplashController::draw() {
 		fWindow->drawImage(fImage, 0, 0);
 		SDL_Delay(1000);
 		i++;
-		if (i > 5) {
+		if (i > 2) {
 			fWindow->closeController(fNextController);
 		}
 	}

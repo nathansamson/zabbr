@@ -9,6 +9,11 @@
 
 namespace Zabbr {
 
+	/**
+	 * A label widget.
+	 *
+	 * @ingroup Widgets.
+	*/
 	class Label : public VWidget {
 	public:
 		Label(SDLWindow*, std::string, SDL_Color);
@@ -20,8 +25,19 @@ namespace Zabbr {
 		virtual int getHeight();
 		virtual void setHeight(int);
 	private:
+		/**
+		 * The allocated width. If 0 it is the default width of the label.
+		*/
 		int fWidth;
+		
+		/**
+		 * The allocated height. If 0 it is the default height of the label.
+		*/
 		int fHeight;
+		
+		/**
+		 * The internal label resource.
+		*/
 		StringFontResource* fLabel;
 	};
 }

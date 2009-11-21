@@ -9,10 +9,16 @@
 
 namespace Zabbr {
 
+	/**
+	 * A controller to show a menu.
+	 *
+	 * @ingroup Controllers
+	 *
+	 * Actually it shows a list of widgets.
+	*/
 	class MenuController : public VSDLController {
 	public:
 		MenuController(SDLWindow*);
-		MenuController(const MenuController&);
 		virtual ~MenuController();
 
 		void addWidget(VWidget*);
@@ -23,9 +29,12 @@ namespace Zabbr {
 		virtual void mouseButton(SDL_MouseButtonEvent);
 		virtual void quit();
 	private:
+		/**
+		 * A list of all widgets.
+		*/
 		std::list<VWidget*> fWidgets;
 	};
 
 }
 
-#endif // _MENUCONTROLLER_H_
+#endif // INC_MENUCONTROLLER_H

@@ -6,7 +6,22 @@
 #include "sdlwindow.h"
 
 namespace Zabbr {
+	/**
+	 * @defgroup Widgets Widgets
+	 *
+	 * The widgets of Zabbr.
+	 *
+	 * @ingroup Zabbr.
+	*/
+	
 
+	/**
+	 * The base Widget class for all Widgets in the GUI library.
+	 *
+	 * If you want to write your own widgets you have to derive from this library.
+	 *
+	 * @ingroup Widgets
+	*/
 	class VWidget {
 	public:
 		VWidget(SDLWindow*);
@@ -23,7 +38,14 @@ namespace Zabbr {
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);
 	protected:
+		/**
+		 * The SDLWindow of the Widget.
+		*/
 		SDLWindow* fWindow;
+		
+		/**
+		 * Should the widget fill all the allocated space (with setWidth/setHeight).
+		*/
 		bool fFill;
 	private:
 		VWidget();
