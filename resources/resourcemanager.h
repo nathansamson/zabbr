@@ -12,13 +12,13 @@ namespace Zabbr {
 
 	class ResourceManager {
 		public:
-			static ResourceManager manager();
+			static ResourceManager& manager();
 			
 			void free(VResource* res);
 			
 			ImageResource* image(std::string);
 			FontResource* font(std::string, int);
-			StringFontResource* string(std::string, FontResource*, SDL_Color);
+			StringFontResource* string(std::string, FontResource*, SDL_Color);	
 		private:
 			ResourceManager();
 			
@@ -27,7 +27,7 @@ namespace Zabbr {
 			VResource* getResource(std::string);
 			
 			std::map<std::string, VResource*> fResourceList;
-			static ResourceManager fgManager;
+			static ResourceManager* fgManager;
 	};
 }
 

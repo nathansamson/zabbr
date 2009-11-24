@@ -1,12 +1,15 @@
-#include "resources/resourcemanager.h"
 
+#include "resources/resourcemanager.h"
+#include <iostream>
 namespace Zabbr {
 
 	ResourceManager::ResourceManager() {
 	}
 
-	ResourceManager ResourceManager::manager() {
-		return ResourceManager::fgManager;
+	ResourceManager& ResourceManager::manager() {
+		if (ResourceManager::fgManager == 0)
+			ResourceManager::fgManager = new ResourceManager();
+		return *ResourceManager::fgManager;
 	}
 	
 	void ResourceManager::free(VResource* res) {
@@ -68,5 +71,5 @@ namespace Zabbr {
 		return res;
 	}
 	
-	ResourceManager ResourceManager::fgManager = ResourceManager();
+	ResourceManager* ResourceManager::fgManager = 0;
 }
