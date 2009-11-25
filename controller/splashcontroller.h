@@ -31,7 +31,6 @@ namespace Zabbr {
 		 * The controller that should be loaded after loading is done.
 		*/
 		VSDLController* fNextController;
-		int i;
 	};
 }
 

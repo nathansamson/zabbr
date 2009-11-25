@@ -7,11 +7,11 @@
 
 namespace Zabbr {
 	/**
-	 * @defgroup Widgets Widgets
+	 * \defgroup Widgets Widgets.
 	 *
 	 * The widgets of Zabbr.
 	 *
-	 * @ingroup Zabbr.
+	 * @ingroup Zabbr
 	*/
 	
 

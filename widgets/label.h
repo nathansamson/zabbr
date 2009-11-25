@@ -10,9 +10,9 @@
 namespace Zabbr {
 
 	/**
-	 * A label widget.
+	 * A Label widget.
 	 *
-	 * @ingroup Widgets.
+	 * @ingroup Widgets
 	*/
 	class Label : public VWidget {
 	public:

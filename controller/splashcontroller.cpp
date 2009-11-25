@@ -18,7 +18,6 @@ namespace Zabbr {
 	                : VSDLController(window),
 	                  fNextController(controller) {
 		fImage = ResourceManager::manager().image(fileName);
-		i = 0;
 	}
 	
 	/**
@@ -32,6 +31,7 @@ namespace Zabbr {
 	 * Draws the splash screen.
 	*/
 	void SplashController::draw() {
+		static int i = 0;
 		fWindow->drawImage(fImage, 0, 0);
 		SDL_Delay(1000);
 		i++;
