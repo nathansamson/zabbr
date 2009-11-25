@@ -27,10 +27,33 @@ namespace Zabbr {
 		VWidget(SDLWindow*);
 		virtual ~VWidget();
 
+		/**
+		 * The function that draws the widget.
+		*/
 		virtual void draw(int, int) = 0;
+		
+		/**
+		 * The function that returns the width of the widget.
+		 *
+		 * @return The width of the widget.
+		*/
 		virtual int getWidth() = 0;
+		
+		/**
+		 * The function that set the width of the widget.
+		*/
 		virtual void setWidth(int) = 0;
+		
+		/**
+		 * The function that returns the height of the widget.
+		 *
+		 * @return The height of the widget.
+		*/
 		virtual int getHeight() = 0;
+		
+		/**
+		 * The function that set the height of the widget.
+		*/
 		virtual void setHeight(int) = 0;
 		void setFill(bool);
 

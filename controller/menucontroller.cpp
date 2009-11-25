@@ -56,7 +56,7 @@ namespace Zabbr {
 	 *
 	 * This will close the controller if Escape is pressed.
 	 *
-	 * @parem key The SDL Keyboard event.
+	 * @param key The SDL Keyboard event.
 	*/
 	void MenuController::keyDown(SDL_KeyboardEvent key) {
 		if (key.keysym.sym == SDLK_ESCAPE) {
@@ -69,7 +69,7 @@ namespace Zabbr {
 	 *
 	 * This will send call the mouseMotion function on all widgets.
 	 *
-	 * @parem event The SDL Mouse Motion event.
+	 * @param event The SDL Mouse Motion event.
 	*/
 	void MenuController::mouseMotion(SDL_MouseMotionEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
@@ -82,7 +82,7 @@ namespace Zabbr {
 	 *
 	 * This will send call the mouseButton function on all widgets.
 	 *
-	 * @parem event The SDL Mouse Button event.
+	 * @param event The SDL Mouse Button event.
 	*/
 	void MenuController::mouseButton(SDL_MouseButtonEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {

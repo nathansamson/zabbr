@@ -7,6 +7,9 @@
 
 namespace Zabbr {
 
+	/**
+	 * An image resource.
+	*/
 	class ImageResource : public VResource {
 	public:
 		static ImageResource* open(std::string);
@@ -20,6 +23,9 @@ namespace Zabbr {
 		ImageResource(std::string, SDL_Surface*);
 		virtual ~ImageResource();
 	
+		/**
+		 * The surface with the image.
+		*/
 		SDL_Surface* fImageSurface;
 	};
 }

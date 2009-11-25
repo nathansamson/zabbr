@@ -7,6 +7,9 @@
 
 namespace Zabbr {
 
+	/**
+	 * A font resource.
+	*/
 	class FontResource : public VResource {
 	public:
 		virtual ~FontResource();
@@ -16,6 +19,9 @@ namespace Zabbr {
 
 		static std::string getID(std::string, int);
 	private:
+		/**
+		 * The TTF_Font.
+		*/
 		TTF_Font* fFont;
 		FontResource(TTF_Font*, std::string);
 	};

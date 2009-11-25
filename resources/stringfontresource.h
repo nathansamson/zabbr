@@ -9,6 +9,9 @@ namespace Zabbr {
 
 	class FontResource;
 
+	/**
+	 * A resource representing a string in a specified font.
+	*/
 	class StringFontResource : public VResource {
 	public:
 
@@ -22,6 +25,9 @@ namespace Zabbr {
 
 		static std::string getID(std::string text, FontResource* font, SDL_Color c);
 	private:
+		/**
+		 * The SDL_Surface of the resource.
+		*/
 		SDL_Surface* fSurface;
 	};
 }

@@ -8,6 +8,9 @@
 
 namespace Zabbr {
 
+	/**
+	 * A Mouse Button Event.
+	*/
 	class MouseButtonEvent {
 	public:
 		~MouseButtonEvent();
@@ -15,6 +18,9 @@ namespace Zabbr {
 		void connect(IMouseButtonCallback*);
 		void fire(SDL_MouseButtonEvent);
 	private:
+		/**
+		 * List of callbacks.
+		*/
 		std::list<IMouseButtonCallback*> fCallbacks;
 	};
 }

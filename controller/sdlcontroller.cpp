@@ -27,7 +27,7 @@ namespace Zabbr {
 	/**
 	 * Function called by the SDLWindow when a key is pressed.
 	 *
-	 * @parem evnt The SDL Keyboard event.
+	 * @param evnt The SDL Keyboard event.
 	*/
 	void VSDLController::keyDown(SDL_KeyboardEvent evnt) {
 	}
@@ -35,7 +35,7 @@ namespace Zabbr {
 	/**
 	 * Function called by the SDLWindow when a mouse motion event is generated.
 	 *
-	 * @parem evnt The SDL Mouse Motion event.
+	 * @param evnt The SDL Mouse Motion event.
 	*/
 	void VSDLController::mouseMotion(SDL_MouseMotionEvent evnt) {
 	}
@@ -43,7 +43,7 @@ namespace Zabbr {
 	/**
 	 * Function called by the SDLWindow when a mouse button event is generated.
 	 *
-	 * @parem evnt The SDL Mouse Button event.
+	 * @param evnt The SDL Mouse Button event.
 	*/
 	void VSDLController::mouseButton(SDL_MouseButtonEvent evnt) {
 	}

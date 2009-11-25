@@ -10,6 +10,9 @@
 
 namespace Zabbr {
 
+	/**
+	 * ResourceManager.
+	*/
 	class ResourceManager {
 		public:
 			static ResourceManager& manager();
@@ -26,7 +29,14 @@ namespace Zabbr {
 			void insertResource(std::string, VResource*);
 			VResource* getResource(std::string);
 			
+			/**
+			 * A map of all resources.
+			*/
 			std::map<std::string, VResource*> fResourceList;
+			
+			/**
+			 * The singleton ResourceManager.
+			*/
 			static ResourceManager* fgManager;
 	};
 }

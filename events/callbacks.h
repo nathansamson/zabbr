@@ -4,8 +4,14 @@
 
 
 namespace Zabbr {
+	/**
+	 * Mouse Button Callback.
+	*/
 	class IMouseButtonCallback {
 	public:
+		/**
+		 * Call function.
+		*/
 		virtual void call(SDL_MouseButtonEvent) = 0;
 	};
 

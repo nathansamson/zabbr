@@ -5,7 +5,7 @@
 */
 
 /**
- * @defgroup Zabbr
+ * @defgroup Zabbr A General Purpose SDL GUI Framework
  *
  * Zabbr is the SDL GUI Framework.
 */

@@ -11,19 +11,26 @@ namespace Zabbr {
 
 	class VSDLController;
 
+	/**
+	 * Exception when SDL could not initialize.
+	*/
 	class SDLInitializationException {
 	public:
 		SDLInitializationException(std::string);
 		std::string getError();
 	private:
+		/**
+		 * The initialization error.
+		*/
 		std::string fError;
 	};
 
+	/**
+	 * A Window.
+	*/
 	class SDLWindow {
 	public:
 		SDLWindow();
-		SDLWindow(const SDLWindow&);
-		SDLWindow& operator=(const SDLWindow&);
 		
 		void draw();
 		
@@ -44,12 +51,26 @@ namespace Zabbr {
 		void drawRectangle(int, int, int, int, int, int, int);
 		void drawRectangle(int, int, int, int, int, int, int, double);
 	protected:
+		/**
+		 * The current active controller.
+		*/
 		VSDLController* fController;
 	private:
 		void freeController(VSDLController*);
 
+		/**
+		 * Keeping the removed controller for a while (rest of the frame) in memory.
+		*/
 		VSDLController* fOldController;
+		
+		/**
+		 * The window surface.
+		*/
 		SDL_Surface* screen;
+		
+		/**
+		 * A bool representing of the app is still running.
+		*/
 		bool fRunning;
 	};
 

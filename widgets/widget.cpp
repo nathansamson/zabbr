@@ -51,6 +51,6 @@ namespace Zabbr {
 	 *
 	 * @param evnt The SDL MouseButton event.
 	*/
-	void VWidget::mouseButton(SDL_MouseButtonEvent) {
+	void VWidget::mouseButton(SDL_MouseButtonEvent evnt) {
 	}
 }
