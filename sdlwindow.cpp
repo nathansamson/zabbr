@@ -5,6 +5,7 @@
 #include "SDL_ttf.h"
 
 #include "sdlwindow.h"
+#include "misc/stopwatch.h"
 #include "controller/sdlcontroller.h"
 #include "resources/imageresource.h"
 #include "resources/stringfontresource.h"
@@ -78,6 +79,7 @@ namespace Zabbr {
 	 * @param controller The first controller to get control of what happens.
 	*/
 	void SDLWindow::run(VSDLController* controller) {
+		Stopwatch stopwatch;
 		fController = controller;
 		SDL_Event event;
 		fRunning = true;
@@ -115,6 +117,7 @@ namespace Zabbr {
 				fController = NULL;
 				screen = NULL;
 			}
+			std::cout << stopwatch.reset() << std::endl;
 		}
 	}
 	
