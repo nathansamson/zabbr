@@ -4,9 +4,7 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	*/
-	Stopwatch::Stopwatch(): fCur(0), fPrev(0) {
-		fCur = new timeval();
-		fPrev = new timeval();
+	Stopwatch::Stopwatch(): fCur(new timeval()), fPrev(new timeval()) {
 		reset();
 	}
 
