@@ -18,7 +18,14 @@ namespace Zabbr {
 		double reset();
 		double time();
 	private:
+		/**
+		 * The current timeval.
+		*/
 		timeval* fCur;
+		
+		/**
+		 * The timeval of the last reset.
+		*/
 		timeval* fPrev;
 	};
 }

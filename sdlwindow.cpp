@@ -1,11 +1,12 @@
 #include <iostream>
+#include <sstream>
 
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
 #include "SDL_ttf.h"
 
 #include "sdlwindow.h"
-#include "misc/stopwatch.h"
+#include "misc/fpscounter.h"
 #include "controller/sdlcontroller.h"
 #include "resources/imageresource.h"
 #include "resources/stringfontresource.h"
@@ -79,7 +80,7 @@ namespace Zabbr {
 	 * @param controller The first controller to get control of what happens.
 	*/
 	void SDLWindow::run(VSDLController* controller) {
-		Stopwatch stopwatch;
+		FPSCounter fpsCounter(500);
 		fController = controller;
 		SDL_Event event;
 		fRunning = true;
@@ -111,13 +112,20 @@ namespace Zabbr {
 				drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
 				fController->draw();
 				draw();
-				SDL_Delay(1);
+				//SDL_Delay(1);
 			} else {
 				freeController(fController);
 				fController = NULL;
 				screen = NULL;
 			}
-			std::cout << stopwatch.reset() << std::endl;
+			if (fpsCounter.frame()) {
+				std::stringstream ssWMCaption;
+				ssWMCaption << fpsCounter.fps();
+				std::string WMCaption;
+				ssWMCaption >> WMCaption;
+				WMCaption = "Space-Invadors   " + WMCaption + " FPS";
+				SDL_WM_SetCaption(WMCaption.c_str(), "Icon Title");
+			}
 		}
 	}
 	
