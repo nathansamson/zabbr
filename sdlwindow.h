@@ -4,8 +4,7 @@
 #include <string>
 #include "SDL.h"
 
-#include "resources/imageresource.h"
-#include "resources/stringfontresource.h"
+#include "resources/sdlsurfaceresource.h"
 
 namespace Zabbr {
 
@@ -45,9 +44,8 @@ namespace Zabbr {
 		void openParentController(VSDLController*);
 		void openController(VSDLController*);
 		
-		void drawImage(ImageResource*, int, int);
-		void drawImage(ImageResource*, int, int, double);
-		void drawString(StringFontResource*, int, int);
+		void drawSurface(SDLSurfaceResource*, int, int);
+		void drawSurface(SDLSurfaceResource*, int, int, double);
 		void drawRectangle(int, int, int, int, int, int, int);
 		void drawRectangle(int, int, int, int, int, int, int, double);
 	protected:

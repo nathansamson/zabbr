@@ -11,14 +11,13 @@ namespace Zabbr {
 	 * @param surface The surface of the image.
 	*/
 	ImageResource::ImageResource(std::string name, SDL_Surface* surface)
-	              : VResource(name), fImageSurface(surface) {
+	              : SDLSurfaceResource(name, surface) {
 	}
 	
 	/**
 	 * Destructor.
 	*/
 	ImageResource::~ImageResource() {
-		SDL_FreeSurface(fImageSurface);
 	}
 
 	/**
@@ -41,32 +40,4 @@ namespace Zabbr {
 		SDL_FreeSurface(temp);
 		return new ImageResource(name, image);
 	}
-	
-	/**
-	 * Returns the width of the image.
-	 *
-	 * @return The width of the image.
-	*/
-	int ImageResource::getWidth() {
-		return fImageSurface->w;
-	}
-	
-	/**
-	 * Returns the height of the image.
-	 *
-	 * @return The height of the image.
-	*/
-	int ImageResource::getHeight() {
-		return fImageSurface->h;
-	}
-	
-	/**
-	 * Returns the surface of the image.
-	 *
-	 * @return The surface.
-	*/
-	SDL_Surface* ImageResource::getSurface() {
-		return fImageSurface;
-	}
-
 }

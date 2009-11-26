@@ -12,35 +12,13 @@ namespace Zabbr {
 	 * @param id The ID of the string fonts.
 	*/
 	StringFontResource::StringFontResource(SDL_Surface* surface, std::string id)
-	                   : VResource(id), fSurface(surface) {
+	                   : SDLSurfaceResource(id, surface) {
 	}
 
 	/**
 	 * Destructor.
 	*/
 	StringFontResource::~StringFontResource() {
-		SDL_FreeSurface(fSurface);
-	}
-	
-	/**
-	 * Returns the width of the string.
-	*/
-	int StringFontResource::getWidth() {
-		return fSurface->w;
-	}
-	
-	/**
-	 * Returns the height of the string.
-	*/
-	int StringFontResource::getHeight() {
-		return fSurface->h;
-	}
-	
-	/**
-	 * Returns the surface.
-	*/
-	SDL_Surface* StringFontResource::getSurface() {
-		return fSurface;
 	}
 
 	/**

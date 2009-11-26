@@ -3,7 +3,7 @@
 
 #include "SDL.h"
 
-#include "resources/resource.h"
+#include "resources/sdlsurfaceresource.h"
 
 namespace Zabbr {
 
@@ -12,23 +12,12 @@ namespace Zabbr {
 	/**
 	 * A resource representing a string in a specified font.
 	*/
-	class StringFontResource : public VResource {
+	class StringFontResource : public SDLSurfaceResource {
 	public:
-
 		StringFontResource(SDL_Surface*, std::string);
 		virtual ~StringFontResource();
 
-		int getWidth();
-		int getHeight();
-		
-		SDL_Surface* getSurface();
-
 		static std::string getID(std::string text, FontResource* font, SDL_Color c);
-	private:
-		/**
-		 * The SDL_Surface of the resource.
-		*/
-		SDL_Surface* fSurface;
 	};
 }
 

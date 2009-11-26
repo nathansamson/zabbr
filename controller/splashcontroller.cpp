@@ -32,7 +32,7 @@ namespace Zabbr {
 	*/
 	void SplashController::draw() {
 		static int i = 0;
-		fWindow->drawImage(fImage, 0, 0);
+		fWindow->drawSurface(fImage, 0, 0);
 		SDL_Delay(1000);
 		i++;
 		if (i > 2) {

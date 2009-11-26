@@ -33,7 +33,7 @@ namespace Zabbr {
 	 * @param y The y location where to draw the label
 	*/
 	void Label::draw(int x, int y) {
-		fWindow->drawString(fLabel, x - getWidth() / 2, y);
+		fWindow->drawSurface(fLabel, x - getWidth() / 2, y);
 	}
 
 	/**

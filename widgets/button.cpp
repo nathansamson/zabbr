@@ -85,7 +85,7 @@ namespace Zabbr {
 			} else {
 				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight()-10, 0, 255, 0);
 			}
-			fWindow->drawString(fStringLabel, x+10, y+5);
+			fWindow->drawSurface(fStringLabel, x+10, y+5);
 
 			fBoundingBox.x = x;
 			fBoundingBox.y = y;

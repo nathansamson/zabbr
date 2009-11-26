@@ -3,14 +3,14 @@
 
 #include "SDL.h"
 
-#include "resources/resource.h"
+#include "resources/sdlsurfaceresource.h"
 
 namespace Zabbr {
 
 	/**
 	 * An image resource.
 	*/
-	class ImageResource : public VResource {
+	class ImageResource : public SDLSurfaceResource {
 	public:
 		static ImageResource* open(std::string);
 		
@@ -19,14 +19,8 @@ namespace Zabbr {
 		
 		SDL_Surface* getSurface();
 	private:
-		ImageResource();
 		ImageResource(std::string, SDL_Surface*);
 		virtual ~ImageResource();
-	
-		/**
-		 * The surface with the image.
-		*/
-		SDL_Surface* fImageSurface;
 	};
 }
 

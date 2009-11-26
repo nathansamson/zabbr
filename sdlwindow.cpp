@@ -172,61 +172,38 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Draws an image on the window.
+	 * Draws a surface on the window.
 	 *
-	 * @param img The image to draw.
+	 * @param surface The surface to draw.
 	 * @param x The x coordinate on the screen.
 	 * @param y The y coordinate on the screen.
 	*/
-	void SDLWindow::drawImage(ImageResource* img, int x, int y) {
-		drawImage(img, x, y, 1.0);
+	void SDLWindow::drawSurface(SDLSurfaceResource* surface, int x, int y) {
+		drawSurface(surface, x, y, 1.0);
 	}
 	
 	/**
-	 * Draws an image on the window.
+	 * Draws a surface on the window.
 	 *
-	 * @param img The image to draw.
+	 * @param surface The surface to draw.
 	 * @param x The x coordinate on the screen.
 	 * @param y The y coordinate on the screen.
-	 * @param scale scale factor of the image. Does nothing yet.
+	 * @param scale Scale factor of the surface. Not yet implemented.
 	*/
-	void SDLWindow::drawImage(ImageResource* img, int x, int y, double scale) {
+	void SDLWindow::drawSurface(SDLSurfaceResource* surface, int x, int y, double scale) {
 		SDL_Rect src, dest;
 	
 		src.x = 0;
 		src.y = 0;
-		src.w = img->getWidth();
-		src.h = img->getHeight();
+		src.w = surface->getWidth();
+		src.h = surface->getHeight();
 		
 		dest.x = x;
 		dest.y = y;
-		dest.w = img->getWidth() * scale;
-		dest.h = img->getHeight() * scale;
+		dest.w = surface->getWidth() * scale;
+		dest.h = surface->getHeight() * scale;
 		
-		SDL_BlitSurface(img->getSurface(), &src, screen, &dest);
-	}
-	
-	/**
-	 * Draws a string on the window.
-	 *
-	 * @param string The string to draw.
-	 * @param x The x coordinate of the string on the window.
-	 * @param y The y coordinate of the string on the window.
-	*/
-	void SDLWindow::drawString(StringFontResource* string, int x, int y) {
-		SDL_Rect src, dest;
-		
-		src.x = 0;
-		src.y = 0;
-		src.w = string->getWidth();
-		src.h = string->getHeight();
-		
-		dest.x = x;
-		dest.y = y;
-		dest.w = string->getWidth();
-		dest.h = string->getHeight();
-		
-		SDL_BlitSurface(string->getSurface(), &src, screen, &dest);
+		SDL_BlitSurface(surface->getSurface(), &src, screen, &dest);
 	}
 	
 	/**
@@ -246,8 +223,7 @@ namespace Zabbr {
 		dest.y = y;
 		dest.w = w;
 		dest.h = h;
-	
-	
+		
 		SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
 	}
 	
@@ -261,10 +237,10 @@ namespace Zabbr {
 	 * @param r The red component of the color of the rectangle.
 	 * @param g The green component of the color of the rectangle.
 	 * @param b The blue component of the color of the rectangle.
-	 * @param op The opacity of the rectangle, 0.0 for completely transparant, 1.0 for opaque.
+	 * @param a The alpha-channel of the rectangle, 0.0 for completely transparant, 1.0 for opaque.
 	*/
-	void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double op) {
-		boxRGBA(screen, x, y, x + w, y + h, r, g, b, op*255);
+	void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double a) {
+		boxRGBA(screen, x, y, x + w, y + h, r, g, b, a*255);
 	}
 	
 	/**
