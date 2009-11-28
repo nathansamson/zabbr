@@ -14,7 +14,7 @@ $(SUBDIRS):
 	$(MAKE) -C $@ $(MFLAGS)
 
 $(LIB): $(SUBDIRS) $(CXXOBJECTS)
-	$(AR) cq $@ $(shell find . -type f -name '*.o')
+	$(AR) rc $@ $(shell find . -type f -name '*.o')
 
 clean:
 	@for i in $(SUBDIRS); do ($(MAKE) -C $$i $(MFLAGS) clean); done
