@@ -118,7 +118,7 @@ namespace Zabbr {
 				drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
 				fController->draw();
 				draw();
-				//SDL_Delay(1);
+				SDL_Delay(1);
 			} else {
 				freeController(fController);
 				fController = NULL;
@@ -132,7 +132,6 @@ namespace Zabbr {
 				WMCaption = "Space-Invadors   " + WMCaption + " FPS";
 				SDL_WM_SetCaption(WMCaption.c_str(), "Icon Title");
 			}
-			SDL_Delay(1);
 		}
 	}
 	
