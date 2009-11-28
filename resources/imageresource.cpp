@@ -1,4 +1,5 @@
 #include "SDL.h"
+#include "SDL_image.h" 
 
 #include "resources/imageresource.h"
 
@@ -31,12 +32,12 @@ namespace Zabbr {
 		SDL_Surface* temp;
 		SDL_Surface* image;
 		
-		temp = SDL_LoadBMP(("../data/"+name).c_str());
+		temp = IMG_Load(("../data/"+name).c_str());
 		if (temp == NULL) {
-			throw ResourceNotLoadedException(name, SDL_GetError());
+			throw ResourceNotLoadedException(name, IMG_GetError());
 		}
 		
-		image = SDL_DisplayFormat(temp);
+		image = SDL_DisplayFormatAlpha(temp);
 		SDL_FreeSurface(temp);
 		return new ImageResource(name, image);
 	}
