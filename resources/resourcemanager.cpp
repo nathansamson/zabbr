@@ -135,4 +135,5 @@ namespace Zabbr {
 	}
 	
 	ResourceManager* ResourceManager::fgManager = 0;
+	std::string ResourceManager::fgDataPath = "";
 }

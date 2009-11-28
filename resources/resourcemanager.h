@@ -18,10 +18,15 @@ namespace Zabbr {
 			static ResourceManager& manager();
 			
 			void free(VResource* res);
-			
+				
 			ImageResource* image(std::string);
 			FontResource* font(std::string, int);
-			StringFontResource* string(std::string, FontResource*, SDL_Color);	
+			StringFontResource* string(std::string, FontResource*, SDL_Color);
+			
+			/**
+			 * The datapath.
+			*/
+			static std::string fgDataPath;
 		private:
 			ResourceManager();
 			

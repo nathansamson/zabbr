@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "SDL_image.h" 
 
+#include "resources/resourcemanager.h"
 #include "resources/imageresource.h"
 
 namespace Zabbr {
@@ -32,7 +33,7 @@ namespace Zabbr {
 		SDL_Surface* temp;
 		SDL_Surface* image;
 		
-		temp = IMG_Load(("../data/"+name).c_str());
+		temp = IMG_Load((ResourceManager::fgDataPath+name).c_str());
 		if (temp == NULL) {
 			throw ResourceNotLoadedException(name, IMG_GetError());
 		}

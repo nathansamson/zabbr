@@ -1,9 +1,8 @@
 #include <sstream>
 #include "SDL_ttf.h"
 
+#include "resources/resourcemanager.h"
 #include "resources/fontresource.h"
-
-
 
 namespace Zabbr {
 	/**
@@ -16,7 +15,7 @@ namespace Zabbr {
 	 * @throw ResourceNotLoadedException
 	*/
 	FontResource* FontResource::open(std::string fontName, int size) {
-		TTF_Font* font = TTF_OpenFont(fontName.c_str(), size);
+		TTF_Font* font = TTF_OpenFont((ResourceManager::fgDataPath+fontName).c_str(), size);
 		if (font != NULL) {
 			return new FontResource(font, getID(fontName, size));
 		}
