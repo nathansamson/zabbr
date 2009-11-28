@@ -54,7 +54,7 @@ namespace Zabbr {
 	
 		atexit(SDL_Quit);
 	
-		screen = SDL_SetVideoMode(xres, yres, 32, SDL_DOUBLEBUF);
+		screen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
 		if (screen == NULL) {
 			throw SDLInitializationException(SDL_GetError());
 		}
@@ -102,6 +102,9 @@ namespace Zabbr {
 						break;
 					case SDL_QUIT:
 						fController->requestQuit();
+						break;
+					case SDL_VIDEORESIZE:
+						screen = SDL_SetVideoMode(event.resize.w, event.resize.h, 32, SDL_RESIZABLE);
 						break;
 				}
 			}
@@ -245,6 +248,24 @@ namespace Zabbr {
 	*/
 	void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double a) {
 		boxRGBA(screen, x, y, x + w, y + h, r, g, b, a*255);
+	}
+	
+	/**
+	 * Get the x-resolution of the window
+	 *
+	 * @return The X resolution (width) of the window.
+	*/
+	int SDLWindow::getXResolution() {
+		return screen->w;
+	}
+
+	/**
+	 * Get the y-resolution of the window
+	 *
+	 * @return The Y resolution (height) of the window.
+	*/
+	int SDLWindow::getYResolution() {
+		return screen->h;
 	}
 	
 	/**

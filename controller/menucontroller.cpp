@@ -41,13 +41,13 @@ namespace Zabbr {
 			fParentController->draw();
 		}
 		int y = 0;
-		int x = 200;
+		int x = fWindow->getXResolution() / 2;
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			(*it)->draw(x, y);
 			y += (*it)->getHeight();
 		}
 		if (fIsBackground) {
-			fWindow->drawRectangle(0, 0, 400, 300, 0, 0, 0, 0.3);
+			fWindow->drawRectangle(0, 0, fWindow->getXResolution(), fWindow->getYResolution(), 0, 0, 0, 0.3);
 		}
 	}
 	

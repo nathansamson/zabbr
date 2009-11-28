@@ -48,6 +48,9 @@ namespace Zabbr {
 		void drawSurface(SDLSurfaceResource*, int, int, double);
 		void drawRectangle(int, int, int, int, int, int, int);
 		void drawRectangle(int, int, int, int, int, int, int, double);
+		
+		int getXResolution();
+		int getYResolution();
 	protected:
 		/**
 		 * The current active controller.
