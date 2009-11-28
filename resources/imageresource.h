@@ -14,9 +14,6 @@ namespace Zabbr {
 	public:
 		static ImageResource* open(std::string);
 		
-		int getWidth();
-		int getHeight();
-		
 		SDL_Surface* getSurface();
 	private:
 		ImageResource(std::string, SDL_Surface*);
