@@ -126,6 +126,7 @@ namespace Zabbr {
 				WMCaption = "Space-Invadors   " + WMCaption + " FPS";
 				SDL_WM_SetCaption(WMCaption.c_str(), "Icon Title");
 			}
+			SDL_Delay(1);
 		}
 	}
 	
