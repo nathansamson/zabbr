@@ -1,5 +1,5 @@
 INCLUDES = -I$(shell pwd) `pkg-config --cflags sdl`
-CXXFLAGS = -Wall $(INCLUDES) -Werror -g
+CXXFLAGS += $(INCLUDES)
 CXXSOURCES = $(shell find . -maxdepth 1 -type f -name '*.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))
