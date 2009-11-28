@@ -4,6 +4,7 @@
 #include "SDL.h"
 
 #include "sdlwindow.h"
+#include "events/event.h"
 
 namespace Zabbr {
 
@@ -31,8 +32,11 @@ namespace Zabbr {
 
 		virtual void draw();
 		virtual void keyDown(SDL_KeyboardEvent);
+		virtual void keyRelease(SDL_KeyboardEvent);
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);
+		virtual void requestQuit();
+		void connectRequestQuit(IEmptyCallback*);
 		virtual void quit();
 		void openParentController();
 		void openController(VSDLController*);
@@ -57,6 +61,11 @@ namespace Zabbr {
 		 * A flag to see if the background is in the background.
 		*/
 		bool fIsBackground;
+		
+		/**
+		 * The request event.
+		*/
+		QuitRequestEvent fQuitRequestEvent;
 };
 }
 

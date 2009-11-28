@@ -30,4 +30,31 @@ namespace Zabbr {
 			(*it)->call(event);
 		}
 	}
+	
+	/**
+	 * Desctructor.
+	*/
+	QuitRequestEvent::~QuitRequestEvent() {
+		for(std::list<IEmptyCallback*>::iterator it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
+			delete (*it);
+		}
+	}
+
+	/**
+	 * Connects a callback with the event.
+	 *
+	 * @param cb The callback.
+	*/
+	void QuitRequestEvent::connect(IEmptyCallback* cb) {
+		fCallbacks.push_back(cb);
+	}
+
+	/**
+	 * Fire the event.
+	*/
+	void QuitRequestEvent::fire() {
+		for(std::list<IEmptyCallback*>::iterator it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
+			(*it)->call();
+		}
+	}
 }

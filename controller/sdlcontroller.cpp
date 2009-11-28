@@ -9,7 +9,8 @@ namespace Zabbr {
 	 *
 	 * @param window The window of the controller.
 	*/
-	VSDLController::VSDLController(SDLWindow* window) : fParentController(NULL), fWindow(window), fIsBackground(false) {
+	VSDLController::VSDLController(SDLWindow* window) : fParentController(NULL),
+	                fWindow(window), fIsBackground(false) {
 	}
 	
 	/**
@@ -30,6 +31,14 @@ namespace Zabbr {
 	 * @param evnt The SDL Keyboard event.
 	*/
 	void VSDLController::keyDown(SDL_KeyboardEvent evnt) {
+	}
+	
+	/**
+	 * Function called by the SDLWindow when a key is released.
+	 *
+	 * @param evnt The SDL Keyboard event.
+	*/
+	void VSDLController::keyRelease(SDL_KeyboardEvent evnt) {
 	}
 
 	/**
@@ -53,11 +62,26 @@ namespace Zabbr {
 	*/
 	void VSDLController::quit() {
 	}
+	
+	/**
+	 * Function called by the when the user requests a quit.
+	*/
+	void VSDLController::requestQuit() {
+		fQuitRequestEvent.fire();
+	}
+	
+	/**
+	 * Connect to the QuitRequest Event.
+	*/
+	void VSDLController::connectRequestQuit(IEmptyCallback* cb) {
+		fQuitRequestEvent.connect(cb);
+	}
 
 	/**
 	 * Gives control back to the parent controller. This controller will be closed.
 	*/
 	void VSDLController::openParentController() {
+		this->fParentController->foreground();
 		fWindow->openParentController(this->fParentController);
 	}
 

@@ -15,6 +15,16 @@ namespace Zabbr {
 		virtual void call(SDL_MouseButtonEvent) = 0;
 	};
 
+	/**
+	 * Empty Callback.
+	*/
+	class IEmptyCallback {
+	public:
+		/**
+		 * Call function.
+		*/
+		virtual void call() = 0;
+	};
 }
 
 #endif // INC_EVENTS_H

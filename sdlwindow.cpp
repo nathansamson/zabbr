@@ -91,6 +91,9 @@ namespace Zabbr {
 					case SDL_KEYDOWN:
 						fController->keyDown(event.key);
 						break;
+					case SDL_KEYUP:
+						fController->keyRelease(event.key);
+						break;
 					case SDL_MOUSEMOTION:
 						fController->mouseMotion(event.motion);
 						break;
@@ -98,7 +101,7 @@ namespace Zabbr {
 						fController->mouseButton(event.button);
 						break;
 					case SDL_QUIT:
-						fController->quit();
+						fController->requestQuit();
 						break;
 				}
 			}
