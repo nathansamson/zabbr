@@ -81,7 +81,8 @@ namespace Zabbr {
 	 * Gives control back to the parent controller. This controller will be closed.
 	*/
 	void VSDLController::openParentController() {
-		this->fParentController->foreground();
+		if (this->fParentController) 
+			this->fParentController->foreground();
 		fWindow->openParentController(this->fParentController);
 	}
 
@@ -92,6 +93,8 @@ namespace Zabbr {
 	*/
 	void VSDLController::openController(VSDLController* c) {
 		c->fParentController = this;
+		background();
+		c->foreground();
 		fWindow->openController(c);
 	}
 

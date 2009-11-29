@@ -41,11 +41,8 @@ namespace Zabbr {
 		void openParentController();
 		void openController(VSDLController*);
 
-		void background();
-		void foreground();
-
 		friend class SDLWindow;
-	protected:
+	protected:	
 		/**
 		 * The parent controller. The parent controller is the controller that 
 		 * caused this controller to open. This can be NULL of this is a root controller.
@@ -66,6 +63,9 @@ namespace Zabbr {
 		 * The request event.
 		*/
 		QuitRequestEvent fQuitRequestEvent;
+	private:
+		void background();
+		void foreground();
 };
 }
 
