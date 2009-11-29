@@ -123,6 +123,7 @@ namespace Zabbr {
 				freeController(fController);
 				fController = NULL;
 				screen = NULL;
+				SDL_Quit();
 			}
 			if (fpsCounter.frame()) {
 				std::stringstream ssWMCaption;
@@ -154,7 +155,6 @@ namespace Zabbr {
 		} else {
 			// We keep the old controller.
 			fRunning = false;
-			SDL_Quit();
 		}
 	}
 	
@@ -164,8 +164,12 @@ namespace Zabbr {
 	 * @param prev The parent controller.
 	*/
 	void SDLWindow::openParentController(VSDLController* prev) {
-		fOldController = fController;
-		fController = prev;
+		if (prev != NULL) {
+			fOldController = fController;
+			fController = prev;
+		} else {
+			fRunning = false;
+		}
 	}
 	
 	/**
