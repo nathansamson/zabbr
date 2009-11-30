@@ -34,7 +34,7 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	*/
-	SDLWindow::SDLWindow() {
+	SDLWindow::SDLWindow(): fOldController(0) {
 	
 	}
 	
