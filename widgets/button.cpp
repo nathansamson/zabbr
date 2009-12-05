@@ -16,6 +16,11 @@ namespace Zabbr {
 		SDL_Color c = {0, 0, 0};
 		fStringLabel = ResourceManager::manager().string(label, font, c);
 		ResourceManager::manager().free(font);
+
+		fBoundingBox.x = 0;
+		fBoundingBox.y = 0;
+		fBoundingBox.w = 0;
+		fBoundingBox.h = 0;
 	}
 
 	/**
