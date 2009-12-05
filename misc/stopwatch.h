@@ -17,6 +17,10 @@ namespace Zabbr {
 
 		double reset();
 		double time();
+		void pause();
+		void unpause();
+		
+		bool isPaused();
 	private:
 		/**
 		 * The current timeval.
@@ -27,6 +31,16 @@ namespace Zabbr {
 		 * The timeval of the last reset.
 		*/
 		timeval* fPrev;
+		
+		/**
+		 * The timeval of the last pause. 0 if not paused.
+		*/
+		timeval* fPauseStart;
+		
+		/**
+		 * The total time of pauses since last reset, exclusive current pause.
+		*/
+		double fPauseTime;
 	};
 }
 
