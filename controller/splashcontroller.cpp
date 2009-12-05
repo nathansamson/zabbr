@@ -17,7 +17,7 @@ namespace Zabbr {
 	          VSDLController* controller)
 	                : VSDLController(window),
 	                  fNextController(controller) {
-		fImage = ResourceManager::manager().image(fileName);
+		fImage = ResourceManager::manager().image(fileName, window->getXResolution(), window->getYResolution(), true);
 	}
 	
 	/**

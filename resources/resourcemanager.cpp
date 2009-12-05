@@ -47,13 +47,42 @@ namespace Zabbr {
 	 * @throw ResourceNotLoadedExcpetion
 	*/
 	ImageResource* ResourceManager::image(std::string fileName) {
-		if (!hasResource(fileName)) {
+		std::string id = ImageResource::createID(fileName);
+		if (!hasResource(id)) {
 			ImageResource* res = ImageResource::open(fileName);
-			insertResource(fileName, res);
+			insertResource(res->getName(), res);
 			
 			return res;
 		} else {
-			return static_cast<ImageResource*>(getResource(fileName));
+			return static_cast<ImageResource*>(getResource(id));
+		}
+	}
+	
+	/**
+	 * Returns an image resource. The image will be scaled.
+	 *
+	 * @param fileName The filename of the image.
+	 * @param width The width of the image.
+	 * @param height The height of the image.
+	 * @param keepRatio True if to keep the aspect ratio of the original image.
+	 *        It is possible that the width or height of the image will be less than the given values.
+	 *
+	 * @return The image.
+	 *
+	 * @throw ResourceNotLoadedExcpetion
+	*/
+	ImageResource* ResourceManager::image(std::string fileName, int width,
+	                                      int height, bool keepRatio) {
+		std::string id = ImageResource::createID(fileName, width, height, keepRatio);
+		if (!hasResource(id)) {
+			ImageResource* res = image(fileName);
+			ImageResource* scaled = res->scale(width, height, keepRatio);
+			free(res);
+			insertResource(scaled->getName(), scaled);
+			
+			return scaled;
+		} else {
+			return static_cast<ImageResource*>(getResource(id));
 		}
 	}
 
