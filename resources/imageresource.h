@@ -14,11 +14,11 @@ namespace Zabbr {
 	public:
 		static ImageResource* open(std::string);
 		
-		ImageResource* scale(int, int, bool);
+		ImageResource* scaleAndRotate(int, int, bool, int);
 		SDL_Surface* getSurface();
 		
 		static std::string createID(std::string);
-		static std::string createID(std::string, int, int, bool);
+		static std::string createID(std::string, int, int, bool, int);
 	private:
 		ImageResource(std::string, SDL_Surface*);
 		virtual ~ImageResource();

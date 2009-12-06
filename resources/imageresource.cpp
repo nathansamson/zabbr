@@ -48,20 +48,25 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Scale the image.
+	 * Scale and rotate the image.
 	 *
 	 * @param w The maximum width of the new image.
 	 * @param h The maximul height of the new image.
 	 * @param keepRatio True if the result shoul be the same ratio as the original.
+	 * @param r The angle of the rotation (in degrees).
 	*/
-	ImageResource* ImageResource::scale(int w, int h, bool keepRatio) {
+	ImageResource* ImageResource::scaleAndRotate(int w, int h, bool keepRatio, int angle) {
 		SDL_Surface* surf;
 		if (keepRatio) {
-			surf = rotozoomSurface(fSurface, 0.0, std::min(w*1.0/fSurface->w, h*1.0/fSurface->h), SMOOTHING_ON);
+			surf = rotozoomSurface(fSurface, angle, std::min(w*1.0/fSurface->w, h*1.0/fSurface->h), SMOOTHING_ON);
 		} else {
-			surf = zoomSurface(fSurface, w*1.0/fSurface->w, h*1.0/fSurface->h, SMOOTHING_ON);
+			SDL_Surface* t;
+			t = zoomSurface(fSurface, w*1.0/fSurface->w, h*1.0/fSurface->h, SMOOTHING_ON);
+			surf = rotozoomSurface(fSurface, angle, 1, SMOOTHING_ON);
+			delete t;
+			
 		}
-		return new ImageResource(createID(getName(), w, h, keepRatio), surf);
+		return new ImageResource(createID(getName(), w, h, keepRatio, angle), surf);
 	}
 	
 	/**
@@ -80,13 +85,15 @@ namespace Zabbr {
 	 * @param w The width of the image.
 	 * @param h The height of the image
 	 * @param keepRatio value to keep the ratio.
+	 * @param angle The angle of the rotation
 	*/
-	std::string ImageResource::createID(std::string name, int w, int h, bool keepRatio) {
+	std::string ImageResource::createID(std::string name, int w, int h, bool keepRatio, int angle) {
 		std::stringstream ssID;
 		ssID << name << "_" << w << "_"<< h;
 		if (keepRatio) {
 			ssID << "_KR";
 		}
+		ssID << "_" << angle;
 		std::string id;
 		ssID >> id;
 		return id;

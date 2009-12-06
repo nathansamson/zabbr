@@ -59,24 +59,25 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Returns an image resource. The image will be scaled.
+	 * Returns an image resource. The image will be scaled and rotated.
 	 *
 	 * @param fileName The filename of the image.
 	 * @param width The width of the image.
 	 * @param height The height of the image.
 	 * @param keepRatio True if to keep the aspect ratio of the original image.
 	 *        It is possible that the width or height of the image will be less than the given values.
+	 * @param angle The angle of the rotation (in degrees).
 	 *
 	 * @return The image.
 	 *
 	 * @throw ResourceNotLoadedExcpetion
 	*/
 	ImageResource* ResourceManager::image(std::string fileName, int width,
-	                                      int height, bool keepRatio) {
-		std::string id = ImageResource::createID(fileName, width, height, keepRatio);
+	                                      int height, bool keepRatio, int angle) {
+		std::string id = ImageResource::createID(fileName, width, height, keepRatio, angle);
 		if (!hasResource(id)) {
 			ImageResource* res = image(fileName);
-			ImageResource* scaled = res->scale(width, height, keepRatio);
+			ImageResource* scaled = res->scaleAndRotate(width, height, keepRatio, angle);
 			free(res);
 			insertResource(scaled->getName(), scaled);
 			

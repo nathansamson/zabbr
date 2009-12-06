@@ -20,7 +20,7 @@ namespace Zabbr {
 			void free(VResource* res);
 				
 			ImageResource* image(std::string);
-			ImageResource* image(std::string, int, int, bool);
+			ImageResource* image(std::string, int, int, bool, int);
 			FontResource* font(std::string, int);
 			StringFontResource* string(std::string, FontResource*, SDL_Color);
 			
