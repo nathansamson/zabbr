@@ -67,13 +67,13 @@ namespace Zabbr {
 	 * Function called by the when the user requests a quit.
 	*/
 	void VSDLController::requestQuit() {
-		fQuitRequestEvent.fire();
+		fQuitRequestEvent();
 	}
 	
 	/**
 	 * Connect to the QuitRequest Event.
 	*/
-	void VSDLController::connectRequestQuit(IEmptyCallback* cb) {
+	void VSDLController::connectRequestQuit(ICallback0* cb) {
 		fQuitRequestEvent.connect(cb);
 	}
 

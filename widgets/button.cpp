@@ -33,9 +33,9 @@ namespace Zabbr {
 	/**
 	 * Connects a message for a mouse click.
 	 *
-	 * @param e The mouse click event.
+	 * @param e The mouse click callback.
 	*/
-	void Button::connectOnMouseClick(IMouseButtonCallback* e) {
+	void Button::connectOnMouseClick(ICallback1<SDL_MouseButtonEvent>* e) {
 		fMouseClickEvent.connect(e);
 	}
 
@@ -123,7 +123,7 @@ namespace Zabbr {
 	*/
 	void Button::mouseButton(SDL_MouseButtonEvent e) {
 		if (fHover && e.button == SDL_BUTTON_LEFT) {
-			fMouseClickEvent.fire(e);
+			fMouseClickEvent(e);
 		}
 	}
 

@@ -8,36 +8,49 @@
 
 namespace Zabbr {
 
-	/**
-	 * A Mouse Button Event.
-	*/
-	class MouseButtonEvent {
+	class Event0 {
 	public:
-		~MouseButtonEvent();
-
-		void connect(IMouseButtonCallback*);
-		void fire(SDL_MouseButtonEvent);
-	private:
-		/**
-		 * List of callbacks.
-		*/
-		std::list<IMouseButtonCallback*> fCallbacks;
-	};
-	
-	/**
-	 * A quit request event.
-	*/
-	class QuitRequestEvent {
-	public:
-		~QuitRequestEvent();
+		~Event0() {
+			for (std::list<ICallback0*>::iterator it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
+				delete (*it);
+			}
+		}
 		
-		void connect(IEmptyCallback*);
-		void fire();
+		void connect(ICallback0* c) {
+			fCallbacks.push_back(c);
+		}
+		
+		void operator()() {
+			for (std::list<ICallback0*>::iterator it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
+				(**it)();
+			}
+		}
 	private:
-		/**
-		 * List of callbacks.
-		*/
-		std::list<IEmptyCallback*> fCallbacks;
+		std::list<ICallback0*> fCallbacks;
+	};
+
+	template<typename T>
+	class Event1 {
+	public:
+		~Event1() {
+			typename std::list<ICallback1<T>* >::iterator it;
+			for (it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
+				delete (*it);
+			}
+		}
+		
+		void connect(ICallback1<T>* c) {
+			fCallbacks.push_back(c);
+		}
+		
+		void operator()(T p1) {
+			typename std::list<ICallback1<T>* >::iterator it;
+			for (it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
+				(**it)(p1);
+			}
+		}
+	private:
+		std::list<ICallback1<T>*> fCallbacks;
 	};
 }
 

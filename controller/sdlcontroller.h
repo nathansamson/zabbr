@@ -36,7 +36,7 @@ namespace Zabbr {
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);
 		virtual void requestQuit();
-		void connectRequestQuit(IEmptyCallback*);
+		void connectRequestQuit(ICallback0*);
 		virtual void quit();
 		void openParentController();
 		void openController(VSDLController*);
@@ -62,7 +62,7 @@ namespace Zabbr {
 		/**
 		 * The request event.
 		*/
-		QuitRequestEvent fQuitRequestEvent;
+		Event0 fQuitRequestEvent;
 	private:
 		void background();
 		void foreground();
