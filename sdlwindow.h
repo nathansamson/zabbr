@@ -45,6 +45,7 @@ namespace Zabbr {
 		void openController(VSDLController*);
 		
 		void drawSurface(SDLSurfaceResource*, int, int);
+		void drawPartOfSurface(SDLSurfaceResource*, int, int, SDL_Rect);
 		void drawSurface(SDLSurfaceResource*, int, int, double);
 		void drawRectangle(int, int, int, int, int, int, int);
 		void drawRectangle(int, int, int, int, int, int, int, double);

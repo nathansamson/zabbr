@@ -89,7 +89,7 @@ namespace Zabbr {
 			while (fRunning && SDL_PollEvent(&event)) {
 				switch (event.type) {
 					case SDL_KEYDOWN:
-						fController->keyDown(event.key);
+						fController->keyPress(event.key);
 						break;
 					case SDL_KEYUP:
 						fController->keyRelease(event.key);
@@ -216,6 +216,17 @@ namespace Zabbr {
 		dest.w = surface->getWidth() * scale;
 		dest.h = surface->getHeight() * scale;
 		
+		SDL_BlitSurface(surface->getSurface(), &src, screen, &dest);
+	}
+	
+	void SDLWindow::drawPartOfSurface(SDLSurfaceResource* surface, int x, int y, SDL_Rect src) {
+		SDL_Rect dest;
+	
+		dest.x = x;
+		dest.y = y;
+		dest.w = src.w;
+		dest.h = src.h;
+	
 		SDL_BlitSurface(surface->getSurface(), &src, screen, &dest);
 	}
 	

@@ -60,6 +60,8 @@ namespace Zabbr {
 		// Events
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);
+		virtual void keyPress(SDL_KeyboardEvent);
+		virtual void keyRelease(SDL_KeyboardEvent);
 	protected:
 		/**
 		 * The SDLWindow of the Widget.

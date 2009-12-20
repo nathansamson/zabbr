@@ -58,9 +58,24 @@ namespace Zabbr {
 	 *
 	 * @param key The SDL Keyboard event.
 	*/
-	void MenuController::keyDown(SDL_KeyboardEvent key) {
-		if (key.keysym.sym == SDLK_ESCAPE) {
+	void MenuController::keyPress(SDL_KeyboardEvent event) {
+		if (event.keysym.sym == SDLK_ESCAPE) {
 			fWindow->closeController(NULL);
+		}
+		
+		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
+			(*it)->keyPress(event);
+		}
+	}
+	
+	/**
+	 * Function called by the SDLWindow when a key is release.
+	 *
+	 * @param key The SDL Keyboard event.
+	*/
+	void MenuController::keyRelease(SDL_KeyboardEvent event) {
+		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
+			(*it)->keyRelease(event);
 		}
 	}
 

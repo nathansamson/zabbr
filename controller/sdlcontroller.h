@@ -31,7 +31,7 @@ namespace Zabbr {
 		virtual ~VSDLController();
 
 		virtual void draw();
-		virtual void keyDown(SDL_KeyboardEvent);
+		virtual void keyPress(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);

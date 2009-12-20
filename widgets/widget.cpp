@@ -53,4 +53,10 @@ namespace Zabbr {
 	*/
 	void VWidget::mouseButton(SDL_MouseButtonEvent evnt) {
 	}
+	
+	void VWidget::keyPress(SDL_KeyboardEvent evnt) {
+	}
+	
+	void VWidget::keyRelease(SDL_KeyboardEvent evnt) {
+	}
 }

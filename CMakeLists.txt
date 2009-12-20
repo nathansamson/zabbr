@@ -11,6 +11,7 @@ add_library (zabbr SHARED
                ./widgets/label.cpp
                ./widgets/button.cpp
                ./widgets/widget.cpp
+               ./widgets/textinput.cpp
                ./misc/stopwatch.cpp
                ./misc/fpscounter.cpp
                ./controller/splashcontroller.cpp

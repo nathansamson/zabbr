@@ -30,7 +30,7 @@ namespace Zabbr {
 	 *
 	 * @param evnt The SDL Keyboard event.
 	*/
-	void VSDLController::keyDown(SDL_KeyboardEvent evnt) {
+	void VSDLController::keyPress(SDL_KeyboardEvent evnt) {
 	}
 	
 	/**
