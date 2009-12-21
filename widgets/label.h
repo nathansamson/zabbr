@@ -17,6 +17,7 @@ namespace Zabbr {
 	class Label : public VWidget {
 	public:
 		Label(SDLWindow*, std::string, SDL_Color);
+		Label(SDLWindow*, std::string, SDL_Color, std::string, int);
 		virtual ~Label();
 
 		virtual void draw(int, int);

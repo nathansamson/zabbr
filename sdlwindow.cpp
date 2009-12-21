@@ -115,7 +115,8 @@ namespace Zabbr {
 			}
 	
 			if (fRunning) { // it is possible we quit when firing events.
-				drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
+				SDL_FillRect(screen, NULL, 0);
+				//drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
 				fController->draw();
 			}
 			

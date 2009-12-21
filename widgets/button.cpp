@@ -12,7 +12,7 @@ namespace Zabbr {
 	Button::Button(SDLWindow* window, std::string label)
 	       : VWidget(window), fLabel(label), fWidth(0),
 	         fHeight(0), fHover(false) {
-		FontResource* font = ResourceManager::manager().font("../data/DejaVuSans-Bold.ttf", 24);
+		FontResource* font = ResourceManager::manager().font("fonts/Blackout-Midnight.ttf", 24);
 		SDL_Color c = {0, 0, 0};
 		fStringLabel = ResourceManager::manager().string(label, font, c);
 		ResourceManager::manager().free(font);

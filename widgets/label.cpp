@@ -11,7 +11,13 @@ namespace Zabbr {
 	 * @param c The color of the text.
 	*/
 	Label::Label(SDLWindow* window, std::string label, SDL_Color c) : VWidget(window), fWidth(0), fHeight(0) {
-		FontResource* font = ResourceManager::manager().font("../data/DejaVuSans-Bold.ttf", 64);
+		FontResource* font = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 64);
+		fLabel = ResourceManager::manager().string(label, font, c);
+		ResourceManager::manager().free(font);
+	}
+	
+	Label::Label(SDLWindow* window, std::string label, SDL_Color c, std::string fontName, int fontSize) : VWidget(window), fWidth(0), fHeight(0) {
+		FontResource* font = ResourceManager::manager().font(fontName, fontSize);
 		fLabel = ResourceManager::manager().string(label, font, c);
 		ResourceManager::manager().free(font);
 	}
