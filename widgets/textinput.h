@@ -21,6 +21,7 @@ namespace Zabbr {
 		virtual void setWidth(int);
 		virtual int getHeight();
 		virtual void setHeight(int);
+		std::string getValue();
 		
 		virtual void keyRelease(SDL_KeyboardEvent);
 	private:

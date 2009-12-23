@@ -139,13 +139,22 @@ namespace Zabbr {
 	}
 
 	/**
+	 * Get the value of the input widget.
+	 *
+	 * @return The input of the user widget.
+	*/
+	std::string TextInputWidget::getValue() {
+		return fText;
+	}
+
+	/**
 	 * Release a key. This will print the pressed key in the widget (if possible)
 	 *
 	 * @param evnt The SDL event.
 	*/	
 	void TextInputWidget::keyRelease(SDL_KeyboardEvent evnt) {
 		if (evnt.keysym.sym == SDLK_BACKSPACE) {
-			if (fText.length() > 0) fText = fText.erase(fText.length() - 1, 1);			
+			if (fText.length() > 0) fText = fText.erase(fText.length() - 1, 1);
 		} else if (char* c = convertToChar(evnt.keysym.sym)) {
 			fText += *c;
 			delete c;
