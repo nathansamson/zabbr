@@ -197,6 +197,21 @@ namespace Zabbr {
 	}
 	
 	/**
+	 * Draws a raw SDL Surface on the window.
+	 *
+	 * @param surface The SDL Surface.
+	 * @param x The x coordinate on the screen.
+	 * @param y The y coordinate on the screen.
+	*/
+	void SDLWindow::drawSurface(SDL_Surface* surface, int x, int y) {
+		SDL_Rect dest;
+		dest.x = x;
+		dest.y = y;
+	
+		SDL_BlitSurface(surface, 0, screen, &dest);
+	}
+	
+	/**
 	 * Draws a surface on the window.
 	 *
 	 * @param surface The surface to draw.
