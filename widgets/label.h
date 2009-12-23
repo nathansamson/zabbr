@@ -4,7 +4,6 @@
 #include "SDL.h"
 
 #include "widgets/widget.h"
-#include "widgets/label.h"
 #include "resources/stringfontresource.h"
 
 namespace Zabbr {
