@@ -54,9 +54,25 @@ namespace Zabbr {
 	void VWidget::mouseButton(SDL_MouseButtonEvent evnt) {
 	}
 	
+	/**
+	 * Default key press event.
+	 *
+	 * This does nothing by default, derived classes can override this method,
+	 * so they can do something on key press (like firing events).
+	 *
+	 * @param evnt The SDL KeyboardEvent event.
+	*/
 	void VWidget::keyPress(SDL_KeyboardEvent evnt) {
 	}
 	
+	/**
+	 * Default key release event.
+	 *
+	 * This does nothing by default, derived classes can override this method,
+	 * so they can do something on key releases (like firing events).
+	 *
+	 * @param evnt The SDL KeyboardEvent event.
+	*/
 	void VWidget::keyRelease(SDL_KeyboardEvent evnt) {
 	}
 }

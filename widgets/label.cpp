@@ -4,7 +4,7 @@
 namespace Zabbr {
 
 	/**
-	 * Default constructor.
+	 * Public constructor.
 	 *
 	 * @param window The window of the label.
 	 * @param label The text of the label.
@@ -16,6 +16,15 @@ namespace Zabbr {
 		ResourceManager::manager().free(font);
 	}
 	
+	/**
+	 * Public constructor.
+	 *
+	 * @param window The window of the label.
+	 * @param label The text of the label.
+	 * @param c The color of the text.
+	 * @param fontName The font name
+	 * @param fontSize The size of the text (in points).
+	*/
 	Label::Label(SDLWindow* window, std::string label, SDL_Color c, std::string fontName, int fontSize) : VWidget(window), fWidth(0), fHeight(0) {
 		FontResource* font = ResourceManager::manager().font(fontName, fontSize);
 		fLabel = ResourceManager::manager().string(label, font, c);

@@ -53,7 +53,7 @@ namespace Zabbr {
 	 * @param w The maximum width of the new image.
 	 * @param h The maximul height of the new image.
 	 * @param keepRatio True if the result shoul be the same ratio as the original.
-	 * @param r The angle of the rotation (in degrees).
+	 * @param angle The angle of the rotation (in degrees).
 	*/
 	ImageResource* ImageResource::scaleAndRotate(int w, int h, bool keepRatio, int angle) {
 		SDL_Surface* surf;

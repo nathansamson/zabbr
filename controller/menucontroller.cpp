@@ -56,7 +56,7 @@ namespace Zabbr {
 	 *
 	 * This will close the controller if Escape is pressed.
 	 *
-	 * @param key The SDL Keyboard event.
+	 * @param event The SDL Keyboard event.
 	*/
 	void MenuController::keyPress(SDL_KeyboardEvent event) {
 		if (event.keysym.sym == SDLK_ESCAPE) {
@@ -71,7 +71,7 @@ namespace Zabbr {
 	/**
 	 * Function called by the SDLWindow when a key is release.
 	 *
-	 * @param key The SDL Keyboard event.
+	 * @param event The SDL Keyboard event.
 	*/
 	void MenuController::keyRelease(SDL_KeyboardEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {

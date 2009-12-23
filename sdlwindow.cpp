@@ -220,6 +220,14 @@ namespace Zabbr {
 		SDL_BlitSurface(surface->getSurface(), &src, screen, &dest);
 	}
 	
+	/**
+	 * Draws a part of the surface.
+	 *
+	 * @param surface The surface to draw.
+	 * @param x The x coordinate on the screen.
+	 * @param y The y coordinate on the screen.
+	 * @param src the rectangle of the part of the surface that should be drawn.
+	*/
 	void SDLWindow::drawPartOfSurface(SDLSurfaceResource* surface, int x, int y, SDL_Rect src) {
 		SDL_Rect dest;
 	

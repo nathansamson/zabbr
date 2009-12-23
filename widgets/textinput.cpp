@@ -3,6 +3,13 @@
 #include "widgets/textinput.h"
 #include "resources/resourcemanager.h"
 
+/**
+ * Convert a SDLKey to a character.
+ *
+ * @param k The SDLKey.
+ *
+ * @return A pointer to char of the SDLKey k, if not a real char returns 0.
+*/
 char* convertToChar(SDLKey k) {
 	switch (k) {
 		case SDLK_a: return new char('a'); break;
@@ -47,6 +54,12 @@ char* convertToChar(SDLKey k) {
 }
 
 namespace Zabbr {
+	/**
+	 * A constructor.
+	 *
+	 * @param window The SDLWindow.
+	 * @param val initial value of the text input widget.
+	*/
 	TextInputWidget::TextInputWidget(SDLWindow* window, std::string val):
 	       VWidget(window), fText(val), fWidth(300), fHeight(80) {
 		fFont = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 30);
@@ -54,11 +67,20 @@ namespace Zabbr {
 		fStringResource = ResourceManager::manager().string(fText, fFont, c);
 	}
 	
+	/**
+	 * Desctructor.
+	*/
 	TextInputWidget::~TextInputWidget() {
 		ResourceManager::manager().free(fFont);
 		ResourceManager::manager().free(fStringResource);
 	}
 	
+	/**
+	 * Draws the input.
+	 *
+	 * @param x The x location of the widget.
+	 * @param y The y location of the widget.
+	*/
 	void TextInputWidget::draw(int x, int y) {
 		x -= fWidth / 2;
 		
@@ -80,22 +102,47 @@ namespace Zabbr {
 		}
 	}
 	
+	/**
+	 * Returns the width of the widget.
+	 *
+	 * @return the width of the widget.
+	*/
 	int TextInputWidget::getWidth() {
 		return fWidth;
 	}
 	
+	/**
+	 * Returns the height of the widget.
+	 *
+	 * @return the height of the widget.
+	*/
 	int TextInputWidget::getHeight() {
 		return fHeight;
 	}
 	
+	/**
+	 * Set the width of the widget.
+	 *
+	 * @param w The width of the widget.
+	*/
 	void TextInputWidget::setWidth(int w) {
 		fWidth = w;
 	}
 	
+	/**
+	 * Set the height of the widget.
+	 *
+	 * @param h THe new height
+	*/
 	void TextInputWidget::setHeight(int h) {
 		fHeight = h;
 	}
-	
+
+	/**
+	 * Release a key. This will print the pressed key in the widget (if possible)
+	 *
+	 * @param evnt The SDL event.
+	*/	
 	void TextInputWidget::keyRelease(SDL_KeyboardEvent evnt) {
 		if (evnt.keysym.sym == SDLK_BACKSPACE) {
 			if (fText.length() > 0) fText = fText.erase(fText.length() - 1, 1);			
