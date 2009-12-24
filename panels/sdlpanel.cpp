@@ -1,28 +1,28 @@
-#include "controller/sdlcontroller.h"
+#include "panels/sdlpanel.h"
 
 namespace Zabbr {
 
 	/**
 	 * Constructor.
 	 *
-	 * The controller is now in the foreground.
+	 * The Panel is now in the foreground.
 	 *
-	 * @param window The window of the controller.
+	 * @param window The window of the Panel.
 	*/
-	VSDLController::VSDLController(SDLWindow* window) : fParentController(NULL),
+	VSDLPanel::VSDLPanel(SDLWindow* window) : fParentPanel(NULL),
 	                fWindow(window), fIsBackground(false) {
 	}
 	
 	/**
 	 * Destructor.
 	*/
-	VSDLController::~VSDLController() {
+	VSDLPanel::~VSDLPanel() {
 	}
 	
 	/**
-	 * Function called by the SDLWindow to draw the controller.
+	 * Function called by the SDLWindow to draw the Panel.
 	*/
-	void VSDLController::draw() {
+	void VSDLPanel::draw() {
 	}
 
 	/**
@@ -30,7 +30,7 @@ namespace Zabbr {
 	 *
 	 * @param evnt The SDL Keyboard event.
 	*/
-	void VSDLController::keyPress(SDL_KeyboardEvent evnt) {
+	void VSDLPanel::keyPress(SDL_KeyboardEvent evnt) {
 	}
 	
 	/**
@@ -38,7 +38,7 @@ namespace Zabbr {
 	 *
 	 * @param evnt The SDL Keyboard event.
 	*/
-	void VSDLController::keyRelease(SDL_KeyboardEvent evnt) {
+	void VSDLPanel::keyRelease(SDL_KeyboardEvent evnt) {
 	}
 
 	/**
@@ -46,7 +46,7 @@ namespace Zabbr {
 	 *
 	 * @param evnt The SDL Mouse Motion event.
 	*/
-	void VSDLController::mouseMotion(SDL_MouseMotionEvent evnt) {
+	void VSDLPanel::mouseMotion(SDL_MouseMotionEvent evnt) {
 	}
 
 	/**
@@ -54,61 +54,61 @@ namespace Zabbr {
 	 *
 	 * @param evnt The SDL Mouse Button event.
 	*/
-	void VSDLController::mouseButton(SDL_MouseButtonEvent evnt) {
+	void VSDLPanel::mouseButton(SDL_MouseButtonEvent evnt) {
 	}
 	
 	/**
 	 * Function called by the SDLWindow if the window should be closed.
 	*/
-	void VSDLController::quit() {
+	void VSDLPanel::quit() {
 	}
 	
 	/**
 	 * Function called by the when the user requests a quit.
 	*/
-	void VSDLController::requestQuit() {
+	void VSDLPanel::requestQuit() {
 		fQuitRequestEvent();
 	}
 	
 	/**
 	 * Connect to the QuitRequest Event.
 	*/
-	void VSDLController::connectRequestQuit(ICallback0* cb) {
+	void VSDLPanel::connectRequestQuit(ICallback0* cb) {
 		fQuitRequestEvent.connect(cb);
 	}
 
 	/**
-	 * Gives control back to the parent controller. This controller will be closed.
+	 * Gives control back to the parent Panel. This Panel will be closed.
 	*/
-	void VSDLController::openParentController() {
-		if (this->fParentController) 
-			this->fParentController->foreground();
-		fWindow->openParentController(this->fParentController);
+	void VSDLPanel::openParentPanel() {
+		if (this->fParentPanel) 
+			this->fParentPanel->foreground();
+		fWindow->openParentPanel(this->fParentPanel);
 	}
 
 	/**
-	 * Gives controller to the specified controller.
+	 * Gives Panel to the specified Panel.
 	 *
-	 * @param c The new active controller. The parent of controller will be this controller.
+	 * @param c The new active Panel. The parent of Panel will be this Panel.
 	*/
-	void VSDLController::openController(VSDLController* c) {
-		c->fParentController = this;
+	void VSDLPanel::openPanel(VSDLPanel* c) {
+		c->fParentPanel = this;
 		background();
 		c->foreground();
-		fWindow->openController(c);
+		fWindow->openPanel(c);
 	}
 
 	/**
-	 * Moves the controller to the background.
+	 * Moves the Panel to the background.
 	*/
-	void VSDLController::background() {
+	void VSDLPanel::background() {
 		fIsBackground = true;
 	}
 
 	/**
-	 * Moves the controller back to the foreground.
+	 * Moves the Panel back to the foreground.
 	*/
-	void VSDLController::foreground() {
+	void VSDLPanel::foreground() {
 		fIsBackground = false;
 	}
 }

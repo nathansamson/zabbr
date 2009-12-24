@@ -8,7 +8,7 @@
 
 namespace Zabbr {
 
-	class VSDLController;
+	class VSDLPanel;
 
 	/**
 	 * Exception when SDL could not initialize.
@@ -36,13 +36,13 @@ namespace Zabbr {
 		void open(int, int, bool);
 		void close();
 		
-	    void run(VSDLController*);
+	    void run(VSDLPanel*);
 
-		/***** API for controllers ******/
+		/***** API for panels ******/
 
-		void closeController(VSDLController*);
-		void openParentController(VSDLController*);
-		void openController(VSDLController*);
+		void closePanel(VSDLPanel*);
+		void openParentPanel(VSDLPanel*);
+		void openPanel(VSDLPanel*);
 		
 		void drawSurface(SDLSurfaceResource*, int, int);
 		void drawSurface(SDL_Surface*, int, int);
@@ -55,21 +55,21 @@ namespace Zabbr {
 		int getYResolution();
 	protected:
 		/**
-		 * The current active controller.
+		 * The current active panel.
 		*/
-		VSDLController* fController;
+		VSDLPanel* fPanel;
 	private:
-		void freeController(VSDLController*);
+		void freePanel(VSDLPanel*);
 
 		/**
-		 * Keeping the removed controller for a while (rest of the frame) in memory.
+		 * Keeping the removed panel for a while (rest of the frame) in memory.
 		*/
-		VSDLController* fOldController;
+		VSDLPanel* fOldPanel;
 		
 		/**
 		 * The window surface.
 		*/
-		SDL_Surface* screen;
+		SDL_Surface* fScreen;
 		
 		/**
 		 * A bool representing of the app is still running.

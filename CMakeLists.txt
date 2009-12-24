@@ -14,7 +14,7 @@ add_library (zabbr SHARED
                ./widgets/textinput.cpp
                ./misc/stopwatch.cpp
                ./misc/fpscounter.cpp
-               ./controller/splashcontroller.cpp
-               ./controller/menucontroller.cpp
-               ./controller/sdlcontroller.cpp
+               ./panels/splashpanel.cpp
+               ./panels/menupanel.cpp
+               ./panels/sdlpanel.cpp
 )

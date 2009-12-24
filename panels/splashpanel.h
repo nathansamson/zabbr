@@ -1,24 +1,24 @@
-#ifndef INC_SPLASHCONTROLLER_H
-#define INC_SPLASHCONTROLLER_H
+#ifndef INC_SPLASHPANEL_H
+#define INC_SPLASHPANEL_H
 
 #include <string>
 
-#include "controller/sdlcontroller.h"
+#include "panels/sdlpanel.h"
 #include "resources/imageresource.h"
 
 namespace Zabbr {
 
 	/**
-	 * A Splash controller.
+	 * A Splash panel.
 	 *
-	 * @ingroup Controllers
+	 * @ingroup panels
 	 *
 	 * This will display a splash image and messages.
 	*/
-	class SplashController : public VSDLController {
+	class SplashPanel: public VSDLPanel {
 	public:
-		SplashController(SDLWindow*, std::string, VSDLController*);
-		virtual ~SplashController();
+		SplashPanel(SDLWindow*, std::string, VSDLPanel*);
+		virtual ~SplashPanel();
 
 		virtual void draw();
 	private:
@@ -28,10 +28,10 @@ namespace Zabbr {
 		ImageResource* fImage;
 		
 		/**
-		 * The controller that should be loaded after loading is done.
+		 * The panel that should be loaded after loading is done.
 		*/
-		VSDLController* fNextController;
+		VSDLPanel* fNextPanel;
 	};
 }
 
-#endif // INC_SPLASHCONTROLLER_H
+#endif // INC_SPLASHPANEL_H

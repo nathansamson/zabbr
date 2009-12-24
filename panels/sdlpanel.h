@@ -1,5 +1,5 @@
-#ifndef INC_SDLCONTROLLER_H
-#define INC_SDLCONTROLLER_H
+#ifndef INC_SDLPANEL_H
+#define INC_SDLPANEL_H
 
 #include "SDL.h"
 
@@ -9,26 +9,26 @@
 namespace Zabbr {
 
 	/**
-	 * \defgroup Controllers Controllers
+	 * \defgroup panels Panels
 	 *
-	 * All the built-in Zabbr controllers.
+	 * All the built-in Zabbr panels.
 	 *
 	 * @ingroup Zabbr
 	*/
 
 	/**
-	 * Virtual base class for all controllers.
+	 * Virtual base class for all panels.
 	 *
-	 * @ingroup Controllers
+	 * @ingroup panels
 	 *
-	 * A controller controls the content of the screen.
-	 * Only one controller is active on a given moment in time.
-	 * The active controller receives the window events (mouse motions for example.)
+	 * A panel controls the content of the screen.
+	 * Only one panel is active on a given moment in time.
+	 * The active panel receives the window events (mouse motions for example.)
 	*/
-	class VSDLController {
+	class VSDLPanel {
 	public:
-		VSDLController(SDLWindow* window);
-		virtual ~VSDLController();
+		VSDLPanel(SDLWindow* window);
+		virtual ~VSDLPanel();
 
 		virtual void draw();
 		virtual void keyPress(SDL_KeyboardEvent);
@@ -38,19 +38,19 @@ namespace Zabbr {
 		virtual void requestQuit();
 		void connectRequestQuit(ICallback0*);
 		virtual void quit();
-		void openParentController();
-		void openController(VSDLController*);
+		void openParentPanel();
+		void openPanel(VSDLPanel*);
 
 		friend class SDLWindow;
 	protected:	
 		/**
-		 * The parent controller. The parent controller is the controller that 
-		 * caused this controller to open. This can be NULL of this is a root controller.
+		 * The parent panel. The parent panel is the panel that 
+		 * caused this panel to open. This can be NULL of this is a root panel.
 		*/
-		VSDLController* fParentController;
+		VSDLPanel* fParentPanel;
 		
 		/**
-		 * The window of the controller. When a controller draws itself it should do this on this window.
+		 * The window of the panel. When a panel draws itself it should do this on this window.
 		*/
 		SDLWindow* fWindow;
 		
@@ -69,4 +69,4 @@ namespace Zabbr {
 };
 }
 
-#endif // INC_SDLCONTROLLER_H
+#endif // INC_SDLPANEL_H

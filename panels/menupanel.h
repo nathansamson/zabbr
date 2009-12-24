@@ -1,25 +1,25 @@
-#ifndef INC_MENUCONTROLLER_H
-#define INC_MENUCONTROLLER_H
+#ifndef INC_MENUPANEL_H
+#define INC_MENUPANEL_H
 
 #include <list>
 #include "SDL.h"
 
-#include "controller/sdlcontroller.h"
+#include "panels/sdlpanel.h"
 #include "widgets/widget.h"
 
 namespace Zabbr {
 
 	/**
-	 * A controller to show a menu.
+	 * A panel to show a menu.
 	 *
-	 * @ingroup Controllers
+	 * @ingroup Panels
 	 *
 	 * Actually it shows a list of widgets.
 	*/
-	class MenuController : public VSDLController {
+	class MenuPanel: public VSDLPanel {
 	public:
-		MenuController(SDLWindow*);
-		virtual ~MenuController();
+		MenuPanel(SDLWindow*);
+		virtual ~MenuPanel();
 
 		void addWidget(VWidget*);
 
@@ -38,4 +38,4 @@ namespace Zabbr {
 
 }
 
-#endif // INC_MENUCONTROLLER_H
+#endif // INC_MENUPANEL_H

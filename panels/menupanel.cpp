@@ -1,13 +1,13 @@
-#include "controller/menucontroller.h"
+#include "panels/menupanel.h"
 
 namespace Zabbr {
 
 	/**
 	 * Constructor.
 	 *
-	 * @param window The window of the controller.
+	 * @param window The window of the panel.
 	*/
-	MenuController::MenuController(SDLWindow* window)  : VSDLController(window) {
+	MenuPanel::MenuPanel(SDLWindow* window) : VSDLPanel(window) {
 	}
 
 	/**
@@ -15,7 +15,7 @@ namespace Zabbr {
 	 *
 	 * This destructor will destruct all widgets in it.
 	*/
-	MenuController::~MenuController() {
+	MenuPanel::~MenuPanel() {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			delete (*it);
 		}
@@ -26,19 +26,19 @@ namespace Zabbr {
 	 *
 	 * @param widget The widget to add.
 	*/
-	void MenuController::addWidget(VWidget* widget) {
+	void MenuPanel::addWidget(VWidget* widget) {
 		fWidgets.push_back(widget);
 	}
 	
 	/**
-	 * Draws the controller.
+	 * Draws the panel.
 	 *
-	 * It will also draw the parent controller.
-	 * If a menu controller is drawn and it is in the background it will be transparent.
+	 * It will also draw the parent panel.
+	 * If a menu panel is drawn and it is in the background it will be transparent.
 	*/
-	void MenuController::draw() {
-		if (fParentController) {
-			fParentController->draw();
+	void MenuPanel::draw() {
+		if (fParentPanel) {
+			fParentPanel->draw();
 		}
 		int y = 0;
 		int x = fWindow->getXResolution() / 2;
@@ -58,9 +58,9 @@ namespace Zabbr {
 	 *
 	 * @param event The SDL Keyboard event.
 	*/
-	void MenuController::keyPress(SDL_KeyboardEvent event) {
+	void MenuPanel::keyPress(SDL_KeyboardEvent event) {
 		if (event.keysym.sym == SDLK_ESCAPE) {
-			fWindow->closeController(NULL);
+			fWindow->closePanel(NULL);
 		}
 		
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
@@ -73,7 +73,7 @@ namespace Zabbr {
 	 *
 	 * @param event The SDL Keyboard event.
 	*/
-	void MenuController::keyRelease(SDL_KeyboardEvent event) {
+	void MenuPanel::keyRelease(SDL_KeyboardEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			(*it)->keyRelease(event);
 		}
@@ -86,7 +86,7 @@ namespace Zabbr {
 	 *
 	 * @param event The SDL Mouse Motion event.
 	*/
-	void MenuController::mouseMotion(SDL_MouseMotionEvent event) {
+	void MenuPanel::mouseMotion(SDL_MouseMotionEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			(*it)->mouseMotion(event);
 		}
@@ -99,7 +99,7 @@ namespace Zabbr {
 	 *
 	 * @param event The SDL Mouse Button event.
 	*/
-	void MenuController::mouseButton(SDL_MouseButtonEvent event) {
+	void MenuPanel::mouseButton(SDL_MouseButtonEvent event) {
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			(*it)->mouseButton(event);
 		}
@@ -110,7 +110,7 @@ namespace Zabbr {
 	 *
 	 * This will quit the controller.
 	*/
-	void MenuController::quit() {
-		fWindow->closeController(NULL);
+	void MenuPanel::quit() {
+		fWindow->closePanel(NULL);
 	}
 }

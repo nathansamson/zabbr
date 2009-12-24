@@ -7,7 +7,7 @@
 
 #include "sdlwindow.h"
 #include "misc/fpscounter.h"
-#include "controller/sdlcontroller.h"
+#include "panels/sdlpanel.h"
 #include "resources/imageresource.h"
 #include "resources/stringfontresource.h"
 
@@ -34,7 +34,7 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	*/
-	SDLWindow::SDLWindow(): fOldController(0) {
+	SDLWindow::SDLWindow(): fOldPanel(0) {
 	
 	}
 	
@@ -54,8 +54,8 @@ namespace Zabbr {
 	
 		atexit(SDL_Quit);
 	
-		screen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
-		if (screen == NULL) {
+		fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
+		if (fScreen == NULL) {
 			throw SDLInitializationException(SDL_GetError());
 		}
 	
@@ -69,19 +69,19 @@ namespace Zabbr {
 	 * Close the window.
 	*/
 	void SDLWindow::close() {
-		if (screen)
-			SDL_FreeSurface(screen);
+		if (fScreen)
+			SDL_FreeSurface(fScreen);
 		TTF_Quit();
 	}
 	
 	/**
 	 * Run the mainloop.
 	 *
-	 * @param controller The first controller to get control of what happens.
+	 * @param panel The first panel to get control of what happens.
 	*/
-	void SDLWindow::run(VSDLController* controller) {
+	void SDLWindow::run(VSDLPanel* panel) {
 		FPSCounter fpsCounter(500);
-		fController = controller;
+		fPanel = panel;
 		SDL_Event event;
 		fRunning = true;
 	
@@ -89,44 +89,44 @@ namespace Zabbr {
 			while (fRunning && SDL_PollEvent(&event)) {
 				switch (event.type) {
 					case SDL_KEYDOWN:
-						fController->keyPress(event.key);
+						fPanel->keyPress(event.key);
 						break;
 					case SDL_KEYUP:
-						fController->keyRelease(event.key);
+						fPanel->keyRelease(event.key);
 						break;
 					case SDL_MOUSEMOTION:
-						fController->mouseMotion(event.motion);
+						fPanel->mouseMotion(event.motion);
 						break;
 					case SDL_MOUSEBUTTONUP:
-						fController->mouseButton(event.button);
+						fPanel->mouseButton(event.button);
 						break;
 					case SDL_QUIT:
-						fController->requestQuit();
+						fPanel->requestQuit();
 						break;
 					case SDL_VIDEORESIZE:
-						screen = SDL_SetVideoMode(event.resize.w, event.resize.h, 32, SDL_RESIZABLE);
+						fScreen = SDL_SetVideoMode(event.resize.w, event.resize.h, 32, SDL_RESIZABLE);
 						break;
 				}
 			}
 	
-			if (fOldController) {
-				delete fOldController;
-				fOldController = NULL;
+			if (fOldPanel) {
+				delete fOldPanel;
+				fOldPanel = NULL;
 			}
 	
 			if (fRunning) { // it is possible we quit when firing events.
-				SDL_FillRect(screen, NULL, 0);
-				//drawRectangle(0, 0, screen->w, screen->h, 0, 0, 0);
-				fController->draw();
+				SDL_FillRect(fScreen, NULL, 0);
+				//drawRectangle(0, 0, fScreen->w, fScreen->h, 0, 0, 0);
+				fPanel->draw();
 			}
 			
 			if (fRunning) { // It is possible we stop running in the draw.
 				draw();
 				SDL_Delay(1);
 			} else {
-				freeController(fController);
-				fController = NULL;
-				screen = NULL;
+				freePanel(fPanel);
+				fPanel = NULL;
+				fScreen = NULL;
 				SDL_Quit();
 			}
 			if (fpsCounter.frame()) {
@@ -144,45 +144,45 @@ namespace Zabbr {
 	 * Updates the physical screen so it contains the same information as the screen buffer.
 	*/
 	void SDLWindow::draw() {
-		SDL_Flip(screen);
+		SDL_Flip(fScreen);
 	}
 	
 	/**
-	 * Close the current controller and pass control to the next controller.
+	 * Close the current panel and pass control to the next panel.
 	 *
-	 * @param next The next controller. If 0 the window closes.
+	 * @param next The next panel. If 0 the window closes.
 	*/
-	void SDLWindow::closeController(VSDLController* next) {
+	void SDLWindow::closePanel(VSDLPanel* next) {
 		if (next != NULL) {
-			fOldController = fController;
-			fController = next;
+			fOldPanel = fPanel;
+			fPanel = next;
 		} else {
-			// We keep the old controller.
+			// We keep the old panel.
 			fRunning = false;
 		}
 	}
 	
 	/**
-	 * Gives control back to the parent controller, and close the current controller.
+	 * Gives control back to the parent panel, and close the current panel.
 	 *
-	 * @param prev The parent controller.
+	 * @param prev The parent panel.
 	*/
-	void SDLWindow::openParentController(VSDLController* prev) {
+	void SDLWindow::openParentPanel(VSDLPanel* prev) {
 		if (prev != NULL) {
-			fOldController = fController;
-			fController = prev;
+			fOldPanel = fPanel;
+			fPanel = prev;
 		} else {
 			fRunning = false;
 		}
 	}
 	
 	/**
-	 * Opens a new controller, but keep the current controller active.
+	 * Opens a new panel, but keep the current panel active.
 	 *
-	 * @param c The new active controller.
+	 * @param c The new active panel.
 	*/
-	void SDLWindow::openController(VSDLController* c) {
-		fController = c;
+	void SDLWindow::openPanel(VSDLPanel* c) {
+		fPanel = c;
 	}
 	
 	/**
@@ -208,7 +208,7 @@ namespace Zabbr {
 		dest.x = x;
 		dest.y = y;
 	
-		SDL_BlitSurface(surface, 0, screen, &dest);
+		SDL_BlitSurface(surface, 0, fScreen, &dest);
 	}
 	
 	/**
@@ -232,7 +232,7 @@ namespace Zabbr {
 		dest.w = surface->getWidth() * scale;
 		dest.h = surface->getHeight() * scale;
 		
-		SDL_BlitSurface(surface->getSurface(), &src, screen, &dest);
+		SDL_BlitSurface(surface->getSurface(), &src, fScreen, &dest);
 	}
 	
 	/**
@@ -251,7 +251,7 @@ namespace Zabbr {
 		dest.w = src.w;
 		dest.h = src.h;
 	
-		SDL_BlitSurface(surface->getSurface(), &src, screen, &dest);
+		SDL_BlitSurface(surface->getSurface(), &src, fScreen, &dest);
 	}
 	
 	/**
@@ -272,7 +272,7 @@ namespace Zabbr {
 		dest.w = w;
 		dest.h = h;
 		
-		SDL_FillRect(screen, &dest, SDL_MapRGB(screen->format, r, g, b));
+		SDL_FillRect(fScreen, &dest, SDL_MapRGB(fScreen->format, r, g, b));
 	}
 	
 	/**
@@ -288,7 +288,7 @@ namespace Zabbr {
 	 * @param a The alpha-channel of the rectangle, 0.0 for completely transparant, 1.0 for opaque.
 	*/
 	void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double a) {
-		boxRGBA(screen, x, y, x + w, y + h, r, g, b, a*255);
+		boxRGBA(fScreen, x, y, x + w, y + h, r, g, b, a*255);
 	}
 	
 	/**
@@ -297,7 +297,7 @@ namespace Zabbr {
 	 * @return The X resolution (width) of the window.
 	*/
 	int SDLWindow::getXResolution() {
-		return screen->w;
+		return fScreen->w;
 	}
 
 	/**
@@ -306,19 +306,19 @@ namespace Zabbr {
 	 * @return The Y resolution (height) of the window.
 	*/
 	int SDLWindow::getYResolution() {
-		return screen->h;
+		return fScreen->h;
 	}
 	
 	/**
-	 * Free a controller and all of its parent controllers.
+	 * Free a panel and all of its parent panels.
 	 *
-	 * @param c The controller to free.
+	 * @param p The panel to free.
 	*/
-	void SDLWindow::freeController(VSDLController* c) {
-		if (c->fParentController) {
-			freeController(c->fParentController);
+	void SDLWindow::freePanel(VSDLPanel* p) {
+		if (p->fParentPanel) {
+			freePanel(p->fParentPanel);
 		}
-		delete c;
+		delete p;
 	}
 
 }
