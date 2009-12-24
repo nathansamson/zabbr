@@ -41,9 +41,8 @@ namespace Zabbr {
 			fParentPanel->draw();
 		}
 		int y = 0;
-		int x = fWindow->getXResolution() / 2;
 		for(std::list<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
-			(*it)->draw(x, y);
+			(*it)->draw((fWindow->getXResolution() - (*it)->getWidth()) / 2, y);
 			y += (*it)->getHeight();
 		}
 		if (fIsBackground) {

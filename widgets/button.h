@@ -34,6 +34,7 @@ namespace Zabbr {
 		virtual void mouseButton(SDL_MouseButtonEvent);
 
 		void connectOnMouseClick(ICallback1<SDL_MouseButtonEvent>*);
+		void connectOnClicked(ICallback1<Button*>*);
 	private:
 		Button();
 		int getRealWidth();
@@ -74,6 +75,11 @@ namespace Zabbr {
 		 * The event fired when the user clicks on the button.
 		*/
 		Event1<SDL_MouseButtonEvent> fMouseClickEvent;
+		
+		/**
+		 * Alternative event when the user clicks the button.
+		*/
+		Event1<Button*> fClickedEvent;
 	};
 }
 

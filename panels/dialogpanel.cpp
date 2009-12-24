@@ -42,7 +42,7 @@ namespace Zabbr {
 			fParentPanel->draw();
 		}
 		
-		fQuestionLabel->draw(fWindow->getXResolution() / 2 - fQuestionLabel->getWidth(),
+		fQuestionLabel->draw((fWindow->getXResolution() - fQuestionLabel->getWidth()) / 2,
 		                     fWindow->getYResolution() / 2 - fQuestionLabel->getHeight() - 5);
 		
 		

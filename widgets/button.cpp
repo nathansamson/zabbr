@@ -38,6 +38,15 @@ namespace Zabbr {
 	void Button::connectOnMouseClick(ICallback1<SDL_MouseButtonEvent>* e) {
 		fMouseClickEvent.connect(e);
 	}
+	
+	/**
+	 * Connects a message when the button is clicked
+	 *
+	 * @param c the callback.
+	*/
+	void Button::connectOnClicked(ICallback1<Button*>* e) {
+		fClickedEvent.connect(e);
+	}
 
 	/**
 	 * Returns the width of the button.
@@ -83,7 +92,7 @@ namespace Zabbr {
 	*/
 	void Button::draw(int x, int y) {
 		if (! fFill) {
-			x = x - getRealWidth() / 2;
+			x = x + (getWidth() - getRealWidth()) / 2;
 			y = y + (getHeight() - getRealHeight()) / 2;
 			if (! fHover) {
 				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight()-10, 255, 0, 0);
@@ -124,6 +133,7 @@ namespace Zabbr {
 	void Button::mouseButton(SDL_MouseButtonEvent e) {
 		if (fHover && e.button == SDL_BUTTON_LEFT) {
 			fMouseClickEvent(e);
+			fClickedEvent(this);
 		}
 	}
 

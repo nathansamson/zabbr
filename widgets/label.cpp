@@ -41,14 +41,14 @@ namespace Zabbr {
 	/**
 	 * Draws the widget on the window.
 	 * 
-	 * The x coordinates are relative to the center of the label.
+	 * The x coordinates are relative to the left of the label.
 	 * The y coordinates are relative to the top of the label.
 	 *
 	 * @param x The x location where to draw the label.
 	 * @param y The y location where to draw the label
 	*/
 	void Label::draw(int x, int y) {
-		fWindow->drawSurface(fLabel, x - getWidth() / 2, y);
+		fWindow->drawSurface(fLabel, x , y);
 	}
 
 	/**

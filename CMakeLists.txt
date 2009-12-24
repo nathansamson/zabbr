@@ -17,4 +17,5 @@ add_library (zabbr SHARED
                ./panels/splashpanel.cpp
                ./panels/menupanel.cpp
                ./panels/sdlpanel.cpp
+               ./panels/dialogpanel.cpp
 )
