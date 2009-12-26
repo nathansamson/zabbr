@@ -1,3 +1,8 @@
+/** \file
+ * File for the resource manager.
+ *
+ * @author Nathan Samson
+*/
 
 #include "resources/resourcemanager.h"
 #include <iostream>

@@ -1,3 +1,9 @@
+/** \file
+ * File for the fps counter.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/fpscounter.h"
 
 namespace Zabbr {

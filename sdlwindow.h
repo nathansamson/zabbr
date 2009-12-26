@@ -1,6 +1,12 @@
 #ifndef INC_SDLWINDOW_H
 #define INC_SDLWINDOW_H
 
+/** \file
+ * File for the SDL window.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 #include "SDL.h"
 

@@ -1,6 +1,12 @@
 #ifndef INC_SDLPANEL_H
 #define INC_SDLPANEL_H
 
+/** \file
+ * File for the Zabbr panels.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "sdlwindow.h"

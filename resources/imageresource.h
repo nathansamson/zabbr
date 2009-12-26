@@ -1,6 +1,12 @@
 #ifndef INC_IMAGERESOURCE_H
 #define INC_IMAGERESOURCE_H
 
+/** \file
+ * File for images.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "resources/sdlsurfaceresource.h"

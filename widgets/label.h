@@ -1,6 +1,12 @@
 #ifndef INC_LABEL_H
 #define INC_LABEL_H
 
+/** \file
+ * File for the label widget.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "widgets/widget.h"

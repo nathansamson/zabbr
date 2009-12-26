@@ -1,3 +1,9 @@
+/** \file
+ * File for the sdl window.
+ *
+ * @author Nathan Samson
+*/
+
 #include <iostream>
 #include <sstream>
 

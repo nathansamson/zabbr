@@ -1,3 +1,9 @@
+/** \file
+ * File for the widget.
+ *
+ * @author Nathan Samson
+*/
+
 #include "widgets/widget.h"
 
 namespace Zabbr {

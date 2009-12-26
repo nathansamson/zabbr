@@ -1,3 +1,8 @@
+/** \file
+ * File for the stopwatch.
+ *
+ * @author Nathan Samson
+*/
 #include "stopwatch.h"
 
 namespace Zabbr {

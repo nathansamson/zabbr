@@ -1,3 +1,9 @@
+/** \file
+ * File for the splash panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "panels/splashpanel.h"

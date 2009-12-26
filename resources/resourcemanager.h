@@ -1,6 +1,12 @@
 #ifndef INC_RESOURCEMANAGER_H
 #define INC_RESOURCEMANAGER_H
 
+/** \file
+ * File for the resource manager.
+ *
+ * @author Nathan Samson
+*/
+
 #include <map>
 
 #include "resources/resource.h"

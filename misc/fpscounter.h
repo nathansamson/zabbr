@@ -1,6 +1,12 @@
 #ifndef INC_FPSCOUNTER_H
 #define INC_FPSCOUNTER_H
 
+/** \file
+ * File for the framerate counter.
+ *
+ * @author Nathan Samson
+*/
+
 #include "misc/stopwatch.h"
 
 namespace Zabbr {

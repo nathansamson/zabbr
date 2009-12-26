@@ -1,3 +1,9 @@
+/** \file
+ * File for the image resource.
+ *
+ * @author Nathan Samson
+*/
+
 #include <algorithm>
 #include <sstream>
 

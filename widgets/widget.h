@@ -1,6 +1,12 @@
 #ifndef INC_WIDGET_H
 #define INC_WIDGET_H
 
+/** \file
+ * File for the widgets.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "sdlwindow.h"

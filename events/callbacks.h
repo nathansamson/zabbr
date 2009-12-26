@@ -1,7 +1,13 @@
-#include "SDL.h"
 #ifndef INC_CALLBACKS_H
 #define INC_CALLBACKS_H
 
+/** \file
+ * File for the callbacks.
+ *
+ * @author Nathan Samson
+*/
+
+#include "SDL.h"
 
 namespace Zabbr {
 	/**

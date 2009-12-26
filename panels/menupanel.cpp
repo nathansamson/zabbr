@@ -1,3 +1,9 @@
+/** \file
+ * File for the menu panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include "panels/menupanel.h"
 
 namespace Zabbr {

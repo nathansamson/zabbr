@@ -1,6 +1,12 @@
 #ifndef INC_STRINGFONTRESOURCE_H
 #define INC_STRINGFONTRESOURCE_H
 
+/** \file
+ * File for the strings in a specific font.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL.h"
 
 #include "resources/sdlsurfaceresource.h"

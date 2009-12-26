@@ -1,3 +1,9 @@
+/** \file
+ * File for the string fonts.
+ *
+ * @author Nathan Samson
+*/
+
 #include <sstream>
 
 #include "resources/stringfontresource.h"

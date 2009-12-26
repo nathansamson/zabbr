@@ -1,3 +1,9 @@
+/** \file
+ * File for the label.
+ *
+ * @author Nathan Samson
+*/
+
 #include "widgets/label.h"
 #include "resources/resourcemanager.h"
 

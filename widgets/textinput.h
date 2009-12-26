@@ -1,6 +1,12 @@
 #ifndef INC_TEXTINPUT_H
 #define INC_TEXTINPUT_H
 
+/** \file
+ * File for the text input widget.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 #include "widgets/widget.h"
 #include "resources/resourcemanager.h"

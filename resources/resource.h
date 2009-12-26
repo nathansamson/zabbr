@@ -1,6 +1,12 @@
 #ifndef INC_RESOURCE_H
 #define INC_RESOURCE_H
 
+/** \file
+ * File for the resources.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 
 namespace Zabbr {

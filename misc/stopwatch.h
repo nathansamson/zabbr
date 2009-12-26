@@ -1,6 +1,12 @@
 #ifndef INC_STOPWATCH_H
 #define INC_STOPWATCH_H
 
+/** \file
+ * File for the stopwatch.
+ *
+ * @author Nathan Samson
+*/
+
 // This will work on unix systems.
 
 #include "sys/time.h"

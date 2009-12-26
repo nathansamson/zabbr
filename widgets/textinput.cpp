@@ -1,3 +1,9 @@
+/** \file
+ * File for the textinput.
+ *
+ * @author Nathan Samson
+*/
+
 #include <iostream>
 
 #include "widgets/textinput.h"

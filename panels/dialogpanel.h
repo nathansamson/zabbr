@@ -1,6 +1,12 @@
 #ifndef INC_DIALOGPANEL_H
 #define INC_DIALOGPANEL_H
 
+/** \file
+ * File for the dialog panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include <map>
 #include <vector>
 

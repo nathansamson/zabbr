@@ -1,3 +1,9 @@
+/** \file
+ * File for the sdl panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include "panels/sdlpanel.h"
 
 namespace Zabbr {

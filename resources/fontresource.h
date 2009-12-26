@@ -1,6 +1,12 @@
 #ifndef INC_FONTRESOURCE_H
 #define INC_FONTRESOURCE_H
 
+/** \file
+ * File for the fonts.
+ *
+ * @author Nathan Samson
+*/
+
 #include "SDL_ttf.h"
 
 #include "resources/resource.h"

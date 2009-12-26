@@ -1,6 +1,12 @@
 #ifndef INC_MENUPANEL_H
 #define INC_MENUPANEL_H
 
+/** \file
+ * File for the menu panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include <list>
 #include "SDL.h"
 

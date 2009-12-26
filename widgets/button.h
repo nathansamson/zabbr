@@ -1,6 +1,12 @@
 #ifndef INC_BUTTON_H
 #define INC_BUTTON_H
 
+/** \file
+ * File for the button panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 #include <list>
 #include "SDL.h"

@@ -1,3 +1,9 @@
+/** \file
+ * File for the button.
+ *
+ * @author Nathan Samson
+*/
+
 #include "widgets/button.h"
 #include "resources/resourcemanager.h"
 

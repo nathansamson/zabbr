@@ -1,3 +1,9 @@
+/** \file
+ * File for the font.
+ *
+ * @author Nathan Samson
+*/
+
 #include <sstream>
 #include "SDL_ttf.h"
 

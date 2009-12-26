@@ -1,6 +1,12 @@
 #ifndef INC_EVENT_H
 #define INC_EVENT_H
 
+/** \file
+ * File for the events.
+ *
+ * @author Nathan Samson
+*/
+
 #include <list>
 #include "SDL.h"
 

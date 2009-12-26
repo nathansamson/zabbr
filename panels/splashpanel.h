@@ -1,6 +1,12 @@
 #ifndef INC_SPLASHPANEL_H
 #define INC_SPLASHPANEL_H
 
+/** \file
+ * File for the Splash panels.
+ *
+ * @author Nathan Samson
+*/
+
 #include <string>
 
 #include "panels/sdlpanel.h"

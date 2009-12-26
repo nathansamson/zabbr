@@ -1,3 +1,9 @@
+/** \file
+ * File for the dialog panel.
+ *
+ * @author Nathan Samson
+*/
+
 #include "panels/dialogpanel.h"
 
 namespace Zabbr {

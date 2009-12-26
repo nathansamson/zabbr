@@ -1,3 +1,9 @@
+/** \file
+ * File for the resource.
+ *
+ * @author Nathan Samson
+*/
+
 #include "resources/resource.h"
 
 #include <iostream>
