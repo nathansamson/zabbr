@@ -11,7 +11,27 @@ namespace Zabbr {
 	/**
 	 * Private constructor.
 	*/
-	ResourceManager::ResourceManager() {
+	ResourceManager::ResourceManager(): fMaxCachedItems(100) {
+	}
+
+	ResourceManager::~ResourceManager() {
+		for(std::map<std::string, VResource*>::iterator it = fResourceList.begin(); it != fResourceList.end(); it++) {
+			if ((*it).second->fRefCount > 0) {
+				std::cout << (*it).second->getName() << " Not freed." << std::endl;
+			} else {
+				delete (*it).second;
+			}
+		}
+	}
+
+	/**
+	 * Free the resource manager.
+	 * It is recommended that this is done only once, just before quit.
+	 *
+	*/
+	void ResourceManager::free() {
+		delete ResourceManager::fgManager;
+		ResourceManager::fgManager = 0;
 	}
 
 	/**
@@ -36,9 +56,13 @@ namespace Zabbr {
 		res->fRefCount--;
 		
 		if (res->fRefCount == 0) {
-			fResourceList.erase(res->getName());
-			delete res;
-			res = NULL;
+			fResourceCache.push_back(res);
+			if (fResourceCache.size() > fMaxCachedItems) {
+				VResource* deleted = fResourceCache.front();
+				fResourceCache.pop_front();
+				fResourceList.erase(deleted->getName());
+				delete deleted;
+			}
 		}
 	}
 	
@@ -59,6 +83,7 @@ namespace Zabbr {
 			
 			return res;
 		} else {
+			std::cout << "LOD FROM CACHE" << std::endl;
 			return static_cast<ImageResource*>(getResource(id));
 		}
 	}
@@ -88,6 +113,7 @@ namespace Zabbr {
 			
 			return scaled;
 		} else {
+			std::cout << "LOD FROM CACHE" << std::endl;
 			return static_cast<ImageResource*>(getResource(id));
 		}
 	}
@@ -165,6 +191,15 @@ namespace Zabbr {
 	*/
 	VResource* ResourceManager::getResource(std::string id) {
 		VResource* res = fResourceList[id];
+		if (res->fRefCount == 0) {
+			// Remove it from the cache list.
+			for(std::list<VResource*>::iterator it = fResourceCache.begin(); it != fResourceCache.end(); it++) {
+				if ((*it) == res) {
+					fResourceCache.erase(it);
+					break;
+				}
+			}
+		}
 		res->fRefCount++;
 		return res;
 	}

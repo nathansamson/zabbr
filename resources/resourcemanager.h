@@ -8,6 +8,7 @@
 */
 
 #include <map>
+#include <list>
 
 #include "resources/resource.h"
 #include "resources/imageresource.h"
@@ -21,7 +22,10 @@ namespace Zabbr {
 	*/
 	class ResourceManager {
 		public:
+			ResourceManager();
+			static void free();
 			static ResourceManager& manager();
+			~ResourceManager();
 			
 			void free(VResource* res);
 				
@@ -35,7 +39,7 @@ namespace Zabbr {
 			*/
 			static std::string fgDataPath;
 		private:
-			ResourceManager();
+			
 			
 			bool hasResource(std::string);
 			void insertResource(std::string, VResource*);
@@ -45,6 +49,17 @@ namespace Zabbr {
 			 * A map of all resources.
 			*/
 			std::map<std::string, VResource*> fResourceList;
+			
+			/**
+			 * A cache of unused resources, but still in the cache.
+			 * This list is ordered on least-recently used first.
+			*/
+			std::list<VResource*> fResourceCache;
+			
+			/**
+			 * The maximum number of cached items.
+			*/
+			unsigned int fMaxCachedItems;
 			
 			/**
 			 * The singleton ResourceManager.

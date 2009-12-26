@@ -16,6 +16,7 @@
 #include "panels/sdlpanel.h"
 #include "resources/imageresource.h"
 #include "resources/stringfontresource.h"
+#include "resources/resourcemanager.h"
 
 namespace Zabbr {
 
@@ -78,6 +79,7 @@ namespace Zabbr {
 		if (fScreen)
 			SDL_FreeSurface(fScreen);
 		TTF_Quit();
+		ResourceManager::free();
 	}
 	
 	/**
