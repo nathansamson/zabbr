@@ -8,9 +8,12 @@
 */
 
 #include <string>
+#include <queue>
 
 #include "panels/sdlpanel.h"
-#include "resources/imageresource.h"
+#include "resources/resourcemanager.h"
+#include "misc/stopwatch.h"
+#include "misc/prefetcher.h"
 
 namespace Zabbr {
 
@@ -25,9 +28,18 @@ namespace Zabbr {
 	public:
 		SplashPanel(SDLWindow*, std::string, VSDLPanel*);
 		virtual ~SplashPanel();
+		void addPrefetcher(IPrefetcher*);
 
 		virtual void draw();
 	private:
+		class EmptyPrefetcher: public IPrefetcher {
+		public:
+			virtual ~EmptyPrefetcher();
+			
+			virtual bool operator()();
+			virtual std::string name();
+		};
+	
 		/**
 		 * The splash image.
 		*/
@@ -37,6 +49,26 @@ namespace Zabbr {
 		 * The panel that should be loaded after loading is done.
 		*/
 		VSDLPanel* fNextPanel;
+		
+		/**
+		 * Prefetcher list.
+		*/
+		std::queue<IPrefetcher*> fPrefetcherList;
+		
+		/**
+		 * A timer to time the length of a draw.
+		*/
+		Stopwatch fTimer;
+		
+		/**
+		 * The font of the status text.
+		*/
+		FontResource* fFont;
+		
+		/**
+		 * Surface for the status text. 
+		*/
+		StringFontResource* fStatusText;
 	};
 }
 
