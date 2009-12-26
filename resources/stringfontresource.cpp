@@ -36,9 +36,10 @@ namespace Zabbr {
 	*/
 	std::string StringFontResource::getID(std::string text, FontResource* font, SDL_Color c) {
 		std::stringstream sID;
-		sID << text << font->getName() << c.r << "_" << c.g << "_" << c.b;
-		std::string id;
-		sID >> id;
+		sID << "_" << c.r << "_" << c.g << "_" << c.b;
+		std::string rgb;
+		sID >> rgb;
+		std::string id = text + font->getName() + rgb;
 		return id;
 	}
 
