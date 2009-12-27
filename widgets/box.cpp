@@ -27,9 +27,7 @@ namespace Zabbr {
 	}
 	
 	Box::~Box() {
-		for(std::vector<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
-			delete (*it);
-		}
+		clear();
 	}
 
 	/**
@@ -60,7 +58,17 @@ namespace Zabbr {
 				w->setHeight(fWidgetDimension.height);
 			}
 		}
-	}	
+	}
+	
+	/**
+	 * Clear all widgets in the list.
+	*/
+	void Box::clear() {
+		for(std::vector<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
+			delete (*it);
+		}
+		fWidgets.clear();
+	}
 	
 	/**
 	 * Returns the width of the box.
@@ -104,6 +112,24 @@ namespace Zabbr {
 	*/
 	void Box::setHeight(int height) {
 		fDimension.height = height;
+	}
+	
+	/**
+	 * Set the Y alignment
+	 *
+	 * @param yAlign The Y-Alignment
+	*/
+	void Box::setYAlign(YAlignment yAlign) {
+		yAlignment = yAlign;
+	}
+	
+	/**
+	 * Set the X alignment
+	 *
+	 * @param xAlign The X-Alignment
+	*/
+	void Box::setXAlign(XAlignment xAlign) {
+		xAlignment = xAlign;
 	}
 	
 	/**

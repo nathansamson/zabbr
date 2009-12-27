@@ -33,11 +33,15 @@ namespace Zabbr {
 		~Box();
 		
 		void appendWidget(VWidget*);
+		void clear();
 		
 		virtual int getWidth();
 		virtual void setWidth(int);
 		virtual int getHeight();
 		virtual void setHeight(int);
+		
+		void setYAlign(YAlignment);
+		void setXAlign(XAlignment);
 		
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);

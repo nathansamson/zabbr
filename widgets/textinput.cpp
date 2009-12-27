@@ -87,8 +87,6 @@ namespace Zabbr {
 	 * @param y The y location of the widget.
 	*/
 	void TextInputWidget::draw(int x, int y) {
-		x -= fWidth / 2;
-		
 		fWindow->drawRectangle(x, y, fWidth, fHeight, 255, 0, 0);
 		fWindow->drawRectangle(x + 2, y + 2, fWidth - 4, fHeight - 4, 255, 255, 255);
 		

@@ -32,6 +32,19 @@ namespace Zabbr {
 	        Box(win, homogenous, spacing, XALIGN_CENTER, yAlign) {
 	}
 	
+	/**
+	 * Public constructor.
+	 *
+	 * @param win The SDLWindow.
+	 * @param homogenous True if all widgets should have the same size.
+	 * @param spacing The spacing in pixels between 2 widgets.
+	 * @param xAlign The X-alignment of the widgets.
+	 * @param yAlign The Y-alignment of the widgets.
+	*/
+	VBox::VBox(SDLWindow* win, bool homogenous, int spacing, XAlignment xAlign, YAlignment yAlign):
+	        Box(win, homogenous, spacing, xAlign, yAlign) {
+	}
+	
 	VBox::~VBox() {
 	}
 	
@@ -43,9 +56,9 @@ namespace Zabbr {
 	*/
 	void VBox::draw(int x, int y) {
 		if (yAlignment == YALIGN_CENTER) {
-			y = (getHeight() - requestedHeight()) / 2;
+			y += (getHeight() - requestedHeight()) / 2;
 		} else if (yAlignment == YALIGN_BOTTOM) {
-			y = getHeight() - requestedHeight();
+			y += getHeight() - requestedHeight();
 		}
 		for(std::vector<VWidget*>::iterator it = fWidgets.begin(); it != fWidgets.end(); it++) {
 			if (xAlignment == XALIGN_CENTER) {
