@@ -19,6 +19,7 @@ namespace Zabbr {
 	Stopwatch::~Stopwatch() {
 		delete fCur;
 		delete fPrev;
+		if (fPauseStart) delete fPauseStart;
 	}
 
 	/**

@@ -77,8 +77,8 @@ namespace Zabbr {
 	void SDLWindow::close() {
 		if (fScreen)
 			SDL_FreeSurface(fScreen);
-		TTF_Quit();
 		ResourceManager::free();
+		TTF_Quit();
 	}
 	
 	/**
