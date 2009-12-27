@@ -20,23 +20,6 @@ namespace Zabbr {
 	bool operator!=(SDL_Color c1, SDL_Color c2) {
 		return (c1.r != c2.r || c1.g != c2.g || c1.b != c2.b);
 	}
-
-	/**
-	 * Public constructor.
-	 *
-	 * @param window The window of the label.
-	 * @param label The text of the label.
-	 * @param c The color of the text.
-	*/
-	Label::Label(SDLWindow* window, std::string label, SDL_Color c):
-	        VWidget(window), fWidth(0), fHeight(0), fLabelString(label), fColor(c) {
-		fFont = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 20);
-		if (label != "") {
-			fLabel = fFont->string(label, c);
-		} else {
-			fLabel = 0;
-		}
-	}
 	
 	/**
 	 * Public constructor.
@@ -47,7 +30,7 @@ namespace Zabbr {
 	 * @param fontName The font name
 	 * @param fontSize The size of the text (in points).
 	*/
-	Label::Label(SDLWindow* window, std::string label, SDL_Color c, std::string fontName, int fontSize):
+	Label::Label(SDLWindow* window, std::string label, SDL_Color c, int fontSize, std::string fontName):
 	         VWidget(window), fWidth(0), fHeight(0), fLabelString(label), fColor(c) {
 		fFont = ResourceManager::manager().font(fontName, fontSize);
 		if (label != "") {

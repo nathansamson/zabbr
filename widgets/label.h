@@ -14,6 +14,11 @@
 
 namespace Zabbr {
 
+	const int FONTSIZE_BIG = 32;
+	const int FONTSIZE_MEDIUM = 24;
+	const int FONTSIZE_NORMAL = 20;
+	const int FONTSIZE_SMALL = 16;
+
 	/**
 	 * A Label widget.
 	 *
@@ -21,8 +26,7 @@ namespace Zabbr {
 	*/
 	class Label : public VWidget {
 	public:
-		Label(SDLWindow*, std::string, SDL_Color);
-		Label(SDLWindow*, std::string, SDL_Color, std::string, int);
+		Label(SDLWindow*, std::string, SDL_Color, int = FONTSIZE_NORMAL, std::string = "DejaVuSans-Bold.ttf");
 		virtual ~Label();
 		
 		void setLabel(std::string);

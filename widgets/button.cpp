@@ -19,7 +19,7 @@ namespace Zabbr {
 	       : VWidget(window), fLabel(label), fWidth(0),
 	         fHeight(0), fHover(false) {
 		SDL_Color c = {0, 0, 0};
-		fLabelWidget = new Label(fWindow, label, c, "fonts/Blackout-Midnight.ttf", 24);
+		fLabelWidget = new Label(fWindow, label, c, FONTSIZE_MEDIUM, "fonts/Blackout-Midnight.ttf");
 
 		fBoundingBox.x = 0;
 		fBoundingBox.y = 0;

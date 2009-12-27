@@ -67,9 +67,9 @@ namespace Zabbr {
 	 * @param val initial value of the text input widget.
 	*/
 	TextInputWidget::TextInputWidget(SDLWindow* window, std::string val):
-	       VWidget(window), fText(val), fWidth(300), fHeight(80) {
+	       VWidget(window), fText(val), fWidth(300), fHeight(0) {
 		SDL_Color c = {0, 0, 0};
-		fLabelWidget = new Label(fWindow, fText, c, "DejaVuSans-Bold.ttf", 30);
+		fLabelWidget = new Label(fWindow, fText, c, FONTSIZE_MEDIUM);
 		fLabelWidget->setWidth(fWidth - 8);
 	}
 	
@@ -87,10 +87,10 @@ namespace Zabbr {
 	 * @param y The y location of the widget.
 	*/
 	void TextInputWidget::draw(int x, int y) {
-		fWindow->drawRectangle(x, y, fWidth, fHeight, 255, 0, 0);
-		fWindow->drawRectangle(x + 2, y + 2, fWidth - 4, fHeight - 4, 255, 255, 255);
+		fWindow->drawRectangle(x, y, fWidth, getHeight(), 255, 0, 0);
+		fWindow->drawRectangle(x + 2, y + 2, fWidth - 4, getHeight() - 4, 255, 255, 255);
 		
-		fLabelWidget->draw(x + 4, y + 4 + (fHeight - 8 - fLabelWidget->getHeight())/2);
+		fLabelWidget->draw(x + 4, y + 4 + (getHeight() - 8 - fLabelWidget->getHeight())/2);
 	}
 	
 	/**
@@ -108,7 +108,15 @@ namespace Zabbr {
 	 * @return the height of the widget.
 	*/
 	int TextInputWidget::getHeight() {
-		return fHeight;
+		if (fHeight == 0) {
+			int h = fLabelWidget->getHeight();
+			if (h == 0) {
+				h = 29;
+			}
+			return h + 8;
+		} else {
+			return fHeight;
+		}
 	}
 	
 	/**

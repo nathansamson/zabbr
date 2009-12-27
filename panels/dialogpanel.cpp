@@ -21,7 +21,7 @@ namespace Zabbr {
 	                         std::vector<std::pair<int, std::string> > responseIDMap):
 	             WidgetPanel(w, new VBox(w, false, 10, YALIGN_CENTER)) {
 		SDL_Color white = {255, 255, 255};
-		fQuestionLabel = new Label(fWindow, question, white, "DejaVuSans-Bold.ttf", 24);
+		fQuestionLabel = new Label(fWindow, question, white, FONTSIZE_MEDIUM);
 		dynamic_cast<VBox*>(fTopLevel)->appendWidget(fQuestionLabel);
 		
 		HBox* buttonBox = new HBox(fWindow, true, 10);

@@ -19,7 +19,7 @@ namespace Zabbr {
 	               WidgetPanel(window, new VBox(window, false, 10)) {
 		fButtonBox = new VBox(fWindow, true, 7);
 		SDL_Color white = {255, 255, 255};
-		dynamic_cast<VBox*>(fTopLevel)->appendWidget(new Label(fWindow, title, white, "DejaVuSans-Bold.ttf", 48));
+		dynamic_cast<VBox*>(fTopLevel)->appendWidget(new Label(fWindow, title, white, 48));
 		dynamic_cast<VBox*>(fTopLevel)->appendWidget(fButtonBox);
 	}
 	
@@ -36,7 +36,7 @@ namespace Zabbr {
 	                     SDL_Color color, std::string font, int size):
 	               WidgetPanel(window, new VBox(window, false, 10)) {
 		fButtonBox = new VBox(fWindow, true, 7);
-		dynamic_cast<VBox*>(fTopLevel)->appendWidget(new Label(fWindow, title, color, font, size));
+		dynamic_cast<VBox*>(fTopLevel)->appendWidget(new Label(fWindow, title, color, size, font));
 		dynamic_cast<VBox*>(fTopLevel)->appendWidget(fButtonBox);
 	}
 	
