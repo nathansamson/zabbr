@@ -11,6 +11,8 @@
 #include "SDL.h"
 
 #include "resources/sdlsurfaceresource.h"
+#include "events/callbacks.h"
+#include "events/event.h"
 
 namespace Zabbr {
 
@@ -59,6 +61,10 @@ namespace Zabbr {
 		
 		int getXResolution();
 		int getYResolution();
+		
+		int connectOnScreenSizeChanged(ICallback3<SDLWindow*, int, int>*);
+		void disconnectOnScreenSizeChanged(int);
+
 	protected:
 		/**
 		 * The current active panel.
@@ -100,6 +106,11 @@ namespace Zabbr {
 			int x;
 			int y;
 		} fRatioOffset;
+		
+		/**
+		 * The screen size changed signal
+		*/
+		Event3<SDLWindow*, int, int> fScreenChanged;
 	};
 
 }

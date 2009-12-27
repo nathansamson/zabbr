@@ -323,6 +323,25 @@ namespace Zabbr {
 	}
 	
 	/**
+	 * Connect to hte screen size changed event.
+	 *
+	 * @param c Your callback.
+	 * return The ID of the callback (so you can disconnect).
+	*/
+	int SDLWindow::connectOnScreenSizeChanged(ICallback3<SDLWindow*, int, int>* c) {
+		return fScreenChanged.connect(c);
+	}
+	
+	/**
+	 * Disconnect a callback.
+	 *
+	 * @param id The the ID of the callback (as returned by connectOnScreenSizeChanged).
+	*/
+	void SDLWindow::disconnectOnScreenSizeChanged(int id) {
+		fScreenChanged.disconnect(id);
+	}
+	
+	/**
 	 * Free a panel and all of its parent panels.
 	 *
 	 * @param p The panel to free.
@@ -334,6 +353,12 @@ namespace Zabbr {
 		delete p;
 	}
 	
+	/**
+	 * Resize the screen.
+	 *
+	 * @param w The new width
+	 * @param h The new height
+	*/
 	void SDLWindow::resize(int w, int h) {
 		fScreen = SDL_SetVideoMode(w, h, 32, SDL_RESIZABLE);
 		if (fKeepratio) {
@@ -346,6 +371,6 @@ namespace Zabbr {
 				fRatioOffset.y = (h - w / fRatio) / 2;
 			}
 		}
+		fScreenChanged(this, getXResolution(), getYResolution());
 	}
-
 }

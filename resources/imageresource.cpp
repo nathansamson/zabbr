@@ -95,13 +95,13 @@ namespace Zabbr {
 	*/
 	std::string ImageResource::createID(std::string name, int w, int h, bool keepRatio, int angle) {
 		std::stringstream ssID;
-		ssID << name << "_" << w << "_"<< h;
+		ssID  << "_" << w << "_"<< h;
 		if (keepRatio) {
 			ssID << "_KR";
 		}
 		ssID << "_" << angle;
 		std::string id;
 		ssID >> id;
-		return id;
+		return name + id;
 	}
 }
