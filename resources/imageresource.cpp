@@ -68,8 +68,8 @@ namespace Zabbr {
 		} else {
 			SDL_Surface* t;
 			t = zoomSurface(fSurface, w*1.0/fSurface->w, h*1.0/fSurface->h, SMOOTHING_ON);
-			surf = rotozoomSurface(fSurface, angle, 1, SMOOTHING_ON);
-			delete t;
+			surf = rotozoomSurface(t, angle, 1, SMOOTHING_ON);
+			SDL_FreeSurface(t);
 			
 		}
 		return new ImageResource(createID(getName(), w, h, keepRatio, angle), surf);
