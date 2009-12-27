@@ -108,10 +108,21 @@ namespace Zabbr {
 			fBoundingBox.x = x;
 			fBoundingBox.y = y;
 			fBoundingBox.w = getRealWidth();
-			fBoundingBox.h = getRealHeight() - 10;
+			fBoundingBox.h = getRealHeight();
 		} else {
-			x = x - getWidth() / 2;
-			fWindow->drawRectangle(x, y, getWidth(), getHeight(), 255, 0, 0);
+			if (! fHover) {
+				fWindow->drawRectangle(x, y,  getWidth(), getHeight(), 255, 0, 0);
+			} else {
+				fWindow->drawRectangle(x, y,  getWidth(), getHeight(), 0, 255, 0);
+			}
+			
+			fLabelWidget->draw(x + (getWidth() - fLabelWidget->getWidth())/2,
+			                   y + (getHeight() - fLabelWidget->getHeight())/2);
+			
+			fBoundingBox.x = x;
+			fBoundingBox.y = y;
+			fBoundingBox.w = getWidth();
+			fBoundingBox.h = getHeight();
 		}
 	}
 

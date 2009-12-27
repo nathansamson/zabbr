@@ -38,7 +38,7 @@ namespace Zabbr {
 		virtual void keyPress(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
 	protected:
-		struct Dimensions {
+		struct Dimension {
 			int width;
 			int height;
 		};
@@ -59,7 +59,7 @@ namespace Zabbr {
 		/**
 		 * Specified dimensions of the widget.
 		*/
-		Dimensions fDimensions;
+		Dimension fDimension;
 		
 		/**
 		 * Alignment on the x-axis.
@@ -70,6 +70,16 @@ namespace Zabbr {
 		 * Alignment on the y-axis.
 		*/
 		YAlignment yAlignment;
+		
+		/**
+		 * Flag to see if all widgets should be the same size.
+		*/
+		bool fHomogenous;
+		
+		/**
+		 * The dimension of a widget. Only required when in homogenous mode.
+		*/
+		Dimension fWidgetDimension;
 	};
 }
 
