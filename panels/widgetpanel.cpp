@@ -52,6 +52,7 @@ namespace Zabbr {
 	 * @param event The SDL Keyboard event.
 	*/
 	void WidgetPanel::keyPress(SDL_KeyboardEvent event) {
+		VSDLPanel::keyPress(event);
 		fTopLevel->keyPress(event);
 	}
 	
@@ -61,6 +62,7 @@ namespace Zabbr {
 	 * @param event The SDL Keyboard event.
 	*/
 	void WidgetPanel::keyRelease(SDL_KeyboardEvent event) {
+		VSDLPanel::keyRelease(event);
 		fTopLevel->keyRelease(event);
 	}
 
@@ -72,6 +74,7 @@ namespace Zabbr {
 	 * @param event The SDL Mouse Motion event.
 	*/
 	void WidgetPanel::mouseMotion(SDL_MouseMotionEvent event) {
+		VSDLPanel::mouseMotion(event);
 		fTopLevel->mouseMotion(event);
 	}
 
@@ -83,6 +86,7 @@ namespace Zabbr {
 	 * @param event The SDL Mouse Button event.
 	*/
 	void WidgetPanel::mouseButton(SDL_MouseButtonEvent event) {
+		VSDLPanel::mouseButton(event);
 		fTopLevel->mouseButton(event);
 	}
 	

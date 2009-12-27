@@ -27,9 +27,8 @@ namespace Zabbr {
 	
 		DialogPanel(SDLWindow*, std::string, std::vector<std::pair<int, std::string> >);
 		
+		virtual void keyRelease(SDL_KeyboardEvent);
 		void connectOnResponse(ICallback1<int>*);
-		
-		void onButtonClick(Button*);
 	private:
 		/**
 		 * The question label
@@ -45,6 +44,9 @@ namespace Zabbr {
 		 * Response event
 		*/
 		Event1<int> fResponseEvent;
+		
+		void onButtonClick(Button*);
+		void onRequestQuit();
 	};
 }
 

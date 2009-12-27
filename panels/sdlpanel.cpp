@@ -45,6 +45,7 @@ namespace Zabbr {
 	 * @param evnt The SDL Keyboard event.
 	*/
 	void VSDLPanel::keyRelease(SDL_KeyboardEvent evnt) {
+		fOnKeyRelease(this, evnt);
 	}
 
 	/**
@@ -81,6 +82,13 @@ namespace Zabbr {
 	*/
 	void VSDLPanel::connectRequestQuit(ICallback0* cb) {
 		fQuitRequestEvent.connect(cb);
+	}
+	
+	/**
+	 * Connect to the key release event.
+	*/
+	void VSDLPanel::connectOnKeyRelease(ICallback2<VSDLPanel*, SDL_KeyboardEvent>* c) {
+		fOnKeyRelease.connect(c);
 	}
 
 	/**

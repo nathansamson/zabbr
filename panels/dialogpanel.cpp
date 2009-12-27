@@ -10,6 +10,9 @@
 
 namespace Zabbr {
 
+	const int DialogPanel::Cancel;
+	const int DialogPanel::Quit;
+
 	/**
 	 * Constructor.
 	 *
@@ -33,6 +36,19 @@ namespace Zabbr {
 			buttonBox->appendWidget(b);
 			b->connectOnClicked(new ClassCallback1<DialogPanel, Button*>(this, &DialogPanel::onButtonClick));
 		}
+		fQuitRequestEvent.connect(new ClassCallback0<DialogPanel>(this, &DialogPanel::onRequestQuit));
+	}
+	
+	/**
+	 * Key release callback.
+	 *
+	 * @param event The event.
+	*/
+	void DialogPanel::keyRelease(SDL_KeyboardEvent event) {
+		WidgetPanel::keyRelease(event);
+		if (event.keysym.sym == SDLK_ESCAPE) {
+			fResponseEvent(DialogPanel::Cancel);
+		}
 	}
 	
 	/**
@@ -49,5 +65,12 @@ namespace Zabbr {
 	*/
 	void DialogPanel::onButtonClick(Button* b) {
 		fResponseEvent(fButtonResponseMap[b]);
+	}
+	
+	/**
+	 * Request a quit;
+	*/
+	void DialogPanel::onRequestQuit() {
+		fResponseEvent(DialogPanel::Quit);
 	}
 }
