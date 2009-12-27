@@ -1,6 +1,12 @@
 #ifndef INC_VBOX_H
 #define INC_VBOX_H
 
+/** \file
+ * File for the vbox widget.
+ *
+ * @author Nathan Samson
+*/
+
 #include "widgets/box.h"
 
 namespace Zabbr {

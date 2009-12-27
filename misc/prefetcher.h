@@ -18,7 +18,18 @@ namespace Zabbr {
 	public:
 		virtual ~IPrefetcher() {}
 		
+		/**
+		 * Run the next load of prefetching. Keep chunks as small as possible in your implementation.
+		 *
+		 * @return If there are no tasks left after running.
+		*/
 		virtual bool operator()() = 0;
+		
+		/**
+		 * Returns the name of the prefetcher.
+		 *
+		 * @return The name of the prefetcher.
+		*/
 		virtual std::string name() = 0;
 	};
 }

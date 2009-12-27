@@ -1,6 +1,12 @@
 #ifndef INC_HBOX_H
 #define INC_HBOX_H
 
+/** \file
+ * File for the hbox widget.
+ *
+ * @author Nathan Samson
+*/
+
 #include "widgets/box.h"
 
 namespace Zabbr {

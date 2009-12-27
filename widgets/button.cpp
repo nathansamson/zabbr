@@ -48,8 +48,8 @@ namespace Zabbr {
 	 *
 	 * @param c the callback.
 	*/
-	void Button::connectOnClicked(ICallback1<Button*>* e) {
-		fClickedEvent.connect(e);
+	void Button::connectOnClicked(ICallback1<Button*>* c) {
+		fClickedEvent.connect(c);
 	}
 
 	/**

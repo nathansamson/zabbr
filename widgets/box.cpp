@@ -7,6 +7,15 @@
 */
 
 namespace Zabbr {
+	/**
+	 * Constructor.
+	 *
+	 * @param win The Window.
+	 * @param homogenous True if all widgets should have the same size, false if not.
+	 * @param spacing The spacing (in pixels) between the widgets.
+	 * @param xAlign The alignment on the x-axis.
+	 * @param yAlign The alignment on the y-axis.
+	*/
 	Box::Box(SDLWindow* win, bool homogenous, int spacing,
 	         XAlignment xAlign, YAlignment yAlign): VWidget(win),
 	            fSpacing(spacing), xAlignment(xAlign), yAlignment(yAlign),
@@ -23,6 +32,11 @@ namespace Zabbr {
 		}
 	}
 
+	/**
+	 * Append a widget to the menu.
+	 *
+	 * @param w The added widget.
+	*/
 	void Box::appendWidget(VWidget* w) {
 		fWidgets.push_back(w);
 		if (fHomogenous) {
@@ -48,6 +62,11 @@ namespace Zabbr {
 		}
 	}	
 	
+	/**
+	 * Returns the width of the box.
+	 *
+	 * @return The width of the box.
+	*/
 	int Box::getWidth() {
 		if (fDimension.width == 0) {
 			return requestedWidth();
@@ -56,10 +75,20 @@ namespace Zabbr {
 		}
 	}
 	
+	/**
+	 * Sets the width of the box.
+	 *
+	 * @param width The new width of the box.
+	*/
 	void Box::setWidth(int width) {
 		fDimension.width = width;
 	}
 	
+	/**
+	 * Returns the height of the box.
+	 *
+	 * @return the height of the box.
+	*/
 	int Box::getHeight() {
 		if (fDimension.height == 0) {
 			return requestedHeight();
@@ -68,6 +97,11 @@ namespace Zabbr {
 		}
 	}
 	
+	/**
+	 * Set the height of the box.
+	 *
+	 * @param height The new height of the box.
+	*/
 	void Box::setHeight(int height) {
 		fDimension.height = height;
 	}

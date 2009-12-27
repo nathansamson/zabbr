@@ -6,12 +6,18 @@
 
 namespace Zabbr {
 
+	/**
+	 * Alignment on the X-axis
+	*/
 	enum XAlignment {
 		XALIGN_LEFT,
 		XALIGN_CENTER,
-			XALIGN_RIGHT
+		XALIGN_RIGHT
 	};
-		
+	
+	/**
+	 * Alignment on the Y-axis.
+	*/
 	enum YAlignment {
 		YALIGN_TOP,
 		YALIGN_CENTER,
@@ -38,12 +44,29 @@ namespace Zabbr {
 		virtual void keyPress(SDL_KeyboardEvent);
 		virtual void keyRelease(SDL_KeyboardEvent);
 	protected:
+		/**
+		 * A dimension struct.
+		*/
 		struct Dimension {
+			/**
+			 * Width
+			*/
 			int width;
+			
+			/**
+			 * Height 
+			*/
 			int height;
 		};
 	
+		/**
+		 * Returns the minimal width of the box.
+		*/
 		virtual int requestedWidth() = 0;
+		
+		/**
+		 * Returns the minimal height of the box.
+		*/
 		virtual int requestedHeight() = 0;
 		
 		/**

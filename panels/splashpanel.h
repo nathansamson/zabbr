@@ -33,6 +33,12 @@ namespace Zabbr {
 
 		virtual void draw();
 	private:
+		/**
+		 * An empty prefetchers.
+		 *
+		 * The empty prefetcher is always run before all other prefetchers,
+		 * to make sure the text appears for the first real prefetcher.
+		*/
 		class EmptyPrefetcher: public IPrefetcher {
 		public:
 			virtual ~EmptyPrefetcher();

@@ -17,6 +17,9 @@
 #include "widgets/button.h"
 
 namespace Zabbr {
+	/**
+	 * Panel that shows a text, and buttons.
+	*/
 	class DialogPanel: public WidgetPanel {
 	public:
 		static const int Quit = -1;

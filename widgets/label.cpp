@@ -9,6 +9,14 @@
 
 namespace Zabbr {
 
+	/**
+	 * Comparison operator for SDL_colors.
+	 *
+	 * @param c1 Color
+	 * @param c2 Other color.
+	 *
+	 * @return If 2 colors are inqual.
+	*/
 	bool operator!=(SDL_Color c1, SDL_Color c2) {
 		return (c1.r != c2.r || c1.g != c2.g || c1.b != c2.b);
 	}

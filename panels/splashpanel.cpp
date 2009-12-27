@@ -36,6 +36,11 @@ namespace Zabbr {
 		delete fStatusLabel;
 	}
 	
+	/**
+	 * Add a prefetcher to the panel.
+	 *
+	 * @param prefetcher The prefetcher to add.
+	*/
 	void SplashPanel::addPrefetcher(IPrefetcher* prefetcher) {
 		fPrefetcherList.push(prefetcher);
 	}
