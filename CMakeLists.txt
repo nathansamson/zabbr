@@ -19,6 +19,7 @@ add_library (zabbr SHARED
                ./misc/fontprefetcher.cpp
                ./panels/splashpanel.cpp
                ./panels/widgetpanel.cpp
+               ./panels/menupanel.cpp
                ./panels/sdlpanel.cpp
                ./panels/dialogpanel.cpp
 )
