@@ -68,17 +68,16 @@ namespace Zabbr {
 	*/
 	TextInputWidget::TextInputWidget(SDLWindow* window, std::string val):
 	       VWidget(window), fText(val), fWidth(300), fHeight(80) {
-		fFont = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 30);
 		SDL_Color c = {0, 0, 0};
-		fStringResource = ResourceManager::manager().string(fText, fFont, c);
+		fLabelWidget = new Label(fWindow, fText, c, "DejaVuSans-Bold.ttf", 30);
+		fLabelWidget->setWidth(fWidth - 8);
 	}
 	
 	/**
 	 * Desctructor.
 	*/
 	TextInputWidget::~TextInputWidget() {
-		ResourceManager::manager().free(fFont);
-		ResourceManager::manager().free(fStringResource);
+		delete fLabelWidget;
 	}
 	
 	/**
@@ -93,19 +92,7 @@ namespace Zabbr {
 		fWindow->drawRectangle(x, y, fWidth, fHeight, 255, 0, 0);
 		fWindow->drawRectangle(x + 2, y + 2, fWidth - 4, fHeight - 4, 255, 255, 255);
 		
-		if (fStringResource->getWidth() < fWidth - 8) {
-			fWindow->drawSurface(fStringResource, x + 4, y + 4 + (fHeight - 8 - fStringResource->getHeight())/2);
-		} else {
-			SDL_Rect rectangle;
-			rectangle.x = fStringResource->getWidth() - (fWidth - 8);
-			rectangle.y = 0;
-			rectangle.w = fWidth - 8;
-			rectangle.h = fHeight;
-			fWindow->drawPartOfSurface(
-			      fStringResource, x + 4,
-			      y + 4 + (fHeight - 8 - fStringResource->getHeight())/2,
-			      rectangle);
-		}
+		fLabelWidget->draw(x + 4, y + 4 + (fHeight - 8 - fLabelWidget->getHeight())/2);
 	}
 	
 	/**
@@ -133,6 +120,7 @@ namespace Zabbr {
 	*/
 	void TextInputWidget::setWidth(int w) {
 		fWidth = w;
+		fLabelWidget->setWidth(fWidth - 8);
 	}
 	
 	/**
@@ -165,12 +153,6 @@ namespace Zabbr {
 			fText += *c;
 			delete c;
 		}
-		ResourceManager::manager().free(fStringResource);
-		SDL_Color c = {0, 0, 0};
-		if (fText == "") {
-			fStringResource = ResourceManager::manager().string(" ", fFont, c);
-		} else {
-			fStringResource = ResourceManager::manager().string(fText, fFont, c);
-		}
+		fLabelWidget->setLabel(fText);
 	}
 }

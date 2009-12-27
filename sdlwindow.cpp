@@ -15,7 +15,6 @@
 #include "misc/fpscounter.h"
 #include "panels/sdlpanel.h"
 #include "resources/imageresource.h"
-#include "resources/stringfontresource.h"
 #include "resources/resourcemanager.h"
 
 namespace Zabbr {
@@ -251,7 +250,7 @@ namespace Zabbr {
 	 * @param y The y coordinate on the screen.
 	 * @param src the rectangle of the part of the surface that should be drawn.
 	*/
-	void SDLWindow::drawPartOfSurface(SDLSurfaceResource* surface, int x, int y, SDL_Rect src) {
+	void SDLWindow::drawPartOfSurface(SDL_Surface* surface, int x, int y, SDL_Rect src) {
 		SDL_Rect dest;
 	
 		dest.x = x;
@@ -259,7 +258,7 @@ namespace Zabbr {
 		dest.w = src.w;
 		dest.h = src.h;
 	
-		SDL_BlitSurface(surface->getSurface(), &src, fScreen, &dest);
+		SDL_BlitSurface(surface, &src, fScreen, &dest);
 	}
 	
 	/**

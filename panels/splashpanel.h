@@ -12,6 +12,7 @@
 
 #include "panels/sdlpanel.h"
 #include "resources/resourcemanager.h"
+#include "widgets/label.h"
 #include "misc/stopwatch.h"
 #include "misc/prefetcher.h"
 
@@ -61,14 +62,9 @@ namespace Zabbr {
 		Stopwatch fTimer;
 		
 		/**
-		 * The font of the status text.
-		*/
-		FontResource* fFont;
-		
-		/**
 		 * Surface for the status text. 
 		*/
-		StringFontResource* fStatusText;
+		Label* fStatusLabel;
 	};
 }
 

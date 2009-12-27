@@ -13,7 +13,6 @@
 #include "resources/resource.h"
 #include "resources/imageresource.h"
 #include "resources/fontresource.h"
-#include "resources/stringfontresource.h"
 
 namespace Zabbr {
 
@@ -32,7 +31,6 @@ namespace Zabbr {
 			ImageResource* image(std::string);
 			ImageResource* image(std::string, int, int, bool, int);
 			FontResource* font(std::string, int);
-			StringFontResource* string(std::string, FontResource*, SDL_Color);
 			
 			/**
 			 * The datapath.

@@ -83,7 +83,6 @@ namespace Zabbr {
 			
 			return res;
 		} else {
-			std::cout << "LOD FROM CACHE" << std::endl;
 			return static_cast<ImageResource*>(getResource(id));
 		}
 	}
@@ -113,7 +112,6 @@ namespace Zabbr {
 			
 			return scaled;
 		} else {
-			std::cout << "LOD FROM CACHE" << std::endl;
 			return static_cast<ImageResource*>(getResource(id));
 		}
 	}
@@ -137,27 +135,6 @@ namespace Zabbr {
 			return font;
 		} else {
 			return static_cast<FontResource*>(getResource(fontID));
-		}
-	}
-
-	/**
-	 * Creates a string.
-	 *
-	 * @param text The text of the string.
-	 * @param font The font.
-	 * @param c The color of the font.
-	 *
-	 * @return The stringfont resource.
-	*/
-	StringFontResource* ResourceManager::string(std::string text, FontResource* font, SDL_Color c) {
-		std::string stringFontID = StringFontResource::getID(text, font, c);
-		if (!hasResource(stringFontID)) {
-			StringFontResource* stringFont = new StringFontResource(font->string(text, c), stringFontID);
-			insertResource(stringFontID, stringFont);
-
-			return stringFont;
-		} else {
-			return static_cast<StringFontResource*>(getResource(stringFontID));
 		}
 	}
 

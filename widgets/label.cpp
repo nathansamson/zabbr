@@ -9,6 +9,10 @@
 
 namespace Zabbr {
 
+	bool operator!=(SDL_Color c1, SDL_Color c2) {
+		return (c1.r != c2.r || c1.g != c2.g || c1.b != c2.b);
+	}
+
 	/**
 	 * Public constructor.
 	 *
@@ -16,10 +20,14 @@ namespace Zabbr {
 	 * @param label The text of the label.
 	 * @param c The color of the text.
 	*/
-	Label::Label(SDLWindow* window, std::string label, SDL_Color c) : VWidget(window), fWidth(0), fHeight(0) {
-		FontResource* font = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 64);
-		fLabel = ResourceManager::manager().string(label, font, c);
-		ResourceManager::manager().free(font);
+	Label::Label(SDLWindow* window, std::string label, SDL_Color c):
+	        VWidget(window), fWidth(0), fHeight(0), fLabelString(label), fColor(c) {
+		fFont = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 20);
+		if (label != "") {
+			fLabel = fFont->string(label, c);
+		} else {
+			fLabel = 0;
+		}
 	}
 	
 	/**
@@ -31,17 +39,56 @@ namespace Zabbr {
 	 * @param fontName The font name
 	 * @param fontSize The size of the text (in points).
 	*/
-	Label::Label(SDLWindow* window, std::string label, SDL_Color c, std::string fontName, int fontSize) : VWidget(window), fWidth(0), fHeight(0) {
-		FontResource* font = ResourceManager::manager().font(fontName, fontSize);
-		fLabel = ResourceManager::manager().string(label, font, c);
-		ResourceManager::manager().free(font);
+	Label::Label(SDLWindow* window, std::string label, SDL_Color c, std::string fontName, int fontSize):
+	         VWidget(window), fWidth(0), fHeight(0), fLabelString(label), fColor(c) {
+		fFont = ResourceManager::manager().font(fontName, fontSize);
+		if (label != "") {
+			fLabel = fFont->string(label, c);
+		} else {
+			fLabel = 0;
+		}
 	}
 
 	/**
 	 * Destructor.
 	*/
 	Label::~Label() {
-		ResourceManager::manager().free(fLabel);
+		if (fLabel) SDL_FreeSurface(fLabel);
+		ResourceManager::manager().free(fFont);
+	}
+	
+	/**
+	 * Change the text of the label.
+	 *
+	 * @param newLabel The new text.
+	*/
+	void Label::setLabel(std::string newLabel) {
+		if (newLabel != fLabelString) {
+			fLabelString = newLabel;
+			if (fLabel) SDL_FreeSurface(fLabel);
+			if (fLabelString != "") {
+				fLabel = fFont->string(fLabelString, fColor);
+			} else {
+				fLabel = 0;
+			}
+		}
+	}
+	
+	/**
+	 * Change the color of the label.
+	 *
+	 * @param newColor The new color.
+	*/
+	void Label::setColor(SDL_Color newColor) {
+		if (newColor != fColor) {
+			fColor = newColor;
+			if (fLabel) SDL_FreeSurface(fLabel);
+			if (fLabelString != "") {
+				fLabel = fFont->string(fLabelString, fColor);
+			} else {
+				fLabel = 0;
+			}
+		}
 	}
 
 	/**
@@ -54,7 +101,19 @@ namespace Zabbr {
 	 * @param y The y location where to draw the label
 	*/
 	void Label::draw(int x, int y) {
-		fWindow->drawSurface(fLabel, x , y);
+		if (!fLabel) {
+			return;
+		}
+		if (fWidth == 0 || fWidth > fLabel->w) {
+			fWindow->drawSurface(fLabel, x , y);
+		} else {
+			SDL_Rect rectangle;
+			rectangle.x = fLabel->w - fWidth;
+			rectangle.y = 0;
+			rectangle.w = fLabel->w;
+			rectangle.h = fLabel->h;
+			fWindow->drawPartOfSurface(fLabel, x, y, rectangle);
+		}
 	}
 
 	/**
@@ -65,7 +124,11 @@ namespace Zabbr {
 	 * @return The width of the label.
 	*/
 	int Label::getWidth() {
-		return fWidth ? fWidth : fLabel->getWidth();
+		if (fLabel) {
+			return fWidth ? fWidth : fLabel->w;
+		} else {
+			return 0;
+		}
 	}
 
 	/**
@@ -85,7 +148,11 @@ namespace Zabbr {
 	 * @return The height of the label.
 	*/
 	int Label::getHeight() {
-		return fHeight ? fHeight : fLabel->getHeight();
+		if (fLabel) {
+			return fHeight ? fHeight : fLabel->h;
+		} else {
+			return 0;
+		}
 	}
 
 	/**

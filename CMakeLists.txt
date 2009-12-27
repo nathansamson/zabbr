@@ -2,7 +2,6 @@ include_directories (${GPSI_SOURCE_DIR}/zabbr ${SDL_INCLUDE_DIR})
 
 add_library (zabbr SHARED
                ./resources/resource.cpp
-               ./resources/stringfontresource.cpp
                ./resources/fontresource.cpp
                ./resources/resourcemanager.cpp
                ./resources/sdlsurfaceresource.cpp

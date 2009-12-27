@@ -18,10 +18,8 @@ namespace Zabbr {
 	Button::Button(SDLWindow* window, std::string label)
 	       : VWidget(window), fLabel(label), fWidth(0),
 	         fHeight(0), fHover(false) {
-		FontResource* font = ResourceManager::manager().font("fonts/Blackout-Midnight.ttf", 24);
 		SDL_Color c = {0, 0, 0};
-		fStringLabel = ResourceManager::manager().string(label, font, c);
-		ResourceManager::manager().free(font);
+		fLabelWidget = new Label(fWindow, label, c, "fonts/Blackout-Midnight.ttf", 24);
 
 		fBoundingBox.x = 0;
 		fBoundingBox.y = 0;
@@ -33,7 +31,7 @@ namespace Zabbr {
 	 * The destructor.
 	*/
 	Button::~Button() {
-		ResourceManager::manager().free(fStringLabel);
+		delete fLabelWidget;
 	}
 
 	/**
@@ -105,7 +103,7 @@ namespace Zabbr {
 			} else {
 				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight()-10, 0, 255, 0);
 			}
-			fWindow->drawSurface(fStringLabel, x+10, y+5);
+			fLabelWidget->draw(x+10, y+5);
 
 			fBoundingBox.x = x;
 			fBoundingBox.y = y;
@@ -149,7 +147,7 @@ namespace Zabbr {
 	 * The real width is the width of the label + a margin.
 	*/
 	int Button::getRealWidth() {
-		return fStringLabel->getWidth() + 20;
+		return fLabelWidget->getWidth() + 20;
 	}
 
 	/**
@@ -158,6 +156,6 @@ namespace Zabbr {
 	 * The real height is the height of the label + a margin.
 	*/
 	int Button::getRealHeight() {
-		return fStringLabel->getHeight() + 20;
+		return fLabelWidget->getHeight() + 20;
 	}
 }

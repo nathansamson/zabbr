@@ -10,7 +10,7 @@
 #include "SDL.h"
 
 #include "widgets/widget.h"
-#include "resources/stringfontresource.h"
+#include "resources/fontresource.h"
 
 namespace Zabbr {
 
@@ -24,6 +24,9 @@ namespace Zabbr {
 		Label(SDLWindow*, std::string, SDL_Color);
 		Label(SDLWindow*, std::string, SDL_Color, std::string, int);
 		virtual ~Label();
+		
+		void setLabel(std::string);
+		void setColor(SDL_Color);
 
 		virtual void draw(int, int);
 		virtual int getWidth();
@@ -42,9 +45,24 @@ namespace Zabbr {
 		int fHeight;
 		
 		/**
-		 * The internal label resource.
+		 * The internal label surface.
 		*/
-		StringFontResource* fLabel;
+		SDL_Surface* fLabel;
+		
+		/**
+		 * The text of the label.
+		*/
+		std::string fLabelString;
+		
+		/**
+		 * The color of the label.
+		*/
+		SDL_Color fColor;
+		
+		/**
+		 * The font of the label.
+		*/
+		FontResource* fFont;
 	};
 }
 

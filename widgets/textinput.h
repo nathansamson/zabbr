@@ -9,7 +9,7 @@
 
 #include <string>
 #include "widgets/widget.h"
-#include "resources/resourcemanager.h"
+#include "widgets/label.h"
 
 namespace Zabbr {
 	/**
@@ -30,16 +30,11 @@ namespace Zabbr {
 		std::string getValue();
 		
 		virtual void keyRelease(SDL_KeyboardEvent);
-	private:
-		/**
-		 * The font of the text.
-		*/
-		FontResource* fFont;
-		
+	private:		
 		/**
 		 * The current string resource.
 		*/
-		StringFontResource* fStringResource;
+		Label* fLabelWidget;
 		
 		/**
 		 * The current text value.

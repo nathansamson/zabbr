@@ -21,10 +21,11 @@ namespace Zabbr {
 	*/
 	SplashPanel::SplashPanel(SDLWindow* window, std::string fileName,
 	                         VSDLPanel* panel):
-	             VSDLPanel(window), fNextPanel(panel), fStatusText(0) {
+	             VSDLPanel(window), fNextPanel(panel) {
 		fImage = ResourceManager::manager().image(fileName, window->getXResolution(), window->getYResolution(), true, 0);
 		fPrefetcherList.push(new EmptyPrefetcher());
-		fFont = ResourceManager::manager().font("DejaVuSans-Bold.ttf", 18);
+		SDL_Color black = {0, 0, 0};
+		fStatusLabel = new Label(fWindow, "", black);
 	}
 	
 	/**
@@ -32,8 +33,7 @@ namespace Zabbr {
 	*/
 	SplashPanel::~SplashPanel() {
 		ResourceManager::manager().free(fImage);
-		if (fStatusText) ResourceManager::manager().free(fStatusText);
-		ResourceManager::manager().free(fFont);
+		delete fStatusLabel;
 	}
 	
 	void SplashPanel::addPrefetcher(IPrefetcher* prefetcher) {
@@ -57,16 +57,14 @@ namespace Zabbr {
 				fPrefetcherList.pop();
 				if (! fPrefetcherList.empty()) {
 					IPrefetcher* next = fPrefetcherList.front();
-					SDL_Color black = {0, 0, 0};
-					if (fStatusText) ResourceManager::manager().free(fStatusText);
-					fStatusText = ResourceManager::manager().string(next->name(), fFont, black);
+					fStatusLabel->setLabel(next->name());
 				} else {
 					fWindow->closePanel(fNextPanel);
 					return;
 				}
 			}
 			fWindow->drawSurface(fImage, 0, 0);
-			fWindow->drawSurface(fStatusText, 20, fWindow->getYResolution() - 20 - fStatusText->getHeight());
+			fStatusLabel->draw(20, fWindow->getYResolution() - 20 - fStatusLabel->getHeight());
 		} else {
 			fWindow->closePanel(fNextPanel);
 		}

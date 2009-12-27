@@ -12,10 +12,9 @@
 #include "SDL.h"
 
 #include "widgets/widget.h"
+#include "widgets/label.h"
 #include "events/callbacks.h"
 #include "events/event.h"
-
-#include "resources/stringfontresource.h"
 
 namespace Zabbr {
 
@@ -70,7 +69,7 @@ namespace Zabbr {
 		/**
 		 * The internal label of the button.
 		*/
-		StringFontResource* fStringLabel;
+		Label* fLabelWidget;
 		
 		/**
 		 * The bounding box of the button, to see if the mouse is in this area.
