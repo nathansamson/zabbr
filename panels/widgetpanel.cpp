@@ -92,6 +92,6 @@ namespace Zabbr {
 	 * This will quit the controller.
 	*/
 	void WidgetPanel::quit() {
-		fWindow->closePanel(NULL);
+		fWindow->closePanel(0);
 	}
 }

@@ -15,7 +15,7 @@ namespace Zabbr {
 	 *
 	 * @param window The window of the Panel.
 	*/
-	VSDLPanel::VSDLPanel(SDLWindow* window) : fParentPanel(NULL),
+	VSDLPanel::VSDLPanel(SDLWindow* window) : fParentPanel(0),
 	                fWindow(window), fIsBackground(false) {
 	}
 	

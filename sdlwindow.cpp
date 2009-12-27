@@ -61,7 +61,7 @@ namespace Zabbr {
 		atexit(SDL_Quit);
 	
 		fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
-		if (fScreen == NULL) {
+		if (fScreen == 0) {
 			throw SDLInitializationException(SDL_GetError());
 		}
 	
@@ -118,11 +118,11 @@ namespace Zabbr {
 	
 			if (fOldPanel) {
 				delete fOldPanel;
-				fOldPanel = NULL;
+				fOldPanel = 0;
 			}
 	
 			if (fRunning) { // it is possible we quit when firing events.
-				SDL_FillRect(fScreen, NULL, 0);
+				SDL_FillRect(fScreen, 0, 0);
 				//drawRectangle(0, 0, fScreen->w, fScreen->h, 0, 0, 0);
 				fPanel->draw();
 			}
@@ -132,8 +132,8 @@ namespace Zabbr {
 				SDL_Delay(1);
 			} else {
 				freePanel(fPanel);
-				fPanel = NULL;
-				fScreen = NULL;
+				fPanel = 0;
+				fScreen = 0;
 				SDL_Quit();
 			}
 			if (fpsCounter.frame()) {
@@ -160,7 +160,7 @@ namespace Zabbr {
 	 * @param next The next panel. If 0 the window closes.
 	*/
 	void SDLWindow::closePanel(VSDLPanel* next) {
-		if (next != NULL) {
+		if (next != 0) {
 			fOldPanel = fPanel;
 			fPanel = next;
 		} else {
@@ -175,7 +175,7 @@ namespace Zabbr {
 	 * @param prev The parent panel.
 	*/
 	void SDLWindow::openParentPanel(VSDLPanel* prev) {
-		if (prev != NULL) {
+		if (prev != 0) {
 			fOldPanel = fPanel;
 			fPanel = prev;
 		} else {

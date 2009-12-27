@@ -51,7 +51,7 @@ namespace Zabbr {
 	protected:	
 		/**
 		 * The parent panel. The parent panel is the panel that 
-		 * caused this panel to open. This can be NULL of this is a root panel.
+		 * caused this panel to open. This can be 0 if this is a root panel.
 		*/
 		VSDLPanel* fParentPanel;
 		

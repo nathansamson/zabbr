@@ -22,7 +22,7 @@ namespace Zabbr {
 	*/
 	FontResource* FontResource::open(std::string fontName, int size) {
 		TTF_Font* font = TTF_OpenFont((ResourceManager::fgDataPath+fontName).c_str(), size);
-		if (font != NULL) {
+		if (font != 0) {
 			return new FontResource(font, getID(fontName, size));
 		}
 		throw ResourceNotLoadedException(getID(fontName, size), TTF_GetError());
@@ -43,7 +43,7 @@ namespace Zabbr {
 	*/
 	FontResource::~FontResource() {
 		TTF_CloseFont(fFont);
-		fFont = NULL;
+		fFont = 0;
 	}
 
 	/**

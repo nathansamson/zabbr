@@ -44,7 +44,7 @@ namespace Zabbr {
 		SDL_Surface* image;
 		
 		temp = IMG_Load((ResourceManager::fgDataPath+name).c_str());
-		if (temp == NULL) {
+		if (temp == 0) {
 			throw ResourceNotLoadedException(name, IMG_GetError());
 		}
 		
