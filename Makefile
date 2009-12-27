@@ -4,7 +4,7 @@ CXXSOURCES = $(shell find . -maxdepth 1 -type f -name '*.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))
 LIB = libzabbr.a
-SUBDIRS = misc controller events resources widgets
+SUBDIRS = misc panels events resources widgets
 
 .PHONY: all clean $(SUBDIRS)
 
