@@ -99,9 +99,9 @@ namespace Zabbr {
 			x = x + (getWidth() - getRealWidth()) / 2;
 			y = y + (getHeight() - getRealHeight()) / 2;
 			if (! fHover) {
-				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight()-10, 255, 0, 0);
+				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight(), 255, 0, 0);
 			} else {
-				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight()-10, 0, 255, 0);
+				fWindow->drawRectangle(x, y, getRealWidth(), getRealHeight(), 0, 255, 0);
 			}
 			fLabelWidget->draw(x+10, y+5);
 
@@ -156,6 +156,6 @@ namespace Zabbr {
 	 * The real height is the height of the label + a margin.
 	*/
 	int Button::getRealHeight() {
-		return fLabelWidget->getHeight() + 20;
+		return fLabelWidget->getHeight() + 10;
 	}
 }

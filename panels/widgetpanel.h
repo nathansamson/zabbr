@@ -1,8 +1,8 @@
-#ifndef INC_MENUPANEL_H
-#define INC_MENUPANEL_H
+#ifndef INC_WIDGETPANEL_H
+#define INC_WIDGETPANEL_H
 
 /** \file
- * File for the menu panel.
+ * File for the widget panel.
  *
  * @author Nathan Samson
 */
@@ -16,18 +16,14 @@
 namespace Zabbr {
 
 	/**
-	 * A panel to show a menu.
+	 * A panel to show a toplevel widget.
 	 *
 	 * @ingroup Panels
-	 *
-	 * Actually it shows a list of widgets.
 	*/
-	class MenuPanel: public VSDLPanel {
+	class WidgetPanel: public VSDLPanel {
 	public:
-		MenuPanel(SDLWindow*);
-		virtual ~MenuPanel();
-
-		void addWidget(VWidget*);
+		WidgetPanel(SDLWindow*, VWidget*);
+		virtual ~WidgetPanel();
 
 		virtual void draw();
 		virtual void keyPress(SDL_KeyboardEvent);
@@ -35,13 +31,13 @@ namespace Zabbr {
 		virtual void mouseMotion(SDL_MouseMotionEvent);
 		virtual void mouseButton(SDL_MouseButtonEvent);
 		virtual void quit();
-	private:
+	protected:
 		/**
-		 * A list of all widgets.
+		 * The top level widget.
 		*/
-		std::list<VWidget*> fWidgets;
+		VWidget* fTopLevel;
 	};
 
 }
 
-#endif // INC_MENUPANEL_H
+#endif // INC_WIDGETPANEL_H

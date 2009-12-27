@@ -11,11 +11,14 @@ add_library (zabbr SHARED
                ./widgets/button.cpp
                ./widgets/widget.cpp
                ./widgets/textinput.cpp
+               ./widgets/box.cpp
+               ./widgets/vbox.cpp
+               ./widgets/hbox.cpp
                ./misc/stopwatch.cpp
                ./misc/fpscounter.cpp
                ./misc/fontprefetcher.cpp
                ./panels/splashpanel.cpp
-               ./panels/menupanel.cpp
+               ./panels/widgetpanel.cpp
                ./panels/sdlpanel.cpp
                ./panels/dialogpanel.cpp
 )

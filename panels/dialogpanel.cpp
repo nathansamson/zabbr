@@ -5,6 +5,8 @@
 */
 
 #include "panels/dialogpanel.h"
+#include "widgets/vbox.h"
+#include "widgets/hbox.h"
 
 namespace Zabbr {
 
@@ -17,16 +19,18 @@ namespace Zabbr {
 	*/
 	DialogPanel::DialogPanel(SDLWindow* w, std::string question,
 	                         std::vector<std::pair<int, std::string> > responseIDMap):
-	             MenuPanel(w) {
+	             WidgetPanel(w, new VBox(w, false, 10, YALIGN_CENTER)) {
 		SDL_Color white = {255, 255, 255};
 		fQuestionLabel = new Label(fWindow, question, white, "DejaVuSans-Bold.ttf", 24);
-		addWidget(fQuestionLabel);
+		dynamic_cast<VBox*>(fTopLevel)->appendWidget(fQuestionLabel);
+		
+		HBox* buttonBox = new HBox(fWindow, true, 10);
+		dynamic_cast<VBox*>(fTopLevel)->appendWidget(buttonBox);
 		
 		for(std::vector<std::pair<int, std::string> >::iterator it = responseIDMap.begin(); it != responseIDMap.end(); it++) {
 			Button* b = new Button(fWindow, (*it).second);
 			fButtonResponseMap[b] = (*it).first;
-			fButtons.push_back(b);
-			addWidget(b);
+			buttonBox->appendWidget(b);
 			b->connectOnClicked(new ClassCallback1<DialogPanel, Button*>(this, &DialogPanel::onButtonClick));
 		}
 	}
@@ -38,30 +42,6 @@ namespace Zabbr {
 	*/
 	void DialogPanel::connectOnResponse(ICallback1<int>* c) {
 		fResponseEvent.connect(c);
-	}
-	
-	/**
-	 * Draw the panel
-	*/
-	void DialogPanel::draw() {
-		if (fParentPanel) {
-			fParentPanel->draw();
-		}
-		
-		fQuestionLabel->draw((fWindow->getXResolution() - fQuestionLabel->getWidth()) / 2,
-		                     fWindow->getYResolution() / 2 - fQuestionLabel->getHeight() - 5);
-		
-		
-		int totalWidth = -10;
-		for(std::vector<Button*>::iterator it = fButtons.begin(); it != fButtons.end(); it++) {
-			totalWidth += (*it)->getWidth() + 10;
-		}
-		
-		int x = (fWindow->getXResolution() - totalWidth) / 2;
-		for(std::vector<Button*>::iterator it = fButtons.begin(); it != fButtons.end(); it++) {
-			(*it)->draw(x, fWindow->getYResolution() / 2 + 5);
-			x += (*it)->getWidth() + 10;
-		}
 	}
 	
 	/**
