@@ -40,7 +40,7 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	*/
-	SDLWindow::SDLWindow(): fOldPanel(0) {
+	SDLWindow::SDLWindow(): fOldPanel(0), fKeepratio(false) {
 	
 	}
 	
@@ -50,10 +50,11 @@ namespace Zabbr {
 	 * @param xres The X resolution.
 	 * @param yres The Y resolution.
 	 * @param fs True if running in fullscreen, false if not.
+	 * @param keepration If the ratio of xres and yres should be kept.
 	 *
 	 * @throw An SDLInitializationException if initialization fails.
 	*/
-	void SDLWindow::open(int xres, int yres, bool fs) {
+	void SDLWindow::open(int xres, int yres, bool fs, bool keepratio) {
 		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 			throw SDLInitializationException(SDL_GetError());
 		}
@@ -68,7 +69,10 @@ namespace Zabbr {
 		if(TTF_Init() == -1) {
 			throw SDLInitializationException(TTF_GetError());
 		}
-	
+		fKeepratio = keepratio;
+		fRatio = xres * 1.0 / yres;
+		fRatioOffset.x = 0;
+		fRatioOffset.y = 0;
 	}
 	
 	/**
@@ -102,16 +106,20 @@ namespace Zabbr {
 						fPanel->keyRelease(event.key);
 						break;
 					case SDL_MOUSEMOTION:
+						event.motion.x -= fRatioOffset.x;
+						event.motion.y -= fRatioOffset.y;
 						fPanel->mouseMotion(event.motion);
 						break;
 					case SDL_MOUSEBUTTONUP:
+						event.button.x -= fRatioOffset.x;
+						event.button.y -= fRatioOffset.y;
 						fPanel->mouseButton(event.button);
 						break;
 					case SDL_QUIT:
 						fPanel->requestQuit();
 						break;
 					case SDL_VIDEORESIZE:
-						fScreen = SDL_SetVideoMode(event.resize.w, event.resize.h, 32, SDL_RESIZABLE);
+						resize(event.resize.w, event.resize.h);
 						break;
 				}
 			}
@@ -212,8 +220,8 @@ namespace Zabbr {
 	*/
 	void SDLWindow::drawSurface(SDL_Surface* surface, int x, int y) {
 		SDL_Rect dest;
-		dest.x = x;
-		dest.y = y;
+		dest.x = x + fRatioOffset.x;
+		dest.y = y + fRatioOffset.y;
 	
 		SDL_BlitSurface(surface, 0, fScreen, &dest);
 	}
@@ -227,19 +235,14 @@ namespace Zabbr {
 	 * @param scale Scale factor of the surface. Not yet implemented.
 	*/
 	void SDLWindow::drawSurface(SDLSurfaceResource* surface, int x, int y, double scale) {
-		SDL_Rect src, dest;
-	
-		src.x = 0;
-		src.y = 0;
-		src.w = surface->getWidth();
-		src.h = surface->getHeight();
+		SDL_Rect dest;
 		
-		dest.x = x;
-		dest.y = y;
+		dest.x = x + fRatioOffset.x;
+		dest.y = y + fRatioOffset.y;
 		dest.w = surface->getWidth() * scale;
 		dest.h = surface->getHeight() * scale;
 		
-		SDL_BlitSurface(surface->getSurface(), &src, fScreen, &dest);
+		SDL_BlitSurface(surface->getSurface(), 0, fScreen, &dest);
 	}
 	
 	/**
@@ -253,8 +256,8 @@ namespace Zabbr {
 	void SDLWindow::drawPartOfSurface(SDL_Surface* surface, int x, int y, SDL_Rect src) {
 		SDL_Rect dest;
 	
-		dest.x = x;
-		dest.y = y;
+		dest.x = x + fRatioOffset.x;
+		dest.y = y + fRatioOffset.y;
 		dest.w = src.w;
 		dest.h = src.h;
 	
@@ -274,8 +277,8 @@ namespace Zabbr {
 	*/
 	void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b) {
 		SDL_Rect dest;
-		dest.x = x;
-		dest.y = y;
+		dest.x = x + fRatioOffset.x;
+		dest.y = y + fRatioOffset.y;
 		dest.w = w;
 		dest.h = h;
 		
@@ -295,7 +298,10 @@ namespace Zabbr {
 	 * @param a The alpha-channel of the rectangle, 0.0 for completely transparant, 1.0 for opaque.
 	*/
 	void SDLWindow::drawRectangle(int x, int y, int w, int h, int r, int g, int b, double a) {
-		boxRGBA(fScreen, x, y, x + w, y + h, r, g, b, a*255);
+		boxRGBA(fScreen, x + fRatioOffset.x,
+		        y + fRatioOffset.y,
+		        x + fRatioOffset.x + w, 
+		        y + fRatioOffset.y + h, r, g, b, a*255);
 	}
 	
 	/**
@@ -304,7 +310,7 @@ namespace Zabbr {
 	 * @return The X resolution (width) of the window.
 	*/
 	int SDLWindow::getXResolution() {
-		return fScreen->w;
+		return fScreen->w - 2 * fRatioOffset.x;
 	}
 
 	/**
@@ -313,7 +319,7 @@ namespace Zabbr {
 	 * @return The Y resolution (height) of the window.
 	*/
 	int SDLWindow::getYResolution() {
-		return fScreen->h;
+		return fScreen->h - 2 * fRatioOffset.y;
 	}
 	
 	/**
@@ -326,6 +332,20 @@ namespace Zabbr {
 			freePanel(p->fParentPanel);
 		}
 		delete p;
+	}
+	
+	void SDLWindow::resize(int w, int h) {
+		fScreen = SDL_SetVideoMode(w, h, 32, SDL_RESIZABLE);
+		if (fKeepratio) {
+			double ratio = w * 1.0 / h;
+			if (ratio > fRatio) {
+				fRatioOffset.x = (w - h * fRatio) / 2;
+				fRatioOffset.y = 0;
+			} else {
+				fRatioOffset.x = 0;
+				fRatioOffset.y = (h - w / fRatio) / 2;
+			}
+		}
 	}
 
 }

@@ -39,7 +39,7 @@ namespace Zabbr {
 		
 		void draw();
 		
-		void open(int, int, bool);
+		void open(int, int, bool, bool = false);
 		void close();
 		
 	    void run(VSDLPanel*);
@@ -66,6 +66,7 @@ namespace Zabbr {
 		VSDLPanel* fPanel;
 	private:
 		void freePanel(VSDLPanel*);
+		void resize(int x, int y);
 
 		/**
 		 * Keeping the removed panel for a while (rest of the frame) in memory.
@@ -81,6 +82,24 @@ namespace Zabbr {
 		 * A bool representing of the app is still running.
 		*/
 		bool fRunning;
+		
+		/**
+		 * Flag to see if we have to keep ratio
+		*/
+		bool fKeepratio;
+		
+		/**
+		 * The ratio of the screen
+		*/
+		double fRatio;
+		
+		/**
+		 * The offset to the physical screen we can draw.
+		*/
+		struct Offset {
+			int x;
+			int y;
+		} fRatioOffset;
 	};
 
 }
