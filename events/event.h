@@ -15,9 +15,15 @@
 
 namespace Zabbr {
 
+	/**
+	 * Generic base class for all events.
+	*/
 	template<typename C>
 	class VGenericEvent {
 	public:
+		/**
+		 * Destructor.
+		*/
 		virtual ~VGenericEvent() {
 			typename storage::iterator it;
 			for (it = fCallbacks.begin(); it != fCallbacks.end(); it++) {
@@ -27,19 +33,44 @@ namespace Zabbr {
 			}
 		}
 		
+		/**
+		 * Connect to the evnet.
+		 *
+		 * @param c The callback.
+		 *
+		 * @return The callback id, if you want to disconnect use this ID.
+		*/
 		int connect(C* c) {
+			for (typename storage::size_type i = 0; i < fCallbacks.size(); i++) {
+				if (fCallbacks[i] == 0) {
+					fCallbacks[i] = c;
+					return i;
+				}
+			}
+			// No space in vector
 			fCallbacks.push_back(c);
 			return fCallbacks.size() - 1;
 		}
 		
+		/**
+		 * Disconnect a callback.
+		 *
+		 * @param cID The callback id.
+		*/
 		void disconnect(int cID) {
 			delete fCallbacks[cID];
 			fCallbacks[cID] = 0;
 		}
 		
 	protected:
+		/**
+		 * The storage type for callbacks of the event.
+		*/
 		typedef std::vector<C*> storage;
 	
+		/**
+		 * A list of callbacks.
+		*/
 		std::vector<C*> fCallbacks;
 	};
 	
