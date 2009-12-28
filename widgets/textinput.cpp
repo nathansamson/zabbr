@@ -13,37 +13,42 @@
  * Convert a SDLKey to a character.
  *
  * @param k The SDLKey.
+ * @param m The modifier keys.
  *
  * @return A pointer to char of the SDLKey k, if not a real char returns 0.
 */
-char* convertToChar(SDLKey k) {
+char* convertToChar(SDLKey k, SDLMod m) {
+	int charOffset = 0;
+	if (m & KMOD_SHIFT) {
+		charOffset = -32; // In ascii From a -> A
+	}
 	switch (k) {
-		case SDLK_a: return new char('a'); break;
-		case SDLK_b: return new char('b'); break;
-		case SDLK_c: return new char('c'); break;
-		case SDLK_d: return new char('d'); break;
-		case SDLK_e: return new char('e'); break;
-		case SDLK_f: return new char('f'); break;
-		case SDLK_g: return new char('g'); break;
-		case SDLK_h: return new char('h'); break;
-		case SDLK_i: return new char('i'); break;
-		case SDLK_j: return new char('j'); break;
-		case SDLK_k: return new char('k'); break;
-		case SDLK_l: return new char('l'); break;
-		case SDLK_m: return new char('m'); break;
-		case SDLK_n: return new char('n'); break;
-		case SDLK_o: return new char('o'); break;
-		case SDLK_p: return new char('p'); break;
-		case SDLK_q: return new char('q'); break;
-		case SDLK_r: return new char('r'); break;
-		case SDLK_s: return new char('s'); break;
-		case SDLK_t: return new char('t'); break;
-		case SDLK_u: return new char('u'); break;
-		case SDLK_v: return new char('v'); break;
-		case SDLK_w: return new char('w'); break;
-		case SDLK_x: return new char('x'); break;
-		case SDLK_y: return new char('y'); break;
-		case SDLK_z: return new char('z'); break;
+		case SDLK_a: return new char('a' + charOffset); break;
+		case SDLK_b: return new char('b' + charOffset); break;
+		case SDLK_c: return new char('c' + charOffset); break;
+		case SDLK_d: return new char('d' + charOffset); break;
+		case SDLK_e: return new char('e' + charOffset); break;
+		case SDLK_f: return new char('f' + charOffset); break;
+		case SDLK_g: return new char('g' + charOffset); break;
+		case SDLK_h: return new char('h' + charOffset); break;
+		case SDLK_i: return new char('i' + charOffset); break;
+		case SDLK_j: return new char('j' + charOffset); break;
+		case SDLK_k: return new char('k' + charOffset); break;
+		case SDLK_l: return new char('l' + charOffset); break;
+		case SDLK_m: return new char('m' + charOffset); break;
+		case SDLK_n: return new char('n' + charOffset); break;
+		case SDLK_o: return new char('o' + charOffset); break;
+		case SDLK_p: return new char('p' + charOffset); break;
+		case SDLK_q: return new char('q' + charOffset); break;
+		case SDLK_r: return new char('r' + charOffset); break;
+		case SDLK_s: return new char('s' + charOffset); break;
+		case SDLK_t: return new char('t' + charOffset); break;
+		case SDLK_u: return new char('u' + charOffset); break;
+		case SDLK_v: return new char('v' + charOffset); break;
+		case SDLK_w: return new char('w' + charOffset); break;
+		case SDLK_x: return new char('x' + charOffset); break;
+		case SDLK_y: return new char('y' + charOffset); break;
+		case SDLK_z: return new char('z' + charOffset); break;
 		case SDLK_0: return new char('0'); break;
 		case SDLK_1: return new char('1'); break;
 		case SDLK_2: return new char('2'); break;
@@ -155,7 +160,7 @@ namespace Zabbr {
 	void TextInputWidget::keyRelease(SDL_KeyboardEvent evnt) {
 		if (evnt.keysym.sym == SDLK_BACKSPACE) {
 			if (fText.length() > 0) fText = fText.erase(fText.length() - 1, 1);
-		} else if (char* c = convertToChar(evnt.keysym.sym)) {
+		} else if (char* c = convertToChar(evnt.keysym.sym, evnt.keysym.mod)) {
 			fText += *c;
 			delete c;
 		}
