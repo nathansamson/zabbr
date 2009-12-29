@@ -23,3 +23,6 @@ add_library (zabbr SHARED
                ./panels/sdlpanel.cpp
                ./panels/dialogpanel.cpp
 )
+
+install(TARGETS zabbr
+        LIBRARY DESTINATION lib)
