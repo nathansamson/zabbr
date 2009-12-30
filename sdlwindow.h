@@ -8,6 +8,7 @@
 */
 
 #include <string>
+#include <vector>
 #include "SDL.h"
 
 #include "resources/sdlsurfaceresource.h"
@@ -33,15 +34,42 @@ namespace Zabbr {
 	};
 
 	/**
+	 * A video mode class.
+	*/
+	class VideoMode {
+	public:
+		VideoMode(int, int);
+		
+		int getX();
+		int getY();
+		
+		bool operator==(const VideoMode&);
+		operator std::string();
+		friend bool operator<(const VideoMode&, const VideoMode&);
+	private:
+		/**
+		 * Y value of the resolution.
+		*/
+		int fX;
+		
+		/**
+		 * X Value of the resolution.
+		*/
+		int fY;
+	};
+	
+	bool operator<(const VideoMode&, const VideoMode&);
+	
+	/**
 	 * A Window.
 	*/
 	class SDLWindow {
 	public:
-		SDLWindow();
+		SDLWindow(std::string);
 		
 		void draw();
 		
-		void open(int, int, bool, bool = false);
+		void open(int, int, bool, bool = false, double = -1.0);
 		void close();
 		
 	    void run(VSDLPanel*);
@@ -58,12 +86,15 @@ namespace Zabbr {
 		void drawSurface(SDLSurfaceResource*, int, int, double);
 		void drawRectangle(int, int, int, int, int, int, int);
 		void drawRectangle(int, int, int, int, int, int, int, double);
+		void resize(VideoMode);
 		
 		int getXResolution();
 		int getYResolution();
 		
 		int connectOnScreenSizeChanged(ICallback3<SDLWindow*, int, int>*);
 		void disconnectOnScreenSizeChanged(int);
+		VideoMode getVideoMode();
+		std::vector<VideoMode> getAvailableResolutions();
 
 	protected:
 		/**
@@ -100,6 +131,11 @@ namespace Zabbr {
 		double fRatio;
 		
 		/**
+		 * The window title.
+		*/
+		std::string fWindowTitle;
+		
+		/**
 		 * The offset to the physical screen we can draw.
 		*/
 		struct Offset {
@@ -111,6 +147,11 @@ namespace Zabbr {
 		 * The screen size changed signal
 		*/
 		Event3<SDLWindow*, int, int> fScreenChanged;
+		
+		/**
+		 * Flag to see if we are fullscreen.
+		*/
+		bool fFullscreen;
 	};
 
 }

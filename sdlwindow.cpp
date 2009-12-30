@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "SDL.h"
 #include "SDL_gfxPrimitives.h"
@@ -40,7 +41,7 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	*/
-	SDLWindow::SDLWindow(): fOldPanel(0), fKeepratio(false) {
+	SDLWindow::SDLWindow(std::string title): fOldPanel(0), fKeepratio(false), fWindowTitle(title) {
 	
 	}
 	
@@ -51,17 +52,23 @@ namespace Zabbr {
 	 * @param yres The Y resolution.
 	 * @param fs True if running in fullscreen, false if not.
 	 * @param keepration If the ratio of xres and yres should be kept.
+	 * @param ratio The ratio (defaults to xres / tres).
 	 *
 	 * @throw An SDLInitializationException if initialization fails.
 	*/
-	void SDLWindow::open(int xres, int yres, bool fs, bool keepratio) {
+	void SDLWindow::open(int xres, int yres, bool fs, bool keepratio, double ratio) {
+		fFullscreen = fs;
 		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 			throw SDLInitializationException(SDL_GetError());
 		}
 	
 		atexit(SDL_Quit);
 	
-		fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
+		if (fFullscreen) {
+			fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_FULLSCREEN | SDL_DOUBLEBUF);
+		} else {
+			fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
+		}
 		if (fScreen == 0) {
 			throw SDLInitializationException(SDL_GetError());
 		}
@@ -70,9 +77,35 @@ namespace Zabbr {
 			throw SDLInitializationException(TTF_GetError());
 		}
 		fKeepratio = keepratio;
-		fRatio = xres * 1.0 / yres;
+		if (ratio <  0.0) {
+			fRatio = xres * 1.0 / yres;
+		} else {
+			fRatio = ratio;
+		}
 		fRatioOffset.x = 0;
 		fRatioOffset.y = 0;
+	}
+	
+	VideoMode::VideoMode(int x, int y): fX(x), fY(y) {
+	}
+	
+	int VideoMode::getX() { return fX; }
+	int VideoMode::getY() { return fY; }
+	
+	bool VideoMode::operator==(const VideoMode& o) {
+		return (fX == o.fX && fY == o.fY);
+	}
+	
+	bool operator<(const VideoMode& lhs, const VideoMode& rhs) {
+		return lhs.fX < rhs.fX;
+	}
+	
+	VideoMode::operator std::string() {
+		std::stringstream res;
+		res << fX << "x" << fY;
+		std::string s;
+		res >> s;
+		return s;
 	}
 	
 	/**
@@ -149,8 +182,8 @@ namespace Zabbr {
 				ssWMCaption << fpsCounter.fps();
 				std::string WMCaption;
 				ssWMCaption >> WMCaption;
-				WMCaption = "Space-Invadors   " + WMCaption + " FPS";
-				SDL_WM_SetCaption(WMCaption.c_str(), "Icon Title");
+				WMCaption = fWindowTitle+ ": " + WMCaption + " FPS";
+				SDL_WM_SetCaption(WMCaption.c_str(), fWindowTitle.c_str());
 			}
 		}
 	}
@@ -304,6 +337,10 @@ namespace Zabbr {
 		        y + fRatioOffset.y + h, r, g, b, a*255);
 	}
 	
+	void SDLWindow::resize(VideoMode mode) {
+		resize(mode.getX(), mode.getY());
+	}
+	
 	/**
 	 * Get the x-resolution of the window
 	 *
@@ -341,6 +378,41 @@ namespace Zabbr {
 		fScreenChanged.disconnect(id);
 	}
 	
+	VideoMode SDLWindow::getVideoMode() {
+		return VideoMode(fScreen->w, fScreen->h);
+	}
+	
+	std::vector<VideoMode> SDLWindow::getAvailableResolutions() {
+		SDL_Rect** modes;
+		int i;
+
+		if(fFullscreen) {
+			modes = SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
+		} else {
+			modes = SDL_ListModes(NULL, SDL_RESIZABLE);
+		}
+
+		/* Check if there are any modes available */
+		if (modes == (SDL_Rect**)0) {
+			return std::vector<VideoMode>();
+		}
+
+	
+		std::vector<VideoMode> listedModes;	
+		if (modes == (SDL_Rect**)-1) {
+			listedModes.push_back(VideoMode(400, 300));
+			listedModes.push_back(VideoMode(640, 480));
+			listedModes.push_back(VideoMode(800, 600));
+			listedModes.push_back(VideoMode(1024, 768));
+		} else {
+			for (i=0; modes[i]; ++i) {
+				listedModes.push_back(VideoMode(modes[i]->w, modes[i]->h));
+			}
+			std::sort(listedModes.begin(), listedModes.end());
+		}
+		return listedModes;
+	}
+	
 	/**
 	 * Free a panel and all of its parent panels.
 	 *
@@ -360,7 +432,11 @@ namespace Zabbr {
 	 * @param h The new height
 	*/
 	void SDLWindow::resize(int w, int h) {
-		fScreen = SDL_SetVideoMode(w, h, 32, SDL_RESIZABLE);
+		if (fFullscreen) {
+			fScreen = SDL_SetVideoMode(w, h, 32, SDL_FULLSCREEN | SDL_DOUBLEBUF);
+		} else {
+			fScreen = SDL_SetVideoMode(w, h, 32, SDL_RESIZABLE);
+		}
 		if (fKeepratio) {
 			double ratio = w * 1.0 / h;
 			if (ratio > fRatio) {
