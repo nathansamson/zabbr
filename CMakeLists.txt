@@ -16,6 +16,7 @@ add_library (zabbr SHARED
                ./widgets/hbox.cpp
                ./widgets/table.cpp
                ./widgets/checkbox.cpp
+               ./widgets/combobox.cpp
                ./misc/stopwatch.cpp
                ./misc/fpscounter.cpp
                ./misc/fontprefetcher.cpp
