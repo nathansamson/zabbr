@@ -20,6 +20,7 @@ namespace Zabbr {
 		
 		void addOption(std::string);
 		std::string getSelectedOption();
+		void setSelectedOption(std::string);
 	
 	private:
 		void setOption(int);

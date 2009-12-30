@@ -43,6 +43,16 @@ namespace Zabbr {
 		return fOptions[fSelectedOption];
 	}
 	
+	void ComboBox::setSelectedOption(std::string option) {
+		int i = 0;
+		for(std::vector<std::string>::iterator it = fOptions.begin(); it != fOptions.end(); it++, i++) {
+			if ((*it) == option) {
+				setOption(i);
+				return;
+			}
+		}
+	}
+	
 	/**
 	 * Set the index of the current option.
 	 *
