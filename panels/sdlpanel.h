@@ -44,6 +44,7 @@ namespace Zabbr {
 		virtual void requestQuit();
 		void connectRequestQuit(ICallback0*);
 		void connectOnKeyRelease(ICallback2<VSDLPanel*, SDL_KeyboardEvent>*);
+		void connectOnClosePanel(ICallback1<VSDLPanel*>*);
 		virtual void quit();
 		void openParentPanel();
 		void openPanel(VSDLPanel*);
@@ -75,6 +76,11 @@ namespace Zabbr {
 		 * The Key release event.
 		*/
 		Event2<VSDLPanel*, SDL_KeyboardEvent> fOnKeyRelease;
+		
+		/**
+		 * The close panel event
+		*/
+		Event1<VSDLPanel*> fOnClose;
 	private:
 		void background();
 		void foreground();

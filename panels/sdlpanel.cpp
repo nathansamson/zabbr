@@ -23,6 +23,14 @@ namespace Zabbr {
 	 * Destructor.
 	*/
 	VSDLPanel::~VSDLPanel() {
+		fOnClose(this);
+	}
+	
+	/**
+	 * Connect to the on close event.
+	*/
+	void VSDLPanel::connectOnClosePanel(ICallback1<VSDLPanel*>* c) {
+		fOnClose.connect(c);
 	}
 	
 	/**
