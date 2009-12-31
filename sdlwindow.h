@@ -103,7 +103,9 @@ namespace Zabbr {
 		VSDLPanel* fPanel;
 	private:
 		void freePanel(VSDLPanel*);
-		void resize(int x, int y);
+		void resize(int, int);
+		void calculateRatioOffset(int, int);
+		int getVideoModeFlags();
 
 		/**
 		 * Keeping the removed panel for a while (rest of the frame) in memory.

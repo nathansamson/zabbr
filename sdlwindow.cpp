@@ -64,11 +64,7 @@ namespace Zabbr {
 	
 		atexit(SDL_Quit);
 	
-		if (fFullscreen) {
-			fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_FULLSCREEN | SDL_DOUBLEBUF);
-		} else {
-			fScreen = SDL_SetVideoMode(xres, yres, 32, SDL_RESIZABLE);
-		}
+		fScreen = SDL_SetVideoMode(xres, yres, 32, getVideoModeFlags());
 		if (fScreen == 0) {
 			throw SDLInitializationException(SDL_GetError());
 		}
@@ -79,11 +75,12 @@ namespace Zabbr {
 		fKeepratio = keepratio;
 		if (ratio <  0.0) {
 			fRatio = xres * 1.0 / yres;
+			fRatioOffset.x = 0;
+			fRatioOffset.y = 0;
 		} else {
 			fRatio = ratio;
+			calculateRatioOffset(xres, yres);
 		}
-		fRatioOffset.x = 0;
-		fRatioOffset.y = 0;
 	}
 	
 	VideoMode::VideoMode(int x, int y): fX(x), fY(y) {
@@ -386,11 +383,7 @@ namespace Zabbr {
 		SDL_Rect** modes;
 		int i;
 
-		if(fFullscreen) {
-			modes = SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
-		} else {
-			modes = SDL_ListModes(NULL, SDL_RESIZABLE);
-		}
+		modes = SDL_ListModes(NULL, getVideoModeFlags());
 
 		/* Check if there are any modes available */
 		if (modes == (SDL_Rect**)0) {
@@ -432,21 +425,37 @@ namespace Zabbr {
 	 * @param h The new height
 	*/
 	void SDLWindow::resize(int w, int h) {
-		if (fFullscreen) {
-			fScreen = SDL_SetVideoMode(w, h, 32, SDL_FULLSCREEN | SDL_DOUBLEBUF);
-		} else {
-			fScreen = SDL_SetVideoMode(w, h, 32, SDL_RESIZABLE);
-		}
+		fScreen = SDL_SetVideoMode(w, h, 32, getVideoModeFlags());
 		if (fKeepratio) {
-			double ratio = w * 1.0 / h;
-			if (ratio > fRatio) {
-				fRatioOffset.x = (w - h * fRatio) / 2;
-				fRatioOffset.y = 0;
-			} else {
-				fRatioOffset.x = 0;
-				fRatioOffset.y = (h - w / fRatio) / 2;
-			}
+			calculateRatioOffset(w, h);
 		}
 		fScreenChanged(this, getXResolution(), getYResolution());
+	}
+	
+	/**
+	 * Calculate the ratio offset.
+	*/
+	void SDLWindow::calculateRatioOffset(int w, int h) {
+		double ratio = w * 1.0 / h;
+		if (ratio > fRatio) {
+			fRatioOffset.x = (w - h * fRatio) / 2;
+			fRatioOffset.y = 0;
+		} else {
+			fRatioOffset.x = 0;
+			fRatioOffset.y = (h - w / fRatio) / 2;
+		}
+	}
+	
+	/**
+	 * Video mode flags.
+	 *
+	 * @return The video mode flags for current settings.
+	*/
+	int SDLWindow::getVideoModeFlags() {
+		if (fFullscreen) {
+			return SDL_FULLSCREEN | SDL_HWSURFACE | SDL_DOUBLEBUF;
+		} else {
+			return SDL_RESIZABLE;
+		}
 	}
 }
