@@ -45,6 +45,7 @@ namespace Zabbr {
 	 * @param evnt The SDL Keyboard event.
 	*/
 	void VSDLPanel::keyPress(SDL_KeyboardEvent evnt) {
+		fOnKeyPress(this, evnt);
 	}
 	
 	/**
@@ -90,6 +91,13 @@ namespace Zabbr {
 	*/
 	void VSDLPanel::connectRequestQuit(ICallback0* cb) {
 		fQuitRequestEvent.connect(cb);
+	}
+	
+	/**
+	 * Connect to the key press event.
+	*/
+	void VSDLPanel::connectOnKeyPress(ICallback2<VSDLPanel*, SDL_KeyboardEvent>* c) {
+		fOnKeyPress.connect(c);
 	}
 	
 	/**
