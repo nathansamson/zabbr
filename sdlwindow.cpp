@@ -397,6 +397,7 @@ namespace Zabbr {
 			listedModes.push_back(VideoMode(640, 480));
 			listedModes.push_back(VideoMode(800, 600));
 			listedModes.push_back(VideoMode(1024, 768));
+			listedModes.push_back(VideoMode(1280, 800));
 		} else {
 			for (i=0; modes[i]; ++i) {
 				listedModes.push_back(VideoMode(modes[i]->w, modes[i]->h));
