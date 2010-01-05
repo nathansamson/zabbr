@@ -9,6 +9,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include "SDL.h"
 
 #include "resources/sdlsurfaceresource.h"
@@ -106,6 +107,7 @@ namespace Zabbr {
 		void resize(int, int);
 		void calculateRatioOffset(int, int);
 		int getVideoModeFlags();
+		void setKeystates();
 
 		/**
 		 * Keeping the removed panel for a while (rest of the frame) in memory.
@@ -154,6 +156,13 @@ namespace Zabbr {
 		 * Flag to see if we are fullscreen.
 		*/
 		bool fFullscreen;
+		
+		/**
+		 * A list of keystates. When a specific
+		 * key is pressed when a panel closes, the state will be true in this list.
+		 * When the key is released it will turn back to false.
+		*/
+		std::map<SDLKey, bool> fPressedKeys;
 	};
 
 }

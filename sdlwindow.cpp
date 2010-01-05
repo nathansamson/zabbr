@@ -136,7 +136,11 @@ namespace Zabbr {
 						fPanel->keyPress(event.key);
 						break;
 					case SDL_KEYUP:
-						fPanel->keyRelease(event.key);
+						if (fPressedKeys[event.key.keysym.sym]) {
+							fPressedKeys[event.key.keysym.sym] = false;
+						} else {
+							fPanel->keyRelease(event.key);
+						}
 						break;
 					case SDL_MOUSEMOTION:
 						event.motion.x -= fRatioOffset.x;
@@ -204,6 +208,8 @@ namespace Zabbr {
 		if (next != 0) {
 			fOldPanel = fPanel;
 			fPanel = next;
+			
+			setKeystates();
 		} else {
 			// We keep the old panel.
 			fRunning = false;
@@ -219,6 +225,8 @@ namespace Zabbr {
 		if (prev != 0) {
 			fOldPanel = fPanel;
 			fPanel = prev;
+			
+			setKeystates();
 		} else {
 			fRunning = false;
 		}
@@ -231,6 +239,7 @@ namespace Zabbr {
 	*/
 	void SDLWindow::openPanel(VSDLPanel* c) {
 		fPanel = c;
+		setKeystates();
 	}
 	
 	/**
@@ -460,6 +469,16 @@ namespace Zabbr {
 			return SDL_FULLSCREEN | SDL_HWSURFACE | SDL_DOUBLEBUF;
 		} else {
 			return SDL_RESIZABLE;
+		}
+	}
+	
+	void SDLWindow::setKeystates() {
+		int keys;
+		Uint8* keystate = SDL_GetKeyState(&keys);
+		for (int i = 0; i < keys; i++) {
+			if (keystate[i]) {
+				fPressedKeys[(SDLKey)i] = true;
+			}
 		}
 	}
 }
