@@ -28,6 +28,7 @@ set(ZABBR_SOURCES
 
 if(SDLMIXER_FOUND)
 	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./resources/soundresource.cpp")
+	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./misc/soundprefetcher.cpp")
 endif()
 
 add_library (zabbr SHARED ${ZABBR_SOURCES})
