@@ -14,6 +14,7 @@
 
 #include "sdlwindow.h"
 #include "misc/fpscounter.h"
+#include "misc/audiomanager.h"
 #include "panels/sdlpanel.h"
 #include "resources/imageresource.h"
 #include "resources/resourcemanager.h"
@@ -58,7 +59,7 @@ namespace Zabbr {
 	*/
 	void SDLWindow::open(int xres, int yres, bool fs, bool keepratio, double ratio) {
 		fFullscreen = fs;
-		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 			throw SDLInitializationException(SDL_GetError());
 		}
 	
@@ -111,7 +112,9 @@ namespace Zabbr {
 	void SDLWindow::close() {
 		if (fScreen)
 			SDL_FreeSurface(fScreen);
+		AudioManager::get().mute(); // Make sure no resources are in use
 		ResourceManager::free();
+		AudioManager::close();
 		TTF_Quit();
 	}
 	

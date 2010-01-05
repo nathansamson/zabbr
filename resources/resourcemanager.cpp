@@ -137,6 +137,27 @@ namespace Zabbr {
 			return static_cast<FontResource*>(getResource(fontID));
 		}
 	}
+	
+	/**
+	 * Opens a small audio file. (Supports only ogg).
+	 *
+	 * @param name The name of the audio file.
+	 *
+	 * @return The Audio file.
+	*/
+	#ifdef ENABLE_AUDIO
+	SoundResource* ResourceManager::sound(std::string name) {
+		std::string id = "audio_" + name;
+		if (!hasResource(id)) {
+			SoundResource* sound = SoundResource::open(name);
+			insertResource(id, sound);
+			
+			return sound;
+		} else {
+			return static_cast<SoundResource*>(getResource(id));
+		}
+	}
+	#endif
 
 	/**
 	 * Checks if a resource with a specific ID is still in memory.

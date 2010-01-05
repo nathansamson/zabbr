@@ -13,6 +13,9 @@
 #include "resources/resource.h"
 #include "resources/imageresource.h"
 #include "resources/fontresource.h"
+#ifdef ENABLE_AUDIO
+#include "resources/soundresource.h"
+#endif
 
 namespace Zabbr {
 
@@ -31,6 +34,9 @@ namespace Zabbr {
 			ImageResource* image(std::string);
 			ImageResource* image(std::string, int, int, bool, int);
 			FontResource* font(std::string, int);
+			#ifdef ENABLE_AUDIO
+			SoundResource* sound(std::string);
+			#endif
 			
 			/**
 			 * The datapath.
