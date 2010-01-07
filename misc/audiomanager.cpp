@@ -30,7 +30,7 @@ namespace Zabbr {
 	AudioManager::AudioManager(): fMuted(false), fPlayMusic(false) {
 		#ifdef ENABLE_AUDIO
 		//Mix_Init(MIX_INIT_OGG);
-		int error = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
+		int error = Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048);
 		if (error != 0) {
 			std::cerr << "Could not load audio: " << Mix_GetError() << std::endl;
 		}
