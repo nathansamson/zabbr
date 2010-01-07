@@ -138,14 +138,14 @@ namespace Zabbr {
 		}
 	}
 	
+	#ifdef ENABLE_AUDIO
 	/**
-	 * Opens a small audio file. (Supports only ogg).
+	 * Opens a small audio file.
 	 *
 	 * @param name The name of the audio file.
 	 *
 	 * @return The Audio file.
 	*/
-	#ifdef ENABLE_AUDIO
 	SoundResource* ResourceManager::sound(std::string name) {
 		std::string id = "audio_" + name;
 		if (!hasResource(id)) {
@@ -155,6 +155,25 @@ namespace Zabbr {
 			return sound;
 		} else {
 			return static_cast<SoundResource*>(getResource(id));
+		}
+	}
+	
+	/**
+	 * Opens a music file.
+	 *
+	 * @param name The name of the music file.
+	 *
+	 * @return The music file.
+	*/
+	MusicResource* ResourceManager::music(std::string name) {
+		std::string id = "music_" + name;
+		if (!hasResource(id)) {
+			MusicResource* music = MusicResource::open(name);
+			insertResource(id, music);
+			
+			return music;
+		} else {
+			return static_cast<MusicResource*>(getResource(id));
 		}
 	}
 	#endif

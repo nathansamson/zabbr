@@ -15,6 +15,7 @@
 #include "resources/fontresource.h"
 #ifdef ENABLE_AUDIO
 #include "resources/soundresource.h"
+#include "resources/musicresource.h"
 #endif
 
 namespace Zabbr {
@@ -36,6 +37,7 @@ namespace Zabbr {
 			FontResource* font(std::string, int);
 			#ifdef ENABLE_AUDIO
 			SoundResource* sound(std::string);
+			MusicResource* music(std::string);
 			#endif
 			
 			/**

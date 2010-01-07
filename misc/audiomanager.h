@@ -7,6 +7,7 @@
 
 #ifdef ENABLE_AUDIO
 #include "resources/soundresource.h"
+#include "resources/musicresource.h"
 #endif
 
 namespace Zabbr {
@@ -18,6 +19,11 @@ namespace Zabbr {
 		AudioManager();
 		virtual ~AudioManager();
 		
+		void playQueue();
+		void addMusicFile(std::string);
+		void startMusic();
+		void stopMusic();
+		
 		void play(std::string, int);
 		void mute();
 		void unmute();
@@ -26,10 +32,12 @@ namespace Zabbr {
 		static void close();
 	private:
 		bool fMuted;
+		bool fPlayMusic;
 		#ifdef ENABLE_AUDIO
 		SoundResource* load(std::string);
 		std::map<int, SoundResource*> fSoundResources;
 		std::vector<SoundResource*> fFreedResources;
+		std::vector<MusicResource*> fMusicResources;
 		#endif
 		void freeResources();
 		

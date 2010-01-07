@@ -27,7 +27,7 @@ namespace Zabbr {
 	/**
 	 * Constructor.
 	*/
-	AudioManager::AudioManager(): fMuted(false) {
+	AudioManager::AudioManager(): fMuted(false), fPlayMusic(false) {
 		#ifdef ENABLE_AUDIO
 		//Mix_Init(MIX_INIT_OGG);
 		int error = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
@@ -44,6 +44,33 @@ namespace Zabbr {
 		Mix_CloseAudio();
 		#endif
 		//Mix_Quit();
+	}
+	
+	void AudioManager::playQueue() {
+		#ifdef ENABLE_AUDIO
+		if (!Mix_PlayingMusic() && fPlayMusic && fMusicResources.size() > 0) {
+			fMusicResources[rand() % fMusicResources.size()]->play();
+		}
+		#endif
+	}
+	
+	void AudioManager::addMusicFile(std::string file) {
+		#ifdef ENABLE_AUDIO
+		fMusicResources.push_back(ResourceManager::manager().music(file));
+		#endif
+	}
+	
+	void AudioManager::startMusic() {
+		#ifdef ENABLE_AUDIO	
+		fPlayMusic = true;
+		#endif
+	}
+	
+	void AudioManager::stopMusic() {
+		#ifdef ENABLE_AUDIO
+		fPlayMusic = false;
+		Mix_HaltMusic();
+		#endif
 	}
 	
 	/**
@@ -114,6 +141,11 @@ namespace Zabbr {
 			ResourceManager::manager().free(*it);
 		}
 		fFreedResources.clear();
+		
+		for(std::vector<MusicResource*>::iterator it = fMusicResources.begin(); it != fMusicResources.end(); it++) {
+			ResourceManager::manager().free(*it);
+		}
+		fMusicResources.clear();
 		#endif
 	}
 	

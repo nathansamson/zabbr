@@ -170,6 +170,7 @@ namespace Zabbr {
 				SDL_FillRect(fScreen, 0, 0);
 				//drawRectangle(0, 0, fScreen->w, fScreen->h, 0, 0, 0);
 				fPanel->draw();
+				AudioManager::get().playQueue();
 			}
 			
 			if (fRunning) { // It is possible we stop running in the draw.
