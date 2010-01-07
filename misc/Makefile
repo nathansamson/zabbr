@@ -1,6 +1,6 @@
 INCLUDES = -I../ `pkg-config --cflags sdl`
 CXXFLAGS += $(INCLUDES)
-CXXSOURCES = $(shell find . -maxdepth 1 -type f -name '*.cpp' -not -name 'soundprefetcher.cpp')
+CXXSOURCES = $(shell find . -maxdepth 1 -type f -name '*.cpp' -not -name 'soundprefetcher.cpp' -not -name 'musicprefetcher.cpp')
 CXXOBJECTS = $(patsubst %.cpp,%.o,$(CXXSOURCES))
 DEPFILES = $(patsubst %.cpp,%.d,$(CXXSOURCES))
 DEPDIR = .deps/
