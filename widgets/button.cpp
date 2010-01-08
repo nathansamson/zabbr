@@ -15,7 +15,7 @@ namespace Zabbr {
 	 * @param window The window of the button.
 	 * @param label The textual label of the button.
 	*/
-	Button::Button(SDLWindow* window, std::string label)
+	Button::Button(Window* window, std::string label)
 	       : VWidget(window), fLabel(label), fWidth(0),
 	         fHeight(0), fHover(false) {
 		SDL_Color c = {0, 0, 0};
@@ -127,7 +127,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow if a mouse motion is fired on the window.
+	 * Function called by the Window if a mouse motion is fired on the window.
 	 *
 	 * @param e The SDL Mouse Motion event.
 	*/
@@ -141,7 +141,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow if a mouse button event is fired on the window.
+	 * Function called by the Window if a mouse button event is fired on the window.
 	 *
 	 * @param e The SDL Mouse Button event.
 	*/

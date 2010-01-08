@@ -15,7 +15,7 @@ namespace Zabbr {
 	 *
 	 * @param window The window of the Panel.
 	*/
-	VSDLPanel::VSDLPanel(SDLWindow* window) : fParentPanel(0),
+	VSDLPanel::VSDLPanel(Window* window) : fParentPanel(0),
 	                fWindow(window), fIsBackground(false) {
 	}
 	
@@ -34,13 +34,13 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Function called by the SDLWindow to draw the Panel.
+	 * Function called by the Window to draw the Panel.
 	*/
 	void VSDLPanel::draw() {
 	}
 
 	/**
-	 * Function called by the SDLWindow when a key is pressed.
+	 * Function called by the Window when a key is pressed.
 	 *
 	 * @param evnt The SDL Keyboard event.
 	*/
@@ -49,7 +49,7 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Function called by the SDLWindow when a key is released.
+	 * Function called by the Window when a key is released.
 	 *
 	 * @param evnt The SDL Keyboard event.
 	*/
@@ -58,7 +58,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow when a mouse motion event is generated.
+	 * Function called by the Window when a mouse motion event is generated.
 	 *
 	 * @param evnt The SDL Mouse Motion event.
 	*/
@@ -66,7 +66,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow when a mouse button event is generated.
+	 * Function called by the Window when a mouse button event is generated.
 	 *
 	 * @param evnt The SDL Mouse Button event.
 	*/
@@ -74,7 +74,7 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Function called by the SDLWindow if the window should be closed.
+	 * Function called by the Window if the window should be closed.
 	*/
 	void VSDLPanel::quit() {
 	}

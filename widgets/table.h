@@ -18,7 +18,7 @@ namespace Zabbr {
 	*/
 	class Table: public VWidget {
 	public:
-		Table(SDLWindow*, int, int, int, int);
+		Table(Window*, int, int, int, int);
 		virtual ~Table();
 		
 		void setWidget(VWidget*, int, int);

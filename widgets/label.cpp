@@ -30,7 +30,7 @@ namespace Zabbr {
 	 * @param fontName The font name
 	 * @param fontSize The size of the text (in points).
 	*/
-	Label::Label(SDLWindow* window, std::string label, SDL_Color c, int fontSize, std::string fontName):
+	Label::Label(Window* window, std::string label, SDL_Color c, int fontSize, std::string fontName):
 	         VWidget(window), fWidth(0), fHeight(0), fLabelString(label), fColor(c) {
 		fFont = ResourceManager::manager().font(fontName, fontSize);
 		if (label != "") {
@@ -96,14 +96,14 @@ namespace Zabbr {
 			return;
 		}
 		if (fWidth == 0 || fWidth > fLabel->w) {
-			fWindow->drawSurface(fLabel, x , y);
+			//fWindow->drawSurface(fLabel, x , y);
 		} else {
 			SDL_Rect rectangle;
 			rectangle.x = fLabel->w - fWidth;
 			rectangle.y = 0;
 			rectangle.w = fLabel->w;
 			rectangle.h = fLabel->h;
-			fWindow->drawPartOfSurface(fLabel, x, y, rectangle);
+			//fWindow->drawPartOfSurface(fLabel, x, y, rectangle);
 		}
 	}
 

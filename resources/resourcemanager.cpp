@@ -66,6 +66,10 @@ namespace Zabbr {
 		}
 	}
 	
+	void ResourceManager::setImageFactory(IImageResourceFactory* imageFactory) {
+		fImageFactory = imageFactory;
+	}
+	
 	/**
 	 * Returns an image resource.
 	 *
@@ -75,15 +79,12 @@ namespace Zabbr {
 	 *
 	 * @throw ResourceNotLoadedExcpetion
 	*/
-	ImageResource* ResourceManager::image(std::string fileName) {
-		std::string id = ImageResource::createID(fileName);
+	IImageResource* ResourceManager::image(std::string fileName) {
+		std::string id = IImageResource::createID(fileName);
 		if (!hasResource(id)) {
-			ImageResource* res = ImageResource::open(fileName);
-			insertResource(res->getName(), res);
-			
-			return res;
+			return (*fImageFactory)(fileName);
 		} else {
-			return static_cast<ImageResource*>(getResource(id));
+			return static_cast<IImageResource*>(getResource(id));
 		}
 	}
 	
@@ -101,18 +102,18 @@ namespace Zabbr {
 	 *
 	 * @throw ResourceNotLoadedExcpetion
 	*/
-	ImageResource* ResourceManager::image(std::string fileName, int width,
+	IImageResource* ResourceManager::image(std::string fileName, int width,
 	                                      int height, bool keepRatio, int angle) {
-		std::string id = ImageResource::createID(fileName, width, height, keepRatio, angle);
+		std::string id = IImageResource::createID(fileName, width, height, keepRatio, angle);
 		if (!hasResource(id)) {
-			ImageResource* res = image(fileName);
-			ImageResource* scaled = res->scaleAndRotate(width, height, keepRatio, angle);
+			IImageResource* res = image(fileName);
+			IImageResource* scaled = res->scaleAndRotate(width, height, keepRatio, angle);
 			free(res);
 			insertResource(scaled->getName(), scaled);
 			
 			return scaled;
 		} else {
-			return static_cast<ImageResource*>(getResource(id));
+			return static_cast<IImageResource*>(getResource(id));
 		}
 	}
 

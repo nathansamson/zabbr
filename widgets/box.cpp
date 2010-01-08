@@ -16,7 +16,7 @@ namespace Zabbr {
 	 * @param xAlign The alignment on the x-axis.
 	 * @param yAlign The alignment on the y-axis.
 	*/
-	Box::Box(SDLWindow* win, bool homogenous, int spacing,
+	Box::Box(Window* win, bool homogenous, int spacing,
 	         XAlignment xAlign, YAlignment yAlign): VWidget(win),
 	            fSpacing(spacing), xAlignment(xAlign), yAlignment(yAlign),
 	            fHomogenous(homogenous) {

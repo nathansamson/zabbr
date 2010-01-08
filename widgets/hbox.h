@@ -15,8 +15,8 @@ namespace Zabbr {
 	*/
 	class HBox: public Box {
 	public:
-		HBox(SDLWindow*, bool, int);
-		HBox(SDLWindow*, bool, int, XAlignment);
+		HBox(Window*, bool, int);
+		HBox(Window*, bool, int, XAlignment);
 		virtual ~HBox();
 	
 		virtual void draw(int, int);

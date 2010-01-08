@@ -12,23 +12,23 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	 *
-	 * @param win The SDLWindow.
+	 * @param win The Window.
 	 * @param homogenous True if all widgets should have the same size.
 	 * @param spacing The spacing in pixels between 2 widgets.
 	*/
-	HBox::HBox(SDLWindow* win, bool homogenous, int spacing):
+	HBox::HBox(Window* win, bool homogenous, int spacing):
 	        Box(win, homogenous, spacing, XALIGN_CENTER, YALIGN_CENTER) {
 	}
 	
 	/**
 	 * Public constructor.
 	 *
-	 * @param win The SDLWindow.
+	 * @param win The Window.
 	 * @param homogenous True if all widgets should have the same size.
 	 * @param spacing The spacing in pixels between 2 widgets.
 	 * @param xAlign The X-alignment of the widgets.
 	*/
-	HBox::HBox(SDLWindow* win, bool homogenous, int spacing, XAlignment xAlign):
+	HBox::HBox(Window* win, bool homogenous, int spacing, XAlignment xAlign):
 	        Box(win, homogenous, spacing, xAlign, YALIGN_CENTER) {
 	}
 	

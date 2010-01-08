@@ -9,7 +9,7 @@
 
 #include "SDL.h"
 
-#include "sdlwindow.h"
+#include "window.h"
 #include "events/event.h"
 
 namespace Zabbr {
@@ -33,7 +33,7 @@ namespace Zabbr {
 	*/
 	class VSDLPanel {
 	public:
-		VSDLPanel(SDLWindow* window);
+		VSDLPanel(Window* window);
 		virtual ~VSDLPanel();
 
 		virtual void draw();
@@ -50,7 +50,7 @@ namespace Zabbr {
 		void openParentPanel();
 		void openPanel(VSDLPanel*);
 
-		friend class SDLWindow;
+		friend class Window;
 	protected:	
 		/**
 		 * The parent panel. The parent panel is the panel that 
@@ -61,7 +61,7 @@ namespace Zabbr {
 		/**
 		 * The window of the panel. When a panel draws itself it should do this on this window.
 		*/
-		SDLWindow* fWindow;
+		Window* fWindow;
 		
 		/**
 		 * A flag to see if the background is in the background.

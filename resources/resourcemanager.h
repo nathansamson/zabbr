@@ -32,8 +32,9 @@ namespace Zabbr {
 			
 			void free(VResource* res);
 				
-			ImageResource* image(std::string);
-			ImageResource* image(std::string, int, int, bool, int);
+			void setImageFactory(IImageResourceFactory*);
+			IImageResource* image(std::string);
+			IImageResource* image(std::string, int, int, bool, int);
 			FontResource* font(std::string, int);
 			#ifdef ENABLE_AUDIO
 			SoundResource* sound(std::string);
@@ -45,8 +46,6 @@ namespace Zabbr {
 			*/
 			static std::string fgDataPath;
 		private:
-			
-			
 			bool hasResource(std::string);
 			void insertResource(std::string, VResource*);
 			VResource* getResource(std::string);
@@ -61,6 +60,8 @@ namespace Zabbr {
 			 * This list is ordered on least-recently used first.
 			*/
 			std::list<VResource*> fResourceCache;
+			
+			IImageResourceFactory* fImageFactory;
 			
 			/**
 			 * The maximum number of cached items.

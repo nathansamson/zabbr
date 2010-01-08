@@ -25,7 +25,7 @@ namespace Zabbr {
 	*/
 	class Button : public VWidget {
 	public:
-		Button(SDLWindow*, std::string label);
+		Button(Window*, std::string label);
 		virtual ~Button();
 
 		virtual void draw(int, int);

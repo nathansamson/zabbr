@@ -7,27 +7,31 @@
  * @author Nathan Samson
 */
 
-#include "SDL.h"
-
-#include "resources/sdlsurfaceresource.h"
+#include "resources/resource.h"
 
 namespace Zabbr {
 
 	/**
 	 * An image resource.
 	*/
-	class ImageResource : public SDLSurfaceResource {
-	public:
-		static ImageResource* open(std::string);
-		
-		ImageResource* scaleAndRotate(int, int, bool, int);
-		SDL_Surface* getSurface();
+	class IImageResource : public VResource {
+	public:	
+		IImageResource(std::string);
+	
+	
+		virtual int getWidth() = 0;
+		virtual int getHeight() = 0;
+		virtual void draw(int, int) = 0;
+		virtual IImageResource* scaleAndRotate(int, int, bool, int) = 0;
 		
 		static std::string createID(std::string);
 		static std::string createID(std::string, int, int, bool, int);
-	private:
-		ImageResource(std::string, SDL_Surface*);
-		virtual ~ImageResource();
+	};
+	
+	class IImageResourceFactory {
+	public:
+		//virtual ~IImageResourceFactory() {};
+		virtual IImageResource* operator()(std::string) = 0;
 	};
 }
 

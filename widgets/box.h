@@ -29,7 +29,7 @@ namespace Zabbr {
 	*/
 	class Box: public VWidget {
 	public:
-		Box(SDLWindow*, bool, int, XAlignment, YAlignment);
+		Box(Window*, bool, int, XAlignment, YAlignment);
 		~Box();
 		
 		void appendWidget(VWidget*);

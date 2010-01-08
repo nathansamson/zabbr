@@ -22,7 +22,7 @@ namespace Zabbr {
 		 *
 		 * @param window The SDL window.
 		*/
-		ComboBox(SDLWindow* window): HBox(window, false, 20), fSelectedOption(-1),
+		ComboBox(Window* window): HBox(window, false, 20), fSelectedOption(-1),
 			      fUpButton(new Button(fWindow, "+")), fDownButton(new Button(fWindow, "-")) {
 
 			SDL_Color white = {255, 255, 255};

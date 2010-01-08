@@ -68,10 +68,10 @@ namespace Zabbr {
 	/**
 	 * A constructor.
 	 *
-	 * @param window The SDLWindow.
+	 * @param window The Window.
 	 * @param val initial value of the text input widget.
 	*/
-	TextInputWidget::TextInputWidget(SDLWindow* window, std::string val):
+	TextInputWidget::TextInputWidget(Window* window, std::string val):
 	       VWidget(window), fText(val), fWidth(300), fHeight(0) {
 		SDL_Color c = {0, 0, 0};
 		fLabelWidget = new Label(fWindow, fText, c, FONTSIZE_MEDIUM);

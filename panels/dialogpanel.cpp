@@ -20,7 +20,7 @@ namespace Zabbr {
 	 * @param question The question to print.
 	 * @param responseIDMap A map of response ID's (should be positive).
 	*/
-	DialogPanel::DialogPanel(SDLWindow* w, std::string question,
+	DialogPanel::DialogPanel(Window* w, std::string question,
 	                         std::vector<std::pair<int, std::string> > responseIDMap):
 	             WidgetPanel(w, new VBox(w, false, 10, YALIGN_CENTER)) {
 		SDL_Color white = {255, 255, 255};

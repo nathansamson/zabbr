@@ -12,36 +12,36 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	 *
-	 * @param win The SDLWindow.
+	 * @param win The Window.
 	 * @param homogenous True if all widgets should have the same size.
 	 * @param spacing The spacing in pixels between 2 widgets.
 	*/
-	VBox::VBox(SDLWindow* win, bool homogenous, int spacing):
+	VBox::VBox(Window* win, bool homogenous, int spacing):
 	        Box(win, homogenous, spacing, XALIGN_CENTER, YALIGN_TOP) {
 	}
 	
 	/**
 	 * Public constructor.
 	 *
-	 * @param win The SDLWindow.
+	 * @param win The Window.
 	 * @param homogenous True if all widgets should have the same size.
 	 * @param spacing The spacing in pixels between 2 widgets.
 	 * @param yAlign The Y-alignment of the widgets.
 	*/
-	VBox::VBox(SDLWindow* win, bool homogenous, int spacing, YAlignment yAlign):
+	VBox::VBox(Window* win, bool homogenous, int spacing, YAlignment yAlign):
 	        Box(win, homogenous, spacing, XALIGN_CENTER, yAlign) {
 	}
 	
 	/**
 	 * Public constructor.
 	 *
-	 * @param win The SDLWindow.
+	 * @param win The Window.
 	 * @param homogenous True if all widgets should have the same size.
 	 * @param spacing The spacing in pixels between 2 widgets.
 	 * @param xAlign The X-alignment of the widgets.
 	 * @param yAlign The Y-alignment of the widgets.
 	*/
-	VBox::VBox(SDLWindow* win, bool homogenous, int spacing, XAlignment xAlign, YAlignment yAlign):
+	VBox::VBox(Window* win, bool homogenous, int spacing, XAlignment xAlign, YAlignment yAlign):
 	        Box(win, homogenous, spacing, xAlign, yAlign) {
 	}
 	

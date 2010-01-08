@@ -17,8 +17,8 @@ namespace Zabbr {
 	*/
 	class MenuPanel: public WidgetPanel {
 	public:
-		MenuPanel(SDLWindow*, std::string);
-		MenuPanel(SDLWindow*, std::string, SDL_Color, std::string, int);
+		MenuPanel(Window*, std::string);
+		MenuPanel(Window*, std::string, SDL_Color, std::string, int);
 	
 		void addButton(Button*);
 	private:

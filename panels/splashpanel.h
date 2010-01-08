@@ -27,7 +27,7 @@ namespace Zabbr {
 	*/
 	class SplashPanel: public VSDLPanel {
 	public:
-		SplashPanel(SDLWindow*, std::string, VSDLPanel*);
+		SplashPanel(Window*, std::string, VSDLPanel*);
 		virtual ~SplashPanel();
 		void addPrefetcher(IPrefetcher*);
 
@@ -50,7 +50,7 @@ namespace Zabbr {
 		/**
 		 * The splash image.
 		*/
-		ImageResource* fImage;
+		IImageResource* fImage;
 		
 		/**
 		 * The panel that should be loaded after loading is done.

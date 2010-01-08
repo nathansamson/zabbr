@@ -26,7 +26,7 @@ namespace Zabbr {
 	*/
 	class Label : public VWidget {
 	public:
-		Label(SDLWindow*, std::string, SDL_Color, int = FONTSIZE_NORMAL, std::string = "DejaVuSans-Bold.ttf");
+		Label(Window*, std::string, SDL_Color, int = FONTSIZE_NORMAL, std::string = "DejaVuSans-Bold.ttf");
 		virtual ~Label();
 		
 		void setLabel(std::string);

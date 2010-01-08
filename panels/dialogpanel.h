@@ -25,7 +25,7 @@ namespace Zabbr {
 		static const int Quit = -1;
 		static const int Cancel = -2;
 	
-		DialogPanel(SDLWindow*, std::string, std::vector<std::pair<int, std::string> >);
+		DialogPanel(Window*, std::string, std::vector<std::pair<int, std::string> >);
 		
 		virtual void keyRelease(SDL_KeyboardEvent);
 		void connectOnResponse(ICallback1<int>*);

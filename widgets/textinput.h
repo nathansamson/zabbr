@@ -19,7 +19,7 @@ namespace Zabbr {
 	*/
 	class TextInputWidget: public VWidget {
 	public:
-		TextInputWidget(SDLWindow*, std::string);
+		TextInputWidget(Window*, std::string);
 		virtual ~TextInputWidget();
 		
 		virtual void draw(int, int);

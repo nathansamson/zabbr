@@ -12,10 +12,10 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	 *
-	 * @param window The SDLWindow
+	 * @param window The Window
 	 * @param title The title of the menu.
 	*/
-	MenuPanel::MenuPanel(SDLWindow* window, std::string title):
+	MenuPanel::MenuPanel(Window* window, std::string title):
 	               WidgetPanel(window, new VBox(window, false, 10)) {
 		fButtonBox = new VBox(fWindow, true, 7);
 		SDL_Color white = {255, 255, 255};
@@ -26,13 +26,13 @@ namespace Zabbr {
 	/**
 	 * Public constructor.
 	 *
-	 * @param window The SDLWindow.
+	 * @param window The Window.
 	 * @param title The Title of the menu
 	 * @param color The color of the title.
 	 * @param font The font of the title.
 	 * @param size The font size.
 	*/
-	MenuPanel::MenuPanel(SDLWindow* window, std::string title,
+	MenuPanel::MenuPanel(Window* window, std::string title,
 	                     SDL_Color color, std::string font, int size):
 	               WidgetPanel(window, new VBox(window, false, 10)) {
 		fButtonBox = new VBox(fWindow, true, 7);

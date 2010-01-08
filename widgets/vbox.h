@@ -15,9 +15,9 @@ namespace Zabbr {
 	*/
 	class VBox: public Box {
 	public:
-		VBox(SDLWindow*, bool, int);
-		VBox(SDLWindow*, bool, int, YAlignment);
-		VBox(SDLWindow*, bool, int, XAlignment, YAlignment);
+		VBox(Window*, bool, int);
+		VBox(Window*, bool, int, YAlignment);
+		VBox(Window*, bool, int, XAlignment, YAlignment);
 		virtual ~VBox();
 	
 		virtual void draw(int, int);

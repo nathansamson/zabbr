@@ -22,7 +22,7 @@ namespace Zabbr {
 	*/
 	class WidgetPanel: public VSDLPanel {
 	public:
-		WidgetPanel(SDLWindow*, VWidget*);
+		WidgetPanel(Window*, VWidget*);
 		virtual ~WidgetPanel();
 
 		virtual void draw();

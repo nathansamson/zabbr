@@ -15,11 +15,11 @@ namespace Zabbr {
 	/**
 	 * Constructor.
 	 *
-	 * @param window The SDLWindow.
+	 * @param window The Window.
 	 * @param fileName The file name of the splash image.
 	 * @param panel The controller that should be activated after loading is done.
 	*/
-	SplashPanel::SplashPanel(SDLWindow* window, std::string fileName,
+	SplashPanel::SplashPanel(Window* window, std::string fileName,
 	                         VSDLPanel* panel):
 	             VSDLPanel(window), fNextPanel(panel) {
 		fImage = ResourceManager::manager().image(fileName, window->getXResolution(), window->getYResolution(), true, 0);
@@ -68,7 +68,7 @@ namespace Zabbr {
 					return;
 				}
 			}
-			fWindow->drawSurface(fImage, 0, 0);
+			fImage->draw(0, 0);
 			fStatusLabel->draw(20, fWindow->getYResolution() - 20 - fStatusLabel->getHeight());
 		} else {
 			fWindow->closePanel(fNextPanel);

@@ -4,9 +4,8 @@ set(ZABBR_SOURCES
                ./resources/resource.cpp
                ./resources/fontresource.cpp
                ./resources/resourcemanager.cpp
-               ./resources/sdlsurfaceresource.cpp
                ./resources/imageresource.cpp
-               ./sdlwindow.cpp
+               ./window.cpp
                ./widgets/label.cpp
                ./widgets/button.cpp
                ./widgets/widget.cpp
@@ -25,6 +24,14 @@ set(ZABBR_SOURCES
                ./panels/menupanel.cpp
                ./panels/sdlpanel.cpp
                ./panels/dialogpanel.cpp)
+
+if(OPENGL)
+	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./glwindow.cpp")
+	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./resources/glimageresource.cpp")
+else()
+	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./sdlwindow.cpp")
+	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./resources/sdlimageresource.cpp")
+endif()
 
 if(SDLMIXER_FOUND)
 	set(ZABBR_SOURCES ${ZABBR_SOURCES} "./resources/soundresource.cpp")

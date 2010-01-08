@@ -12,7 +12,7 @@
 namespace Zabbr {
 	class CheckBox: public VWidget {
 	public:
-		CheckBox(SDLWindow*, bool);
+		CheckBox(Window*, bool);
 		
 		virtual void draw(int, int);
 		virtual int getWidth();

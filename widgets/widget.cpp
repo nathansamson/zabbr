@@ -18,7 +18,7 @@ namespace Zabbr {
 	 *
 	 * @param window The window of the widget.
 	*/
-	VWidget::VWidget(SDLWindow* window)
+	VWidget::VWidget(Window* window)
 	        : fWindow(window), fFill(false) {
 
 	}

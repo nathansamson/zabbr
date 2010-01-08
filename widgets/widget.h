@@ -9,7 +9,7 @@
 
 #include "SDL.h"
 
-#include "sdlwindow.h"
+#include "window.h"
 
 namespace Zabbr {
 	/**
@@ -30,7 +30,7 @@ namespace Zabbr {
 	*/
 	class VWidget {
 	public:
-		VWidget(SDLWindow*);
+		VWidget(Window*);
 		virtual ~VWidget();
 
 		/**
@@ -70,9 +70,9 @@ namespace Zabbr {
 		virtual void keyRelease(SDL_KeyboardEvent);
 	protected:
 		/**
-		 * The SDLWindow of the Widget.
+		 * The Window of the Widget.
 		*/
-		SDLWindow* fWindow;
+		Window* fWindow;
 		
 		/**
 		 * Should the widget fill all the allocated space (with setWidth/setHeight).

@@ -10,10 +10,10 @@ namespace Zabbr {
 	/**
 	 * Constructor.
 	 *
-	 * @param w The SDLWindow.
+	 * @param w The Window.
 	 * @param enabled If the checkbox is checked or not.
 	*/
-	CheckBox::CheckBox(SDLWindow* w, bool enabled):
+	CheckBox::CheckBox(Window* w, bool enabled):
 	           VWidget(w), fEnabled(enabled), fWidth(0), fHeight(0) {
 		fBoundingBox.x = 0;
 		fBoundingBox.y = 0;
@@ -101,7 +101,7 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Function called by the SDLWindow if a mouse motion is fired on the window.
+	 * Function called by the Window if a mouse motion is fired on the window.
 	 *
 	 * @param e The SDL Mouse Motion event.
 	*/
@@ -115,7 +115,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow if a mouse event is fired on the window.
+	 * Function called by the Window if a mouse event is fired on the window.
 	 *
 	 * @param e The SDL Mouse Button event.
 	*/

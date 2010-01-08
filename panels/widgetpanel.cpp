@@ -14,7 +14,7 @@ namespace Zabbr {
 	 * @param window The window of the panel.
 	 * @param widget The toplevel widget of the panel.
 	*/
-	WidgetPanel::WidgetPanel(SDLWindow* window, VWidget* widget): VSDLPanel(window), fTopLevel(widget) {
+	WidgetPanel::WidgetPanel(Window* window, VWidget* widget): VSDLPanel(window), fTopLevel(widget) {
 	}
 
 	/**
@@ -45,7 +45,7 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Function called by the SDLWindow when a key is pressed.
+	 * Function called by the Window when a key is pressed.
 	 *
 	 * This will close the controller if Escape is pressed.
 	 *
@@ -57,7 +57,7 @@ namespace Zabbr {
 	}
 	
 	/**
-	 * Function called by the SDLWindow when a key is release.
+	 * Function called by the Window when a key is release.
 	 *
 	 * @param event The SDL Keyboard event.
 	*/
@@ -67,7 +67,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow when the mouse moves.
+	 * Function called by the Window when the mouse moves.
 	 *
 	 * This will send call the mouseMotion function on all widgets.
 	 *
@@ -79,7 +79,7 @@ namespace Zabbr {
 	}
 
 	/**
-	 * Function called by the SDLWindow when a mouse button event is generated.
+	 * Function called by the Window when a mouse button event is generated.
 	 *
 	 * This will send call the mouseButton function on all widgets.
 	 *

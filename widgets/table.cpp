@@ -10,13 +10,13 @@ namespace Zabbr {
 	/**
 	 * Constructor.
 	 *
-	 * @param w The SDLWindow.
+	 * @param w The Window.
 	 * @param xSpacing The spacing between cells on one row.
 	 * @param ySpacing The spacing betwene cells in one column.
 	 * @param rows The number of rows.
 	 * @param columns The number of columns.
 	*/
-	Table::Table(SDLWindow* w, int xSpacing, int ySpacing,
+	Table::Table(Window* w, int xSpacing, int ySpacing,
 	             int rows, int columns): VWidget(w), fXSpacing(xSpacing), fYSpacing(ySpacing) {
 		fDimension.width = 0;
 		fDimension.height = 0;
